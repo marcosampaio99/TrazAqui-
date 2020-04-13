@@ -103,4 +103,9 @@ public class Utilizador
  
         return s;
     }
+    
+    public Utilizador clone() {
+        return new Utilizador(this);
+    }
 }
+
