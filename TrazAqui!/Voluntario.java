@@ -103,12 +103,13 @@ public class Voluntario extends Utilizador
         s = ("Voluntário: \n" + 
                "Nome: " + this.getNome() + "\n" + 
                "Password: " + this.getPassword() + "\n" +
-               "Email: " + this.getEmail() + "\n")+
+               "Email: " + this.getEmail() + "\n"+
                "Raio Geografico: " + this.getRaiogeografico() + "\n" +
                "Velocidade média (m/s): " + this.velocidade +"\n" +
                "Rating: " + this.rating + "\n" +
-               "Verificador: " + this.verificador + "\n";
-               System.out.println(this.getLocalizacao());
+               "Verificador: " + this.verificador + "\n"+
+               "Localizacao: "+ this.getLocalizacao() + "\n");
+             
  
         return s;
     }

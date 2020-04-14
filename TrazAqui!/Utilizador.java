@@ -98,8 +98,9 @@ public class Utilizador
         s = ("Utilizador: \n" + 
                "Nome: " + this.nome + "\n" + 
                "Password: " + this.password + "\n" +
-               "Email: " + this.email + "\n");
-               System.out.println(this.localizacao);
+               "Email: " + this.email + "\n"+
+               "Localizacao: "+ this.getLocalizacao() + "\n");
+             
  
         return s;
     }

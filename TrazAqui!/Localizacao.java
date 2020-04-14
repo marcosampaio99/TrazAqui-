@@ -52,7 +52,7 @@ public class Localizacao {
 
     //CONVERTE PARA REPRESENTAÇÃO TEXTUAL
     public String toString () {
-        return new String ("Localizacao = " + latitude + ", " + longitude);
+        return new String ( + latitude + ", " + longitude);
     }
 
     //CRIA UMA COPIA DO PONTO RECEPTOR (RECEPTOR = this)

@@ -140,14 +140,14 @@ public class Empresa extends Utilizador
         s = ("Empresa: \n" + 
                "Nome: " + this.getNome() + "\n" + 
                "Password: " + this.getPassword() + "\n" +
-               "Email: " + this.getEmail() + "\n")+
+               "Email: " + this.getEmail() + "\n"+
                "Raio Geografico(m): " + this.getRaiogeografico() + "\n" +
                "Velocidade média (m/s): " + this.velocidade +"\n" +
                "Rating: " + this.rating + "\n" +
                "Multitasking(Sim:1/Não:0): " + this.multitasking + "\n" +
                "Disponível(Sim:1/Não:0): " + this.indicador + "\n" +
-               "Pedidos disponíveis ao mesmo tempo: " + this.capacidade +  "\n";
-               System.out.println(this.getLocalizacao());
+               "Pedidos disponíveis ao mesmo tempo: " + this.capacidade +  "\n" +
+               "Localizacao: "+ this.getLocalizacao() + "\n");
  
         return s;
     }

@@ -32,11 +32,11 @@ public boolean equals (Object o){
     public String toString() {
         String s = new String();
  
-        s = ("Cliente: \n" + 
+        s = ( "\nCliente: \n" + 
                "Nome: " + this.getNome() + "\n" + 
                "Password: " + this.getPassword() + "\n" +
-               "Email: " + this.getEmail() + "\n");
-               System.out.println(this.getLocalizacao());
+               "Email: " + this.getEmail() + "\n"+
+               "Localizacao: "+ this.getLocalizacao() + "\n");
  
         return s;
     }
