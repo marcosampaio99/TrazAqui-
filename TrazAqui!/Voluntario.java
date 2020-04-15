@@ -3,7 +3,7 @@
 public class Voluntario extends Utilizador
 {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
-    private int raiogeografico;
+    private double raiogeografico;
     private int velocidade;
     private int rating;
     private int verificador;
@@ -34,7 +34,7 @@ public class Voluntario extends Utilizador
     }  
     
     
-    public Voluntario(String nome,String email,String password,Localizacao localizacao, int raiogeografico, int velocidade, int rating){
+    public Voluntario(String nome,String email,String password,Localizacao localizacao, double raiogeografico, int velocidade, int rating){
         super(nome,email,password,localizacao);
         this.raiogeografico=raiogeografico;
         this.velocidade=velocidade;
@@ -49,7 +49,7 @@ public class Voluntario extends Utilizador
 // getters
 
 
-    public int getRaiogeografico(){
+    public double getRaiogeografico(){
         return this.raiogeografico;
     }
     
@@ -102,7 +102,7 @@ public class Voluntario extends Utilizador
  
         s = ("Voluntário: \n" + 
                "Nome: " + this.getNome() + "\n" + 
-               "Password: " + this.getPassword() + "\n" +
+              // "Password: " + this.getPassword() + "\n" +
                "Email: " + this.getEmail() + "\n"+
                "Raio Geografico: " + this.getRaiogeografico() + "\n" +
                "Velocidade média (m/s): " + this.velocidade +"\n" +

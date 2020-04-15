@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Parser
+comment1.params=
+comment1.target=void\ parse()
+comment2.params=input
+comment2.target=Cliente\ lerCliente(java.lang.String)
+comment3.params=input
+comment3.target=Voluntario\ lerVoluntario(java.lang.String)
+comment4.params=input
+comment4.target=Empresa\ lerEmpresa(java.lang.String)
+comment5.params=nomeFich
+comment5.target=java.util.List\ lerFicheiro(java.lang.String)
+comment6.params=
+comment6.target=java.lang.String\ showGestaoCliente()
+comment7.params=
+comment7.target=java.lang.String\ showGestaoVoluntario()
+comment8.params=
+comment8.target=java.lang.String\ showGestaoEmpresa()
+numComments=9

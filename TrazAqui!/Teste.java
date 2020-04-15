@@ -13,11 +13,9 @@ public class Teste{
         Voluntario voluntario2= new Voluntario("Marcelo","v2@mail.com","123456",localizacao1,42000,30,0);
         Cliente cliente1 = new Cliente("Pablito","u1@mail.com","123456",localizacao1);
         Cliente cliente2 = new Cliente("Carol","u2@mail.com","123456",localizacao1);
-        Empresa empresa1 = new Empresa("Entregas ao Domicilio","e1@mail.com","1234",localizacao1,5000,60,0,3,0,1,1);
-        Empresa empresa2 = new Empresa("NósLevamos","e2@mail.com","12345",localizacao1,15000,55,0,4,1,1,30);
         Loja l1 =new Loja("MaggieStore","l1@mail.com","123456",localizacao1,0);
         Loja l2 =new Loja("Marcels","l2@mail.com","123456",localizacao1,0);
-        ServicoEmpresa s1 = new ServicoEmpresa(0,l2,empresa1,d1,100);
+
         ServicoVoluntario sv1 =new ServicoVoluntario(0,l1,voluntario1,d1);
         
       
@@ -33,8 +31,8 @@ public class Teste{
       
       GestaoEmpresa g3=new GestaoEmpresa();
       /*Adding elements to HashMap*/
-      g3.addEmpresa(empresa1);
-      g3.addEmpresa(empresa2);
+      //g3.addEmpresa(empresa1);
+      //g3.addEmpresa(empresa2);
      
       GestaoLojas g4=new GestaoLojas();
       /*Adding elements to HashMap*/
@@ -48,6 +46,13 @@ public class Teste{
        //System.out.println(empresa2);
        // System.out.println(g1);
        
-       System.out.println(s1);
+       //System.out.println(s1);
+       
+       Parser p = new Parser();
+       p.parse();
+       System.out.println(p.showGestaoCliente());
+       System.out.println(p.showGestaoVoluntario());
+       System.out.println(p.showGestaoEmpresa());
+       
     }
 }

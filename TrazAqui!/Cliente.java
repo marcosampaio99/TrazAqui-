@@ -34,7 +34,7 @@ public boolean equals (Object o){
  
         s = ( "\nCliente: \n" + 
                "Nome: " + this.getNome() + "\n" + 
-               "Password: " + this.getPassword() + "\n" +
+              // "Password: " + this.getPassword() + "\n" +
                "Email: " + this.getEmail() + "\n"+
                "Localizacao: "+ this.getLocalizacao() + "\n" + "\n");
  

@@ -8,10 +8,11 @@
 public class Empresa extends Utilizador
 {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
-    private int raiogeografico;
+    private int NIF;
+    private double raiogeografico;
     private int velocidade;
     private int rating;
-    private int taxa; // em percentagem
+    private double taxa; //preco por km
     private int multitasking;//1 se fizer mais do q 1 entrega ao mesmo tempo 0 se nao
     private int indicador; //1 se estiver disposto a recolher 0 se nao
     private int capacidade; // quantas encomendas conseguem tratar ao mm tempo 
@@ -24,6 +25,7 @@ public class Empresa extends Utilizador
     {
         // inicializa variáveis de instância
         super();
+        this.NIF=0;
         this.raiogeografico=0;
         this.velocidade=0;
         this.rating=0;
@@ -35,6 +37,7 @@ public class Empresa extends Utilizador
 
     public Empresa(Empresa e){
         super(e);
+        this.NIF=e.getNIF();
         this.raiogeografico=e.getRaiogeografico();
         this.velocidade=e.getVelocidade();
         this.rating=e.getRating();
@@ -44,8 +47,9 @@ public class Empresa extends Utilizador
         this.capacidade=e.getCapacidade();
     }
     
-    public Empresa(String nome,String email,String password,Localizacao localizacao, int raiogeografico, int velocidade, int rating, int taxa,int multitasking, int indicador, int capacidade){
+    public Empresa(String nome,String email,String password,Localizacao localizacao,int nif, double raiogeografico, int velocidade, int rating, double taxa,int multitasking, int indicador, int capacidade){
         super(nome,email,password,localizacao);
+        this.NIF=nif;
         this.raiogeografico=raiogeografico;
         this.velocidade=velocidade;
         this.rating=rating;
@@ -57,8 +61,10 @@ public class Empresa extends Utilizador
     
     
     // getters 
-    
-    public int getRaiogeografico(){
+    public int getNIF(){
+        return this.NIF;
+    }
+    public double getRaiogeografico(){
         return this.raiogeografico;
     }
     
@@ -70,7 +76,7 @@ public class Empresa extends Utilizador
         return this.rating;
     }
     
-    public int getTaxa(){
+    public double getTaxa(){
         return this.taxa;
     }
     
@@ -90,6 +96,10 @@ public class Empresa extends Utilizador
     }
     
     // setters
+    
+    public void setNIF(){
+         this.NIF=NIF;
+    }
     
     public void setRaiogeografico(){
         this.raiogeografico=raiogeografico;
@@ -127,6 +137,7 @@ public class Empresa extends Utilizador
         
         Empresa e = (Empresa) o;
         return(super.equals(e)&&this.raiogeografico==e.getRaiogeografico())
+            &&(this.NIF==e.getNIF())
             &&(this.velocidade==e.getVelocidade())
             &&(this.rating==e.getRating())&&(this.taxa==e.getTaxa())
             &&(this.multitasking==e.getMulti()&&(this.indicador==e.getIndicador())
@@ -139,8 +150,9 @@ public class Empresa extends Utilizador
  
         s = ("Empresa: \n" + 
                "Nome: " + this.getNome() + "\n" + 
-               "Password: " + this.getPassword() + "\n" +
+              // "Password: " + this.getPassword() + "\n" +
                "Email: " + this.getEmail() + "\n"+
+               "NIF: " + this.getNIF() + "\n" +
                "Raio Geografico(m): " + this.getRaiogeografico() + "\n" +
                "Velocidade média (m/s): " + this.velocidade +"\n" +
                "Rating: " + this.rating + "\n" +
