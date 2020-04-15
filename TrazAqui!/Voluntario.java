@@ -108,7 +108,7 @@ public class Voluntario extends Utilizador
                "Velocidade média (m/s): " + this.velocidade +"\n" +
                "Rating: " + this.rating + "\n" +
                "Verificador: " + this.verificador + "\n"+
-               "Localizacao: "+ this.getLocalizacao() + "\n");
+               "Localizacao: "+ this.getLocalizacao() + "\n") + "\n";
              
  
         return s;

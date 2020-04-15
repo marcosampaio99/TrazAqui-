@@ -6,7 +6,7 @@ public class ServicoVoluntario
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private int id;
     // encomenda
-    //loja
+    private Loja loja;
     private Voluntario voluntario;
     private Date data;
 
@@ -22,14 +22,16 @@ public class ServicoVoluntario
        this.data=null;
     }
 
-    public ServicoVoluntario(int id, Voluntario e,Date data, int c){
+    public ServicoVoluntario(int id, Loja l, Voluntario e,Date data){
         this.id=id;
+        this.loja=l;
         this.voluntario=e;
         this.data=data;
     }
     
     public ServicoVoluntario(ServicoVoluntario s){
         this.id=s.getId();
+        this.loja=s.getLoja();
         this.voluntario=s.getVoluntario();
         this.data=s.getData();
 
@@ -38,6 +40,9 @@ public class ServicoVoluntario
     public int getId(){
         return this.id;
     }
+    public Loja getLoja(){
+    return this.loja;
+     }
     public Voluntario getVoluntario(){
     return this.voluntario;
     }
@@ -47,6 +52,9 @@ public class ServicoVoluntario
 
     public void setId(int id){
     this.id=id;
+    }
+    public void setLoja(Loja l){
+    this.loja=l;
     }
     public void setVoluntario(Voluntario e){
     this.voluntario=e;
@@ -61,6 +69,7 @@ public class ServicoVoluntario
     ServicoVoluntario se=(ServicoVoluntario) o;
     return this.id==se.id &&
            this.getVoluntario().equals(se.getVoluntario()) &&
+           this.getLoja().equals(se.getLoja())&&
            this.getData().equals(se.getData());
 
           }
@@ -74,7 +83,7 @@ public class ServicoVoluntario
             return"Pedido:  \n"+
             "Id: " +this.id + "\n" +
             "Encomenda: " + "\n" +
-            "Loja: "+  "\n" +
+            "Loja: "+ this.loja.getNome() + "\n" +
             "Voluntario: " + this.voluntario.getNome() + "\n" +
             "Data: " + this.data.toString() + "\n" ;
 

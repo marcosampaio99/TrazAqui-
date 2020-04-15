@@ -36,7 +36,7 @@ public boolean equals (Object o){
                "Nome: " + this.getNome() + "\n" + 
                "Password: " + this.getPassword() + "\n" +
                "Email: " + this.getEmail() + "\n"+
-               "Localizacao: "+ this.getLocalizacao() + "\n");
+               "Localizacao: "+ this.getLocalizacao() + "\n" + "\n");
  
         return s;
     }

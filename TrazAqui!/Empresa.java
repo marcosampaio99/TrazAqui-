@@ -147,7 +147,7 @@ public class Empresa extends Utilizador
                "Multitasking(Sim:1/Não:0): " + this.multitasking + "\n" +
                "Disponível(Sim:1/Não:0): " + this.indicador + "\n" +
                "Pedidos disponíveis ao mesmo tempo: " + this.capacidade +  "\n" +
-               "Localizacao: "+ this.getLocalizacao() + "\n");
+               "Localizacao: "+ this.getLocalizacao() + "\n") + "\n";
  
         return s;
     }

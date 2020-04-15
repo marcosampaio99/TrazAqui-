@@ -13,7 +13,7 @@ public class GestaoEmpresa
 
    public GestaoEmpresa(HashMap<String,Empresa> empresas2){
     this.empresas=new HashMap();
-    for(Empresa a:empresas.values())
+    for(Empresa a:empresas2.values())
         this.empresas.put(a.getEmail(),a.clone());
     }
     
