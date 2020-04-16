@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Encomenda
 {
-    private int id;
+    String id;
     private Cliente cliente;// variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private Loja loja;
     public double peso;
@@ -10,7 +10,7 @@ public class Encomenda
     private ArrayList <LinhaEncomenda> linhas;
     
     public Encomenda(){
-        this.id = -1;
+        this.id = "";
         this.loja= new Loja();
         this.cliente = new Cliente();
         this.peso=0.0;
@@ -18,13 +18,13 @@ public class Encomenda
          this. linhas =new ArrayList<>();
     }
 
-    public Encomenda(int idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, String produtosAux, boolean stateAux){
+    public Encomenda(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux, ArrayList<LinhaEncomenda> l){
         this.id=idAux;
         this.cliente=new Cliente(clienteAux);
         this.loja=new Loja(lojaAux);
         this.peso=pesoAux;
         this.state=stateAux;
-         setLinhas (linhas);
+         setLinhas (l);
     }
 
     public Encomenda(Encomenda e){
@@ -40,7 +40,7 @@ public class Encomenda
     //getters
 
 
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -60,18 +60,19 @@ public class Encomenda
         return this.state;
     }
     
-     public ArrayList <LinhaEncomenda> getLinhas(){
+   
+public ArrayList <LinhaEncomenda> getLinhas(){
         ArrayList <LinhaEncomenda> li =new ArrayList <>(this.linhas.size());
         for(LinhaEncomenda s :this.linhas){
             li.add(s);
         }
         return li;
     }
-    
+  
     //setters
 
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -90,14 +91,15 @@ public class Encomenda
     public void setState(boolean state) {
         this.state = state;
     }
-    
-     public void setLinhas(ArrayList<LinhaEncomenda> linhas){
-        this.linhas =new ArrayList <>(linhas.size());
+
+
+   public void setLinhas(ArrayList<LinhaEncomenda> linhas){
+         this.linhas =new ArrayList <>(linhas.size());
         for(LinhaEncomenda s :linhas){
             this.linhas.add(s);
         }
     }
-
+    
     //equals
 
 

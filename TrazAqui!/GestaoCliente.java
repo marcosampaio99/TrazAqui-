@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.HashMap;
 /**
  * Escreva a descrição da classe GestaoCliente aqui.
  * 
@@ -78,5 +79,10 @@ public class GestaoCliente
 
     }
     
+    
+    // busca cliente com respetivo mail
+     public Cliente buscaCliente(String mail){
+        return this.clientes.get(mail).clone();
+    }
     
 }

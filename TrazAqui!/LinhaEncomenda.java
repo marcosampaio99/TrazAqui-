@@ -9,7 +9,7 @@ public class LinhaEncomenda {
     private String referencia;
     private String descricao;
     private double preco;
-    private int quantidade;
+    private double quantidade;
 
     public LinhaEncomenda() {
         this.referencia = "n/a";
@@ -20,7 +20,7 @@ public class LinhaEncomenda {
     }
     
     public LinhaEncomenda(String referencia, String descricao, double preco,
-                int quantidade) {
+                double quantidade) {
         this.referencia = referencia;
         this.descricao = descricao;
         this.preco = preco;
@@ -59,7 +59,7 @@ public class LinhaEncomenda {
         this.preco = preco;
     }
 
-    public int getQuantidade() {
+    public double getQuantidade() {
         return this.quantidade;
     }
 
@@ -82,15 +82,14 @@ public class LinhaEncomenda {
               le.getQuantidade() == this.quantidade;
     }
     
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Referencia: ").append (this.referencia);
-        sb.append("Descricao ").append (this.descricao); 
-        sb.append("Preco ").append (this.preco);
-        sb.append("Quantidade").append (this.quantidade);
-        
-        return sb.toString();
-    }            
+          
     
+        public String toString() {
+        return  "Referencia: " + this.referencia + "\n" +
+                "Descricao: " + this.descricao + "\n" +
+                "Preço: " + this.preco +  "\n" +
+                "Quantidade: " + this.quantidade + "\n" +"\n";
+
+    }
 }
 

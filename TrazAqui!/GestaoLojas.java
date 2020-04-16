@@ -73,5 +73,8 @@ public class GestaoLojas
 
     }
     
-    
+    // busca loja com mail 
+     public Loja buscaLoja(String mail){
+        return this.lojas.get(mail).clone();
+    }
 }
