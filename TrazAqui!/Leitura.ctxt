@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Leitura
+comment1.params=
+comment1.target=void\ ler()
+comment10.params=
+comment10.target=java.lang.String\ showGestaoVoluntario()
+comment11.params=
+comment11.target=java.lang.String\ showGestaoEmpresa()
+comment2.params=input
+comment2.target=Cliente\ lerCliente(java.lang.String)
+comment3.params=input
+comment3.target=Voluntario\ lerVoluntario(java.lang.String)
+comment4.params=input
+comment4.target=Loja\ lerLoja(java.lang.String)
+comment5.params=input
+comment5.target=Encomenda\ lerEncomenda(java.lang.String)
+comment6.params=input
+comment6.target=LinhaEncomenda\ leproduto(java.lang.String)
+comment7.params=input
+comment7.target=Empresa\ lerEmpresa(java.lang.String)
+comment8.params=nomeFich
+comment8.target=java.util.List\ lerFicheiro(java.lang.String)
+comment9.params=
+comment9.target=java.lang.String\ showGestaoCliente()
+numComments=12

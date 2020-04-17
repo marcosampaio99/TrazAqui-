@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Encomenda
 {
     String id;
-    private Cliente cliente;// variáveis de instância - substitua o exemplo abaixo pelo seu próprio
+    private Cliente cliente;
     private Loja loja;
     public double peso;
     private boolean state; // 0 se n for medico 1 se for
