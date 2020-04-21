@@ -87,7 +87,7 @@ public class Leitura {
         double raio = Double.parseDouble(campos[4]);
         
         
-        return new Voluntario(nome,email,"passdefault",l1,raio,0,0);
+        return new Voluntario(nome,email,"passdefault",l1,raio,0,0,0);
     }
     
     public Loja lerLoja(String input){

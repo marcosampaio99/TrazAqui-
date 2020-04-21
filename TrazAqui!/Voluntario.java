@@ -34,7 +34,7 @@ public class Voluntario extends Utilizador
     }  
     
     
-    public Voluntario(String nome,String email,String password,Localizacao localizacao, double raiogeografico, int velocidade, int rating){
+    public Voluntario(String nome,String email,String password,Localizacao localizacao, double raiogeografico, int velocidade, int rating,int verificador){
         super(nome,email,password,localizacao);
         this.raiogeografico=raiogeografico;
         this.velocidade=velocidade;

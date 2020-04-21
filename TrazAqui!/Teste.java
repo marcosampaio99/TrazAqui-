@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Date;
 import java.util.ArrayList;
-
+/*
 public class Teste{
     public static void main(String [] args) {
         Localizacao localizacao1= new Localizacao(0.0,0.0);
@@ -21,22 +21,22 @@ public class Teste{
        
       
       GestaoCliente g1 = new GestaoCliente();
-      /*Adding elements to HashMap*/
+      //Adding elements to HashMap
       g1.addCliente(cliente1);
       g1.addCliente(cliente2);
       
       GestaoVoluntario g2=new GestaoVoluntario();
-      /*Adding elements to HashMap*/
+      //Adding elements to HashMap
       g2.addVoluntario(voluntario1);
       g2.addVoluntario(voluntario2);
       
       GestaoEmpresa g3=new GestaoEmpresa();
-      /*Adding elements to HashMap*/
+      //Adding elements to HashMap
       //g3.addEmpresa(empresa1);
       //g3.addEmpresa(empresa2);
      
       GestaoLojas g4=new GestaoLojas();
-      /*Adding elements to HashMap*/
+      //Adding elements to HashMap
       g4.addLoja(l1);
       g4.addLoja(l2);
   
@@ -47,3 +47,4 @@ public class Teste{
 }
 
     }
+*/

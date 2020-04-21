@@ -27,6 +27,7 @@ public class Utilizador
         this.nome = a.getNome();
         this.password = a.getPassword();
         this.localizacao=a.getLocalizacao();
+       
     }  
     
     
@@ -58,7 +59,7 @@ public class Utilizador
       return this.localizacao;
     }
 
-
+   
     
     // setters 
     
