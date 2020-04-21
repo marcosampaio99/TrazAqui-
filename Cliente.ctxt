@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Cliente
+comment0.text=\r\n\ Escreva\ a\ descri\u00E7\u00E3o\ da\ classe\ Cliente\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\ \r\n\ @version\ (n\u00FAmero\ de\ vers\u00E3o\ ou\ data)\r\n
+comment1.params=
+comment1.target=Cliente()
+comment2.params=c
+comment2.target=Cliente(Cliente)
+comment3.params=nome\ email\ password\ localizacao
+comment3.target=Cliente(java.lang.String,\ java.lang.String,\ java.lang.String,\ Localizacao)
+comment4.params=o
+comment4.target=boolean\ equals(java.lang.Object)
+comment5.params=
+comment5.target=java.lang.String\ toString()
+comment6.params=
+comment6.target=Cliente\ clone()
+numComments=7
