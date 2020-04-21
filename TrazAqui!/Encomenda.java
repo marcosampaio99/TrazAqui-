@@ -127,5 +127,10 @@ public ArrayList <LinhaEncomenda> getLinhas(){
                 "Produtos " + this.linhas.toString();
 
     }
+    
+    
+     public Encomenda clone(){
+        return new Encomenda(this);
+    }
 }
 

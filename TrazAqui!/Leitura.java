@@ -22,6 +22,7 @@ public class Leitura {
     GestaoVoluntario gv = new GestaoVoluntario();
     GestaoEmpresa ge = new GestaoEmpresa();
     GestaoLojas gl = new GestaoLojas();
+    GestaoEncomenda ges = new GestaoEncomenda();
   	
   public void ler(){
       
@@ -53,7 +54,8 @@ public class Leitura {
                         break;
                case "Encomenda":
                     Encomenda en=lerEncomenda(linhaPartida[1]);
-                     System.out.println(en.toString());
+                      ges.addEncomenda(en);
+                  //   System.out.println(en.toString());
                     break;
                default:
                       System.out.println("Linha inválida.");

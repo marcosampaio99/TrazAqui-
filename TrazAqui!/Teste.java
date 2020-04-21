@@ -42,6 +42,7 @@ public class Teste{
   
       Leitura l = new Leitura();
       l.ler();
+      System.out.println(l.ges.buscaEncomenda("e6813"));
     
 }
 
