@@ -12,8 +12,8 @@ import java.nio.file.Paths;
 import java.lang.Object;
 import java.util.HashMap;
 import java.util.Map;
-
-
+import java.time.LocalDate;
+import java.util.Date;
 
 
 public class Leitura {
@@ -87,7 +87,7 @@ public class Leitura {
         double raio = Double.parseDouble(campos[4]);
         
         
-        return new Voluntario(nome,email,"passdefault",l1,raio,0,0,0);
+        return new Voluntario(nome,email,"passdefault",l1,raio,0,0.0,0,0);
     }
     
     public Loja lerLoja(String input){
@@ -110,6 +110,7 @@ public class Leitura {
      //Loja l = new Loja();
      Loja l = gl.buscaLoja(emailL);
       double peso = Double.parseDouble(campos[3]);
+      Date data = new Date();
       //fazer ciclo for para ler uma linha de encomenda de cada vez
       String[] novos=input.split(",",5);
       String[] finalissima=novos[4].split(",");
@@ -123,7 +124,7 @@ public class Leitura {
       li.add(len);
 
     }
-       return new Encomenda(id,c,l,peso,false,li);
+       return new Encomenda(id,c,l,peso,false,data,li);
     }
     
   public LinhaEncomenda leproduto(String input){
@@ -146,7 +147,7 @@ public class Leitura {
       double raio = Double.parseDouble(campos[5]);
       double taxa = Double.parseDouble(campos[6]);
        
-      return new Empresa(nome,email,"passdefault",l1,nif,raio,0,0,taxa,0,0,0);
+      return new Empresa(nome,email,"passdefault",l1,nif,raio,0,0.0,0,taxa,0,0,0);
     }
     
     

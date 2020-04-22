@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Encomenda
 {
@@ -7,6 +8,7 @@ public class Encomenda
     private Loja loja;
     public double peso;
     private boolean state; // 0 se n for medico 1 se for
+    private Date data;
     private ArrayList <LinhaEncomenda> linhas;
     
     public Encomenda(){
@@ -18,12 +20,13 @@ public class Encomenda
          this. linhas =new ArrayList<>();
     }
 
-    public Encomenda(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux, ArrayList<LinhaEncomenda> l){
+    public Encomenda(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,Date dataAux, ArrayList<LinhaEncomenda> l){
         this.id=idAux;
         this.cliente=new Cliente(clienteAux);
         this.loja=new Loja(lojaAux);
         this.peso=pesoAux;
         this.state=stateAux;
+        this.data=dataAux;
          setLinhas (l);
     }
 
@@ -60,7 +63,10 @@ public class Encomenda
         return this.state;
     }
     
-   
+    public Date getData() {
+        return this.data;
+    }
+    
 public ArrayList <LinhaEncomenda> getLinhas(){
         ArrayList <LinhaEncomenda> li =new ArrayList <>(this.linhas.size());
         for(LinhaEncomenda s :this.linhas){
@@ -92,6 +98,9 @@ public ArrayList <LinhaEncomenda> getLinhas(){
         this.state = state;
     }
 
+    public void setData(Date data) {
+        this.data = data;
+    }
 
    public void setLinhas(ArrayList<LinhaEncomenda> linhas){
          this.linhas =new ArrayList <>(linhas.size());
@@ -113,6 +122,7 @@ public ArrayList <LinhaEncomenda> getLinhas(){
                 this.state==aux.state &&          
                 this.getCliente().equals(aux.getCliente()) &&
                 this.getLoja().equals(aux.getLoja())&&
+                this.getData().equals(aux.getData()) &&
                 this.getLinhas().equals(aux.getLinhas());
 
     }
@@ -124,6 +134,7 @@ public ArrayList <LinhaEncomenda> getLinhas(){
                 "Cliente: " + this.cliente.getNome() + "\n" +
                 "Loja: " + this.loja.getNome() + "\n" +
                 "Peso: " + this.peso + "\n" +
+                "Data:" + this.data + "\n" +
                 "Produtos " + this.linhas.toString();
 
     }

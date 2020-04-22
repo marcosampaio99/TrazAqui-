@@ -66,8 +66,9 @@ public class Menus implements Serializable {
 
     public static void submenu_HistoricoEncomendas(){
     	System.out.println("--------------------MENU HISTORICO DE ENCOMENDAS--------------------");
-    	System.out.println("1-Consultar encomenda entregue por voluntarios");
-    	System.out.println("2-Consultar encomenda entregue por empresas");
+    	System.out.println("1-Consultar encomendas entregues por voluntario");
+    	System.out.println("2-Consultar encomenda entregues por empresa");
+    	System.out.println("3-Consultar encomendas por um período");
     	System.out.println("0-Sair");
     }
 

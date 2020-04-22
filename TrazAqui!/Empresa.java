@@ -11,7 +11,8 @@ public class Empresa extends Utilizador
     private int NIF;
     private double raiogeografico;
     private int velocidade;
-    private int rating;
+    private double rating;
+    private int nmrClassificacoes;
     private double taxa; //preco por km
     private int multitasking;//1 se fizer mais do q 1 entrega ao mesmo tempo 0 se nao
     private int indicador; //1 se estiver disposto a recolher 0 se nao
@@ -28,7 +29,8 @@ public class Empresa extends Utilizador
         this.NIF=0;
         this.raiogeografico=0;
         this.velocidade=0;
-        this.rating=0;
+        this.rating=0.0;
+        this.nmrClassificacoes=0;
         this.taxa=0;
         this.multitasking=0;
         this.indicador=1;
@@ -41,18 +43,20 @@ public class Empresa extends Utilizador
         this.raiogeografico=e.getRaiogeografico();
         this.velocidade=e.getVelocidade();
         this.rating=e.getRating();
+        this.nmrClassificacoes=e.getnmrClassificacoes();
         this.taxa=e.getTaxa();
         this.multitasking=e.getMulti();
         this.indicador=e.getIndicador();
         this.capacidade=e.getCapacidade();
     }
     
-    public Empresa(String nome,String email,String password,Localizacao localizacao,int nif, double raiogeografico, int velocidade, int rating, double taxa,int multitasking, int indicador, int capacidade){
+    public Empresa(String nome,String email,String password,Localizacao localizacao,int nif, double raiogeografico, int velocidade, double rating,int nmrClassificacoes, double taxa,int multitasking, int indicador, int capacidade){
         super(nome,email,password,localizacao);
         this.NIF=nif;
         this.raiogeografico=raiogeografico;
         this.velocidade=velocidade;
         this.rating=rating;
+        this.nmrClassificacoes=nmrClassificacoes;
         this.taxa=taxa;
         this.multitasking=multitasking;
         this.indicador=indicador;
@@ -72,8 +76,12 @@ public class Empresa extends Utilizador
         return this.velocidade;
     }
     
-    public int getRating(){
+    public double getRating(){
         return this.rating;
+    }
+    
+    public int getnmrClassificacoes() {
+        return this.nmrClassificacoes;
     }
     
     public double getTaxa(){
@@ -113,10 +121,13 @@ public class Empresa extends Utilizador
         this.rating=rating;
     }
     
+    public void setnmrClassificacoes(int nmrClassificacoes){
+        this.nmrClassificacoes=nmrClassificacoes;
+    }
+    
      public void setTaxa(){
         this.taxa=taxa;
     }
-    
 
      public void setMulti(){
         this.multitasking=multitasking;
@@ -139,7 +150,7 @@ public class Empresa extends Utilizador
         return(super.equals(e)&&this.raiogeografico==e.getRaiogeografico())
             &&(this.NIF==e.getNIF())
             &&(this.velocidade==e.getVelocidade())
-            &&(this.rating==e.getRating())&&(this.taxa==e.getTaxa())
+            &&(this.rating==e.getRating())&&(this.nmrClassificacoes==e.getnmrClassificacoes()) &&(this.taxa==e.getTaxa())
             &&(this.multitasking==e.getMulti()&&(this.indicador==e.getIndicador())
             &&(this.capacidade==e.getCapacidade()));
             
@@ -156,6 +167,7 @@ public class Empresa extends Utilizador
                "Raio Geografico(m): " + this.getRaiogeografico() + "\n" +
                "Velocidade média (m/s): " + this.velocidade +"\n" +
                "Rating: " + this.rating + "\n" +
+               "Nr de Classificações: " + this.nmrClassificacoes + "\n" +
                "Multitasking(Sim:1/Não:0): " + this.multitasking + "\n" +
                "Disponível(Sim:1/Não:0): " + this.indicador + "\n" +
                "Pedidos disponíveis ao mesmo tempo: " + this.capacidade +  "\n" +
@@ -169,4 +181,6 @@ public class Empresa extends Utilizador
         return new Empresa(this);
     }
     
+    
+   
 }

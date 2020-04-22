@@ -45,18 +45,18 @@ public class GestaoGeral implements Serializable{
         }
     }
   
-  public void registaEmpresa(String emailAux, String nomeAux, String passwordAux,Localizacao localizacaoAux,int nifAux,double raiogeograficoAux,int velocidadeAux,int ratingAux,double taxaAux,int multitaskingAux,int indicadorAux,int capacidadeAux) throws GestaoGeralException{
+  public void registaEmpresa(String emailAux, String nomeAux, String passwordAux,Localizacao localizacaoAux,int nifAux,double raiogeograficoAux,int velocidadeAux,double ratingAux,int nmrClassificacoesAux,double taxaAux,int multitaskingAux,int indicadorAux,int capacidadeAux) throws GestaoGeralException{
        if (empresas.verifica(emailAux)) throw new GestaoGeralException(emailAux);
        else {
-            Empresa e_aux = new Empresa(emailAux, nomeAux, passwordAux, localizacaoAux,nifAux,raiogeograficoAux,velocidadeAux,ratingAux,taxaAux,multitaskingAux,indicadorAux,capacidadeAux);
+            Empresa e_aux = new Empresa(emailAux, nomeAux, passwordAux, localizacaoAux,nifAux,raiogeograficoAux,velocidadeAux,ratingAux,nmrClassificacoesAux,taxaAux,multitaskingAux,indicadorAux,capacidadeAux);
             this.empresas.addEmpresa(e_aux);
         }
     }
   
-  public void registaVoluntario(String emailAux, String nomeAux, String passwordAux,Localizacao localizacaoAux,double raiogeograficoAux,int velocidadeAux,int ratingAux,int verificadorAux) throws GestaoGeralException{
+  public void registaVoluntario(String emailAux, String nomeAux, String passwordAux,Localizacao localizacaoAux,double raiogeograficoAux,int velocidadeAux,double ratingAux,int nmrClassificacoesAux,int verificadorAux) throws GestaoGeralException{
       if (voluntarios.verifica(emailAux)) throw new GestaoGeralException(emailAux);
        else {
-            Voluntario v_aux = new Voluntario(emailAux,nomeAux, passwordAux, localizacaoAux,raiogeograficoAux,velocidadeAux,ratingAux,verificadorAux);
+            Voluntario v_aux = new Voluntario(emailAux,nomeAux, passwordAux, localizacaoAux,raiogeograficoAux,velocidadeAux,ratingAux,nmrClassificacoesAux,verificadorAux);
             this.voluntarios.addVoluntario(v_aux);
         }
     }
