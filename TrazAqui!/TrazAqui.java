@@ -5,12 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.*;
 import java.io.*;
-/**
- * Escreva a descri√ß√£o da classe TrazAqui aqui.
- * 
- * @author (seu nome) 
- * @version (n√∫mero de vers√£o ou data)
- */
+
+
 public class TrazAqui implements Serializable
 {
   
@@ -22,17 +18,17 @@ public class TrazAqui implements Serializable
         
         do {
             Menus.menu();
-            opt=Scanners.leituraInt("Escolha uma op√ß√£o:");
+            opt=Scanners.leituraInt("Escolha uma opÁ„o:");
             
             switch(opt){
                 case 1:{
                     int optLogin;
                     do {
                         Menus.submenu_login();
-                        optLogin = Scanners.leituraInt("Escolha uma op√ß√£o");
+                        optLogin = Scanners.leituraInt("Escolha uma opÁ„o");
                         switch (optLogin) {
                             case 1: {
-                                String email = Scanners.leituraString("Email:");
+                                String email = Scanners.leituraString("Email:") + "@mail.com";
                                 String password = Scanners.leituraString("Password:");
                                 try {
                                     g.loginCliente(email, password);
@@ -40,7 +36,7 @@ public class TrazAqui implements Serializable
                                     int optLoginCliente;
                                     do{
                                         Menus.submenu_cliente();
-                                        optLoginCliente = Scanners.leituraInt("Escolha uma op√ß√¢o");
+                                        optLoginCliente = Scanners.leituraInt("Escolha uma opÁ„o");
                                         switch(optLoginCliente){
                                         case 1:{
                                         break;
@@ -52,7 +48,7 @@ public class TrazAqui implements Serializable
                                             int optHistorico;
                                             do{
                                                Menus.submenu_HistoricoEncomendas();
-                                               optHistorico=Scanners.leituraInt("Escolha uma op√ß√£o");
+                                               optHistorico=Scanners.leituraInt("Escolha uma opÁ„o");
                                                switch(optHistorico){
                                                 case 1:{
                                                 break;
@@ -134,10 +130,10 @@ public class TrazAqui implements Serializable
                     int optRegUtilizador;
                     do {
                         Menus.submenu_RegistarUtilizador();
-                        optRegUtilizador=Scanners.leituraInt("Escolha uma op√ß√£o");
+                        optRegUtilizador=Scanners.leituraInt("Escolha uma opÁ„o");
                         switch(optRegUtilizador){
                             case 1:{
-                                String email = Scanners.leituraString("Email:");
+                                String email = Scanners.leituraString("Email:")+ "@mail.com";
                                 String nome = Scanners.leituraString("Nome:");
                                 String password = Scanners.leituraString("Password:");
                                 double n = Scanners.leituraDouble("Coordenada N(usar virgula):");
@@ -148,12 +144,12 @@ public class TrazAqui implements Serializable
                                     g.registaCliente(email, nome, password,lAux);
                                     System.out.println("Registo de cliente com sucesso!");
                                 } catch (GestaoGeralException e) {
-                                    System.out.println("Este email j√° tem conta associada " + e.getMessage());
+                                    System.out.println("Este email j· tem conta associada " + e.getMessage());
                                 }
                                 break;
                             }
                             case 2:{
-                                String email = Scanners.leituraString("Email:");
+                                String email = Scanners.leituraString("Email:")+ "@mail.com";
                                 String nome = Scanners.leituraString("Nome:");
                                 String password = Scanners.leituraString("Password:");
                                 double n = Scanners.leituraDouble("Coordenada N(usar virgula):");
@@ -165,12 +161,12 @@ public class TrazAqui implements Serializable
                                     g.registaLoja(email, nome, password,lAux,tempoEspera);
                                     System.out.println("Registo de loja com sucesso!");
                                 } catch (GestaoGeralException e) {
-                                    System.out.println("Este email j√° tem conta associada " + e.getMessage());
+                                    System.out.println("Este email j· tem conta associada " + e.getMessage());
                                 }
                                 break;
                             }
                             case 3:{
-                                String email = Scanners.leituraString("Email:");
+                                String email = Scanners.leituraString("Email:"+ "@mail.com");
                                 String nome = Scanners.leituraString("Nome:");
                                 String password = Scanners.leituraString("Password:");
                                 double n = Scanners.leituraDouble("Coordenada N(usar virgula):");
@@ -187,12 +183,12 @@ public class TrazAqui implements Serializable
                                     g.registaEmpresa(email,nome, password,lAux,NIF,raiogeografico,velocidade,0.0,0,taxa,multitasking,0,capacidade);
                                     System.out.println("Registo de empresa com sucesso!");
                                 } catch (GestaoGeralException e) {
-                                    System.out.println("Este email j√° tem conta associada " + e.getMessage());
+                                    System.out.println("Este email j· tem conta associada " + e.getMessage());
                                 }
                                 break;
                             }
                             case 4:{
-                                String email = Scanners.leituraString("Email:");
+                                String email = Scanners.leituraString("Email:"+ "@mail.com");
                                 String nome = Scanners.leituraString("Nome:");
                                 String password = Scanners.leituraString("Password:");
                                 double n = Scanners.leituraDouble("Coordenada N(usar virgula):");
@@ -205,10 +201,17 @@ public class TrazAqui implements Serializable
                                     g.registaVoluntario(email,nome, password,lAux,raiogeografico,velocidade,0.0,0,0);
                                     System.out.println("Registo de voluntario com sucesso!");
                                 } catch (GestaoGeralException e) {
-                                    System.out.println("Este email j√° tem conta associada " + e.getMessage());
+                                    System.out.println("Este email j· tem conta associada " + e.getMessage());
                                 }
                                 break;
                             }
+                            case 5 :{
+                                ArrayList<Cliente> result = new ArrayList<Cliente>();
+                                    result = (ArrayList) g.listagemClientes();
+                                    for (Cliente c : result)
+                                        System.out.println(c.toString());
+                                    break;
+                                }
                             case 0:{
                                 break;
                             }
@@ -222,7 +225,7 @@ public class TrazAqui implements Serializable
                     int optGravarCarregar;
                     do{
                         Menus.submenu_gravar();
-                        optGravarCarregar=Scanners.leituraInt("Escolha uma op√ß√£o");
+                        optGravarCarregar=Scanners.leituraInt("Escolha uma opÁ„o");
                         switch(optGravarCarregar){
                             case 1:{
                                 
@@ -231,6 +234,10 @@ public class TrazAqui implements Serializable
                                 
                                 Leitura l = new Leitura();
                                 l.ler();
+                                g.addListaClientes(l.listagemClientes());
+                                g.addListaEmpresas(l.listagemEmpresas());
+                                g.addListaLojas(l.listagemLojas());
+                                g.addListaVoluntarios(l.listagemVoluntarios());
                                 System.out.println("Carregamento realizado com sucesso");
                                 
                             }

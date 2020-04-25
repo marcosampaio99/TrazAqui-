@@ -73,10 +73,18 @@ public class GestaoCliente
     // confirma login
     
      public boolean login(String email, String password){
-        if((this.verifica(email)) == false) return false;
-        if ((this.getCliente().get(email).getPassword().equals(password) == true) && (this.getCliente().get(email) instanceof Cliente)) return true;
-        else return false;
-
+        if((this.verifica(email)) == false){
+            System.out.println("as");
+            return false;
+        }
+        if ((this.getCliente().get(email).getPassword().equals(password) == true) && (this.getCliente().get(email) instanceof Cliente)) {
+            System.out.println("as2");
+            return true;
+        }
+        else{
+            System.out.println("as3");
+            return false;
+        }
     }
     
     

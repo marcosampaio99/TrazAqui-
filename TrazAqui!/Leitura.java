@@ -1,4 +1,4 @@
-// FICHEIRO QUE LÊ DE UM DOCUMENTO E GUARDA NA GESTAOCLIENTES GESTAOLOJAS GESTAOEMPRESAS 
+   // FICHEIRO QUE LÊ DE UM DOCUMENTO E GUARDA NA GESTAOCLIENTES GESTAOLOJAS GESTAOEMPRESAS 
 
 import java.util.List;
 import java.util.ArrayList;
@@ -17,13 +17,13 @@ import java.util.Date;
 
 
 public class Leitura {
-	
+    
     GestaoCliente gc =new GestaoCliente();
     GestaoVoluntario gv = new GestaoVoluntario();
     GestaoEmpresa ge = new GestaoEmpresa();
     GestaoLojas gl = new GestaoLojas();
     GestaoEncomenda ges = new GestaoEncomenda();
-  	
+    
   public void ler(){
       
       List<String> linhas = lerFicheiro("LogsGerados.txt"); //alterar nome do ficheiro
@@ -170,4 +170,24 @@ public class Leitura {
   public String showGestaoEmpresa(){
       return ge.toString();
 }
+
+public List<Cliente> listagemClientes(){
+       ArrayList<Cliente> list = new ArrayList<Cliente>(this.gc.getCliente().values());
+       return list;
+    }
+
+public List<Empresa> listagemEmpresas(){
+       ArrayList<Empresa> list = new ArrayList<Empresa>(this.ge.getEmpresa().values());
+       return list;
+    }
+    
+public List<Loja> listagemLojas(){
+       ArrayList<Loja> list = new ArrayList<Loja>(this.gl.getLoja().values());
+       return list;
+    }
+    
+public List<Voluntario> listagemVoluntarios(){
+       ArrayList<Voluntario> list = new ArrayList<Voluntario>(this.gv.getVoluntario().values());
+       return list;
+    }
 }

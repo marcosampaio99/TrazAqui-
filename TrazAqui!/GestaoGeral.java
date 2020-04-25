@@ -85,4 +85,37 @@ public class GestaoGeral implements Serializable{
   public void loginLoja(String emailAux, String passwordAux) throws GestaoGeralException {
         if (lojas.login(emailAux, passwordAux) == false) throw new GestaoGeralException(emailAux);
     }
+    
+    
+  public void addListaClientes(List<Cliente> c){
+        for (Cliente temp : c) {
+        this.clientes.addCliente(temp);
+     }
+   }
+   
+   public void addListaEmpresas(List<Empresa> e){
+        for (Empresa temp : e) {
+        this.empresas.addEmpresa(temp);
+     }
+   }
+   
+    public void addListaLojas(List<Loja> l){
+        for (Loja temp : l) {
+        this.lojas.addLoja(temp);
+     }
+   }
+   
+    public void addListaVoluntarios(List<Voluntario> v){
+        for (Voluntario temp : v) {
+        this.voluntarios.addVoluntario(temp);
+     }
+   }
+   
+   
+   public List<Cliente> listagemClientes(){
+       ArrayList<Cliente> list = new ArrayList<Cliente>(this.getClientes().values());
+       return list;
+    }
 }
+        
+
