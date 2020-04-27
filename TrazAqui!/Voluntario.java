@@ -1,4 +1,5 @@
-
+import java.util.List;
+import java.util.ArrayList;
 
 public class Voluntario extends Utilizador
 {
@@ -8,7 +9,7 @@ public class Voluntario extends Utilizador
     private double rating;
     private int nmrClassificacoes;
     private int verificador;
-    //lista das entregas efetuadas
+    private List<RealizadaVoluntario> rv;
     
 
     /**
@@ -22,7 +23,7 @@ public class Voluntario extends Utilizador
      this.rating=0.0;
      this.nmrClassificacoes=0;
      this.verificador=0; // 1 se o voluntario estiver ocupado; 0 cc
-     //lista de entregas
+     this.rv = new ArrayList<>();
     }
 
     
@@ -33,18 +34,18 @@ public class Voluntario extends Utilizador
         this.rating=v.getRating();
         this.nmrClassificacoes=v.getnmrClassificacoes();
         this.verificador=v.getVerificador();
-        
+        this.rv=v.getRv();
     }  
     
     
-    public Voluntario(String nome,String email,String password,Localizacao localizacao, double raiogeografico, int velocidade, double rating,int nmrClassificacoes,int verificador){
-        super(nome,email,password,localizacao);
+    public Voluntario(String email,String nome,String password,Localizacao localizacao, double raiogeografico, int velocidade, double rating,int nmrClassificacoes,int verificador,List<RealizadaVoluntario> rvAux){
+        super(email,nome,password,localizacao);
         this.raiogeografico=raiogeografico;
         this.velocidade=velocidade;
         this.rating=rating;
         this.nmrClassificacoes=nmrClassificacoes;
         this.verificador=verificador;
-        
+        this.rv=rvAux;
 
 }
  
@@ -73,18 +74,24 @@ public class Voluntario extends Utilizador
         return this.verificador;
     }
     
+    public List<RealizadaVoluntario> getRv(){
+        List<RealizadaVoluntario> l = new ArrayList();
+        for(RealizadaVoluntario r : this.rv)
+            l.add(r);
+        return l;
+    }
     // setters 
     
 
-    public void setRaiogeografico(){
+    public void setRaiogeografico(double raiogeografico){
         this.raiogeografico=raiogeografico;
     }
     
-    public void setVelocidade(){
+    public void setVelocidade(int velocidade){
         this.velocidade=velocidade;
     }
     
-    public void setRating(){
+    public void setRating(double rating){
         this.rating=rating;
     }
     
@@ -92,11 +99,15 @@ public class Voluntario extends Utilizador
         this.nmrClassificacoes=nmrClassificacoes;
     }
     
-    public void setVerificador(){
+    public void setVerificador(int verificador){
         this.verificador=verificador;
     }
     
-    
+    public void setRv(List<RealizadaVoluntario> l){
+        this.rv = new ArrayList<>();
+        for(RealizadaVoluntario r : l)
+            this.rv.add(r);
+    }
     
     public boolean equals (Object o){
         if(this==o) return true;
@@ -105,7 +116,8 @@ public class Voluntario extends Utilizador
         
         Voluntario u = (Voluntario) o;
         return(super.equals(u)&&this.raiogeografico==u.getRaiogeografico()) && (this.velocidade==u.getVelocidade())
-            &&(this.rating==u.getRating())&& (this.nmrClassificacoes==u.getnmrClassificacoes()) && (this.verificador==u.getVerificador());
+            &&(this.rating==u.getRating())&& (this.nmrClassificacoes==u.getnmrClassificacoes()) && (this.verificador==u.getVerificador()
+            && this.getRv().equals(u.getRv()));
             
     }
     
@@ -113,15 +125,15 @@ public class Voluntario extends Utilizador
         String s = new String();
  
         s = ("Voluntário: \n" + 
-               "Nome: " + this.getNome() + "\n" + 
-              // "Password: " + this.getPassword() + "\n" +
-               "Email: " + this.getEmail() + "\n"+
-               "Raio Geografico: " + this.getRaiogeografico() + "\n" +
-               "Velocidade média (m/s): " + this.velocidade +"\n" +
-               "Rating: " + this.rating + "\n" +
-               "Nr de Classificações: " + this.nmrClassificacoes + "\n" + 
-               "Verificador: " + this.verificador + "\n"+
-               "Localizacao: "+ this.getLocalizacao() + "\n") + "\n";
+               "Nome: " + this.getNome() +  
+               "Email: " + this.getEmail() + 
+               "Raio Geografico: " + this.getRaiogeografico() + 
+               "Velocidade média (m/s): " + this.velocidade +
+               "Rating: " + this.rating + 
+               "Nr de Classificações: " + this.nmrClassificacoes +  
+               "Verificador: " + this.verificador + 
+               "Encomendas entregues: " + this.rv.toString() +
+               "Localizacao: "+ this.getLocalizacao() + "\n");
              
  
         return s;
@@ -130,6 +142,13 @@ public class Voluntario extends Utilizador
     
     public Voluntario clone() {
         return new Voluntario(this);
+    }
+    
+    //metodos para atualizar listas de encomendas entregues
+    public void atualizaLV(RealizadaVoluntario r){
+        ArrayList<RealizadaVoluntario> list = new ArrayList<RealizadaVoluntario>(this.getRv());
+        list.add(r);
+        this.setRv(list);
     }
 }
 

@@ -73,5 +73,19 @@ public class GestaoEmpresa
 
     }
     
-    
+    //metodo para atualizar listas de encomendas entregues
+     public void atualizaELE(RealizadaEmpresa r, String mail) {((this.empresas.get(mail))).atualizaLE(r);}
+     
+   
+    //metodo para atualizar classficacao
+      public void atualizaClassificacaoEmpresa(double c, Empresa cl){
+        if (this.empresas.get(cl.getEmail()).getnmrClassificacoes() == 0 ) {
+            this.empresas.get(cl.getEmail()).setRating(c);
+            this.empresas.get(cl.getEmail()).setnmrClassificacoes(1);
+        }
+        else {
+            this.empresas.get(cl.getEmail()).setRating(((c)+ (this.empresas.get(cl.getEmail()).getRating() * this.empresas.get(cl.getEmail()).getnmrClassificacoes())) / (this.empresas.get(cl.getEmail()).getnmrClassificacoes() +1)) ;
+            this.empresas.get(cl.getEmail()).setnmrClassificacoes(this.empresas.get(cl.getEmail()).getnmrClassificacoes() + 1);
+        }
+    }
 }

@@ -28,7 +28,7 @@ public class TrazAqui implements Serializable
                         optLogin = Scanners.leituraInt("Escolha uma opção");
                         switch (optLogin) {
                             case 1: {
-                                String email = Scanners.leituraString("Email:") + "@mail.com";
+                                String email = Scanners.leituraString("Email:");
                                 String password = Scanners.leituraString("Password:");
                                 try {
                                     g.loginCliente(email, password);
@@ -133,15 +133,16 @@ public class TrazAqui implements Serializable
                         optRegUtilizador=Scanners.leituraInt("Escolha uma opção");
                         switch(optRegUtilizador){
                             case 1:{
-                                String email = Scanners.leituraString("Email:")+ "@mail.com";
+                                String email = Scanners.leituraString("Email:");
                                 String nome = Scanners.leituraString("Nome:");
                                 String password = Scanners.leituraString("Password:");
                                 double n = Scanners.leituraDouble("Coordenada N(usar virgula):");
                                 double l = Scanners.leituraDouble("Coordenada L(usar virgula):");
                                 Localizacao lAux=new Localizacao(n,l);
-                                
+                                List<RealizadaEmpresa> re = new ArrayList<RealizadaEmpresa>();
+                                List<RealizadaVoluntario> rv = new ArrayList<RealizadaVoluntario>();
                                 try {
-                                    g.registaCliente(email, nome, password,lAux);
+                                    g.registaCliente(email, nome, password,lAux,re,rv);
                                     System.out.println("Registo de cliente com sucesso!");
                                 } catch (GestaoGeralException e) {
                                     System.out.println("Este email já tem conta associada " + e.getMessage());
@@ -149,7 +150,7 @@ public class TrazAqui implements Serializable
                                 break;
                             }
                             case 2:{
-                                String email = Scanners.leituraString("Email:")+ "@mail.com";
+                                String email = Scanners.leituraString("Email:");
                                 String nome = Scanners.leituraString("Nome:");
                                 String password = Scanners.leituraString("Password:");
                                 double n = Scanners.leituraDouble("Coordenada N(usar virgula):");
@@ -166,7 +167,7 @@ public class TrazAqui implements Serializable
                                 break;
                             }
                             case 3:{
-                                String email = Scanners.leituraString("Email:"+ "@mail.com");
+                                String email = Scanners.leituraString("Email:");
                                 String nome = Scanners.leituraString("Nome:");
                                 String password = Scanners.leituraString("Password:");
                                 double n = Scanners.leituraDouble("Coordenada N(usar virgula):");
@@ -178,9 +179,9 @@ public class TrazAqui implements Serializable
                                 double taxa = Scanners.leituraDouble("Taxa:");
                                 int multitasking = Scanners.leituraInt("Multitasking? (0-N 1-S):");
                                 int capacidade = Scanners.leituraInt("Capacidade:");
-                                
+                                List<RealizadaEmpresa> re = new ArrayList<RealizadaEmpresa>();
                                 try {
-                                    g.registaEmpresa(email,nome, password,lAux,NIF,raiogeografico,velocidade,0.0,0,taxa,multitasking,0,capacidade);
+                                    g.registaEmpresa(email,nome, password,lAux,NIF,raiogeografico,velocidade,0.0,0,taxa,multitasking,0,capacidade,re);
                                     System.out.println("Registo de empresa com sucesso!");
                                 } catch (GestaoGeralException e) {
                                     System.out.println("Este email já tem conta associada " + e.getMessage());
@@ -188,7 +189,7 @@ public class TrazAqui implements Serializable
                                 break;
                             }
                             case 4:{
-                                String email = Scanners.leituraString("Email:"+ "@mail.com");
+                                String email = Scanners.leituraString("Email:");
                                 String nome = Scanners.leituraString("Nome:");
                                 String password = Scanners.leituraString("Password:");
                                 double n = Scanners.leituraDouble("Coordenada N(usar virgula):");
@@ -196,9 +197,9 @@ public class TrazAqui implements Serializable
                                 Localizacao lAux=new Localizacao(n,l);
                                 double raiogeografico = Scanners.leituraDouble("Raio geografico:");
                                 int velocidade = Scanners.leituraInt("Velocidade:");
-                                
+                                List<RealizadaVoluntario> rv = new ArrayList<RealizadaVoluntario>();
                                 try {
-                                    g.registaVoluntario(email,nome, password,lAux,raiogeografico,velocidade,0.0,0,0);
+                                    g.registaVoluntario(email,nome, password,lAux,raiogeografico,velocidade,0.0,0,0,rv);
                                     System.out.println("Registo de voluntario com sucesso!");
                                 } catch (GestaoGeralException e) {
                                     System.out.println("Este email já tem conta associada " + e.getMessage());
@@ -238,6 +239,7 @@ public class TrazAqui implements Serializable
                                 g.addListaEmpresas(l.listagemEmpresas());
                                 g.addListaLojas(l.listagemLojas());
                                 g.addListaVoluntarios(l.listagemVoluntarios());
+                                g.addListaEncomendas(l.listagemEncomendas());
                                 System.out.println("Carregamento realizado com sucesso");
                                 
                             }

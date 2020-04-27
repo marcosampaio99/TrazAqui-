@@ -11,6 +11,7 @@ public class GestaoGeral implements Serializable{
   private GestaoEmpresa empresas;
   private GestaoVoluntario voluntarios;
   private GestaoLojas lojas;
+  private GestaoEncomenda encomendas;
   
   //construtores
   public GestaoGeral(){
@@ -18,6 +19,7 @@ public class GestaoGeral implements Serializable{
       this.empresas= new GestaoEmpresa();
       this.voluntarios= new GestaoVoluntario();
       this.lojas= new GestaoLojas();
+      this.encomendas= new GestaoEncomenda();
     }
     
   public HashMap<String,Cliente> getClientes(){
@@ -36,27 +38,31 @@ public class GestaoGeral implements Serializable{
       return this.lojas.getLoja();
     }
     
+  public HashMap<String,Encomenda> getEncomendas(){
+      return this.encomendas.getEncomenda();
+    }
+    
   //metodos para registar utilizadores
-  public void registaCliente(String emailAux, String nomeAux, String passwordAux,Localizacao localizacaoAux) throws GestaoGeralException{
+  public void registaCliente(String emailAux, String nomeAux, String passwordAux,Localizacao localizacaoAux, List<RealizadaEmpresa> reAux, List<RealizadaVoluntario> rvAux) throws GestaoGeralException{
        if (clientes.verifica(emailAux)) throw new GestaoGeralException(emailAux);
        else {
-            Cliente c_aux = new Cliente(emailAux, nomeAux, passwordAux, localizacaoAux);
+            Cliente c_aux = new Cliente(emailAux, nomeAux, passwordAux, localizacaoAux,reAux,rvAux);
             this.clientes.addCliente(c_aux);
         }
     }
   
-  public void registaEmpresa(String emailAux, String nomeAux, String passwordAux,Localizacao localizacaoAux,int nifAux,double raiogeograficoAux,int velocidadeAux,double ratingAux,int nmrClassificacoesAux,double taxaAux,int multitaskingAux,int indicadorAux,int capacidadeAux) throws GestaoGeralException{
+  public void registaEmpresa(String emailAux, String nomeAux, String passwordAux,Localizacao localizacaoAux,int nifAux,double raiogeograficoAux,int velocidadeAux,double ratingAux,int nmrClassificacoesAux,double taxaAux,int multitaskingAux,int indicadorAux,int capacidadeAux, List<RealizadaEmpresa> reAux) throws GestaoGeralException{
        if (empresas.verifica(emailAux)) throw new GestaoGeralException(emailAux);
        else {
-            Empresa e_aux = new Empresa(emailAux, nomeAux, passwordAux, localizacaoAux,nifAux,raiogeograficoAux,velocidadeAux,ratingAux,nmrClassificacoesAux,taxaAux,multitaskingAux,indicadorAux,capacidadeAux);
+            Empresa e_aux = new Empresa(emailAux, nomeAux, passwordAux, localizacaoAux,nifAux,raiogeograficoAux,velocidadeAux,ratingAux,nmrClassificacoesAux,taxaAux,multitaskingAux,indicadorAux,capacidadeAux,reAux);
             this.empresas.addEmpresa(e_aux);
         }
     }
   
-  public void registaVoluntario(String emailAux, String nomeAux, String passwordAux,Localizacao localizacaoAux,double raiogeograficoAux,int velocidadeAux,double ratingAux,int nmrClassificacoesAux,int verificadorAux) throws GestaoGeralException{
+  public void registaVoluntario(String emailAux, String nomeAux, String passwordAux,Localizacao localizacaoAux,double raiogeograficoAux,int velocidadeAux,double ratingAux,int nmrClassificacoesAux,int verificadorAux,List<RealizadaVoluntario> rvAux) throws GestaoGeralException{
       if (voluntarios.verifica(emailAux)) throw new GestaoGeralException(emailAux);
        else {
-            Voluntario v_aux = new Voluntario(emailAux,nomeAux, passwordAux, localizacaoAux,raiogeograficoAux,velocidadeAux,ratingAux,nmrClassificacoesAux,verificadorAux);
+            Voluntario v_aux = new Voluntario(emailAux,nomeAux, passwordAux, localizacaoAux,raiogeograficoAux,velocidadeAux,ratingAux,nmrClassificacoesAux,verificadorAux,rvAux);
             this.voluntarios.addVoluntario(v_aux);
         }
     }
@@ -86,7 +92,7 @@ public class GestaoGeral implements Serializable{
         if (lojas.login(emailAux, passwordAux) == false) throw new GestaoGeralException(emailAux);
     }
     
-    
+   // metodos para adicioanr listas de entidades lidas dos logs á gestao geral 
   public void addListaClientes(List<Cliente> c){
         for (Cliente temp : c) {
         this.clientes.addCliente(temp);
@@ -111,11 +117,70 @@ public class GestaoGeral implements Serializable{
      }
    }
    
-   
+    public void addListaEncomendas(List<Encomenda> v){
+        for (Encomenda temp : v) {
+        this.encomendas.addEncomenda(temp);
+     }
+   }
+   //metodos de listagens de entidades presentes no sistema para o admin ver
    public List<Cliente> listagemClientes(){
        ArrayList<Cliente> list = new ArrayList<Cliente>(this.getClientes().values());
        return list;
     }
+    
+    public List<Empresa> listagemEmpresas(){
+       ArrayList<Empresa> list = new ArrayList<Empresa>(this.getEmpresas().values());
+       return list;
+    }
+    
+    public List<Voluntario> listagemVoluntarios(){
+       ArrayList<Voluntario> list = new ArrayList<Voluntario>(this.getVoluntarios().values());
+       return list;
+    }
+    
+    public List<Loja> listagemLojas(){
+       ArrayList<Loja> list = new ArrayList<Loja>(this.getLojas().values());
+       return list;
+    }
+    
+    public List<Encomenda> listagemEncomendas(){
+       ArrayList<Encomenda> list = new ArrayList<Encomenda>(this.getEncomendas().values());
+       return list;
+    }
+    
+    public List<RealizadaEmpresa> listagemEncomendasRealizadasEmpresas(){
+        ArrayList<RealizadaEmpresa> list = new ArrayList<RealizadaEmpresa>(this.encomendas.getRealizadaEmpresa());
+        return list;
+    }
+    
+    public List<RealizadaVoluntario> listagemEncomendasRealizadasVoluntarios(){
+        ArrayList<RealizadaVoluntario> list = new ArrayList<RealizadaVoluntario>(this.encomendas.getRealizadaVoluntario());
+        return list;
+    }
+    
+   public List<Pronta> listagemPedidos(){
+
+        ArrayList<Encomenda> list = new ArrayList<Encomenda>(this.getEncomendas().values());
+        ArrayList<Pronta> list2 = new ArrayList<Pronta>();
+
+        for(Encomenda a : list) {
+            if (a instanceof Pronta) list2.add((Pronta) a);
+        }
+
+        return list2;
+    }
+    
+    //metodo para o cliente ver os pedidos que tem para responder
+    public List<Pronta> listagemEncomendasProntas(Cliente c) {   
+        List<Encomenda> list = new ArrayList<>(this.getEncomendas().values());
+        List<Pronta> r = new ArrayList<>();
+
+        for (Encomenda a : list)
+            if((a instanceof Pronta) && ((Pronta)a).getFlagLojaPronta()==true && ((Pronta)a).getRespostaCliente()==true && a.getCliente().getEmail().equals(c.getEmail()) ) r.add((Pronta)a);
+    return r;
+   }
+   
+   
 }
         
 

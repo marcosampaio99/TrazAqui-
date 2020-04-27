@@ -57,6 +57,9 @@ public class Leitura {
                       ges.addEncomenda(en);
                   //   System.out.println(en.toString());
                     break;
+               case "Aceite":
+                    Pronta enc=lerAceite(linhaPartida[1]);
+                    ges.addEncomenda(enc);
                default:
                       System.out.println("Linha inválida.");
                        break;
@@ -73,8 +76,10 @@ public class Leitura {
         double gpsx = Double.parseDouble(campos[2]);
         double gpsy = Double.parseDouble(campos[3]);
         Localizacao l1 =new Localizacao(gpsx,gpsy);
+        List<RealizadaEmpresa> re = new ArrayList<RealizadaEmpresa>();
+        List<RealizadaVoluntario> rv = new ArrayList<RealizadaVoluntario>();
         
-        return new Cliente(nome,email,"passdefault",l1);
+        return new Cliente(email,nome,"passdefault",l1,re,rv);
   }
   
   public Voluntario lerVoluntario(String input){
@@ -85,9 +90,9 @@ public class Leitura {
         double gpsy = Double.parseDouble(campos[3]);
         Localizacao l1 =new Localizacao(gpsx,gpsy);
         double raio = Double.parseDouble(campos[4]);
+        List<RealizadaVoluntario> rv = new ArrayList<RealizadaVoluntario>();
         
-        
-        return new Voluntario(nome,email,"passdefault",l1,raio,0,0.0,0,0);
+        return new Voluntario(email,nome,"passdefault",l1,raio,0,0.0,0,0,rv);
     }
     
     public Loja lerLoja(String input){
@@ -97,7 +102,7 @@ public class Leitura {
         double gpsx = Double.parseDouble(campos[2]);
         double gpsy = Double.parseDouble(campos[3]);
         Localizacao l1 =new Localizacao(gpsx,gpsy);
-        return new Loja(nome,email,"passdefault",l1,0.0);
+        return new Loja(email,nome,"passdefault",l1,0.0);
     }
     
     public Encomenda lerEncomenda(String input){  
@@ -105,16 +110,14 @@ public class Leitura {
       String id = campos[0];
       String emailC = campos[1]+"@mail.com";
       Cliente c = gc.buscaCliente(emailC);
-      //Cliente c =new Cliente ();
-     String emailL = campos[2]+"@mail.com";
-     //Loja l = new Loja();
-     Loja l = gl.buscaLoja(emailL);
+      String emailL = campos[2]+"@mail.com";
+      Loja l = gl.buscaLoja(emailL);
       double peso = Double.parseDouble(campos[3]);
       Date data = new Date();
       //fazer ciclo for para ler uma linha de encomenda de cada vez
       String[] novos=input.split(",",5);
       String[] finalissima=novos[4].split(",");
-       ArrayList <LinhaEncomenda> li =new ArrayList <>();
+      ArrayList <LinhaEncomenda> li =new ArrayList <>();
       for(int i = 0; i<finalissima.length;i+=4){
       String referencia=finalissima[i];
       String descricao=finalissima[i+1];
@@ -146,10 +149,16 @@ public class Leitura {
       int nif = Integer.valueOf(campos[4]);
       double raio = Double.parseDouble(campos[5]);
       double taxa = Double.parseDouble(campos[6]);
-       
-      return new Empresa(nome,email,"passdefault",l1,nif,raio,0,0.0,0,taxa,0,0,0);
+      List<RealizadaEmpresa> re = new ArrayList<RealizadaEmpresa>();
+      return new Empresa(email,nome,"passdefault",l1,nif,raio,0,0.0,0,taxa,0,0,0,re);
     }
     
+  public Pronta lerAceite(String input){
+      String id=input;
+      Encomenda temp= new Encomenda (this.ges.buscaEncomenda(id));
+      return new Pronta(temp.getId(),temp.getCliente(),temp.getLoja(),temp.getPeso(),temp.getState(),temp.getData(),temp.getLinhas(),false,true,-1);
+      
+    }
     
   public List<String> lerFicheiro(String nomeFich) {
         List<String> lines = new ArrayList<>();
@@ -190,4 +199,12 @@ public List<Voluntario> listagemVoluntarios(){
        ArrayList<Voluntario> list = new ArrayList<Voluntario>(this.gv.getVoluntario().values());
        return list;
     }
+
+public List<Encomenda> listagemEncomendas(){
+       ArrayList<Encomenda> list = new ArrayList<Encomenda>(this.ges.getEncomenda().values());
+       return list;
+    }    
+    
+
+    
 }

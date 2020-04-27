@@ -73,5 +73,19 @@ public class GestaoVoluntario
 
     }
     
-    
+    //metodos para atualizar listas de encomendas entregues 
+     public void atualizaVLV(RealizadaVoluntario r, String mail) {((this.voluntarios.get(mail))).atualizaLV(r);}
+     
+     
+     //metodo para atualizar classficacao
+      public void atualizaClassificacaoVoluntario(double c, Voluntario cl){
+        if (this.voluntarios.get(cl.getEmail()).getnmrClassificacoes() == 0 ) {
+            this.voluntarios.get(cl.getEmail()).setRating(c);
+            this.voluntarios.get(cl.getEmail()).setnmrClassificacoes(1);
+        }
+        else {
+            this.voluntarios.get(cl.getEmail()).setRating(((c)+ (this.voluntarios.get(cl.getEmail()).getRating() * this.voluntarios.get(cl.getEmail()).getnmrClassificacoes())) / (this.voluntarios.get(cl.getEmail()).getnmrClassificacoes() +1)) ;
+            this.voluntarios.get(cl.getEmail()).setnmrClassificacoes(this.voluntarios.get(cl.getEmail()).getnmrClassificacoes() + 1);
+        }
+    }
 }

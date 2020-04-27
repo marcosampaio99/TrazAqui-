@@ -17,7 +17,7 @@ public class Encomenda
         this.cliente = new Cliente();
         this.peso=0.0;
         this.state= false;
-         this. linhas =new ArrayList<>();
+        this. linhas =new ArrayList<>();
     }
 
     public Encomenda(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,Date dataAux, ArrayList<LinhaEncomenda> l){

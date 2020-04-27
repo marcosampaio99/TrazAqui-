@@ -31,9 +31,9 @@ public class Utilizador
     }  
     
     
-    public Utilizador(String nome,String email,String password,Localizacao localizacao){
-        this.nome=nome;
+    public Utilizador(String email,String nome,String password,Localizacao localizacao){
         this.email=email;
+        this.nome=nome;
         this.password=password;
         this.localizacao=localizacao;
 
@@ -97,9 +97,9 @@ public class Utilizador
         String s = new String();
  
         s = ("Utilizador: \n" + 
+                "Email: " + this.email + "\n"+
                "Nome: " + this.nome + "\n" + 
                "Password: " + this.password + "\n" +
-               "Email: " + this.email + "\n"+
                "Localizacao: "+ this.getLocalizacao() + "\n");
              
  

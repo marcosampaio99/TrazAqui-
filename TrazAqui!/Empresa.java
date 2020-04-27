@@ -1,3 +1,5 @@
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Escreva a descrição da classe Empresa aqui.
@@ -17,7 +19,7 @@ public class Empresa extends Utilizador
     private int multitasking;//1 se fizer mais do q 1 entrega ao mesmo tempo 0 se nao
     private int indicador; //1 se estiver disposto a recolher 0 se nao
     private int capacidade; // quantas encomendas conseguem tratar ao mm tempo 
-    // lista de entregas efetuadas;
+    private List<RealizadaEmpresa> re;
 
     /**
      * COnstrutor para objetos da classe Empresa
@@ -35,6 +37,7 @@ public class Empresa extends Utilizador
         this.multitasking=0;
         this.indicador=1;
         this.capacidade=1;
+        this.re = new ArrayList<>();
     }
 
     public Empresa(Empresa e){
@@ -48,10 +51,11 @@ public class Empresa extends Utilizador
         this.multitasking=e.getMulti();
         this.indicador=e.getIndicador();
         this.capacidade=e.getCapacidade();
+        this.re=e.getRe();
     }
     
-    public Empresa(String nome,String email,String password,Localizacao localizacao,int nif, double raiogeografico, int velocidade, double rating,int nmrClassificacoes, double taxa,int multitasking, int indicador, int capacidade){
-        super(nome,email,password,localizacao);
+    public Empresa(String email,String nome,String password,Localizacao localizacao,int nif, double raiogeografico, int velocidade, double rating,int nmrClassificacoes, double taxa,int multitasking, int indicador, int capacidade,List<RealizadaEmpresa> reAux){
+        super(email,nome,password,localizacao);
         this.NIF=nif;
         this.raiogeografico=raiogeografico;
         this.velocidade=velocidade;
@@ -61,6 +65,7 @@ public class Empresa extends Utilizador
         this.multitasking=multitasking;
         this.indicador=indicador;
         this.capacidade=capacidade;
+        this.re=reAux;
     }
     
     
@@ -103,21 +108,28 @@ public class Empresa extends Utilizador
         return this.capacidade;
     }
     
+    public List<RealizadaEmpresa> getRe(){
+        List<RealizadaEmpresa> l = new ArrayList();
+        for(RealizadaEmpresa r : this.re)
+            l.add(r);
+        return l;
+    }
+    
     // setters
     
-    public void setNIF(){
+    public void setNIF(int NIF){
          this.NIF=NIF;
     }
     
-    public void setRaiogeografico(){
+    public void setRaiogeografico(double raiogeografico){
         this.raiogeografico=raiogeografico;
     }
     
-    public void setVelocidade(){
+    public void setVelocidade(int velocidade){
         this.velocidade=velocidade;
     }
     
-    public void setRating(){
+    public void setRating(double rating){
         this.rating=rating;
     }
     
@@ -125,20 +137,26 @@ public class Empresa extends Utilizador
         this.nmrClassificacoes=nmrClassificacoes;
     }
     
-     public void setTaxa(){
+     public void setTaxa(double taxa){
         this.taxa=taxa;
     }
 
-     public void setMulti(){
+     public void setMulti(int multitasking){
         this.multitasking=multitasking;
     }
     
-    public void setIndicador(){
+    public void setIndicador(int indicador){
     this.indicador=indicador;
     }
     
-     public void setCapacidade(){
+     public void setCapacidade(int capacidade){
         this.capacidade=capacidade;
+    }
+    
+    public void setRe(List<RealizadaEmpresa> l){
+        this.re = new ArrayList<>();
+        for(RealizadaEmpresa r : l)
+            this.re.add(r);
     }
     
     public boolean equals (Object o){
@@ -152,26 +170,26 @@ public class Empresa extends Utilizador
             &&(this.velocidade==e.getVelocidade())
             &&(this.rating==e.getRating())&&(this.nmrClassificacoes==e.getnmrClassificacoes()) &&(this.taxa==e.getTaxa())
             &&(this.multitasking==e.getMulti()&&(this.indicador==e.getIndicador())
-            &&(this.capacidade==e.getCapacidade()));
+            &&(this.capacidade==e.getCapacidade()) && this.getRe().equals(e.getRe()));
             
     }
     
     public String toString() {
         String s = new String();
  
-        s = ("Empresa: \n" + 
-               "Nome: " + this.getNome() + "\n" + 
-              // "Password: " + this.getPassword() + "\n" +
-               "Email: " + this.getEmail() + "\n"+
-               "NIF: " + this.getNIF() + "\n" +
-               "Raio Geografico(m): " + this.getRaiogeografico() + "\n" +
-               "Velocidade média (m/s): " + this.velocidade +"\n" +
-               "Rating: " + this.rating + "\n" +
-               "Nr de Classificações: " + this.nmrClassificacoes + "\n" +
-               "Multitasking(Sim:1/Não:0): " + this.multitasking + "\n" +
-               "Disponível(Sim:1/Não:0): " + this.indicador + "\n" +
-               "Pedidos disponíveis ao mesmo tempo: " + this.capacidade +  "\n" +
-               "Localizacao: "+ this.getLocalizacao() + "\n") + "\n";
+        s = ("Empresa: " + 
+               "Nome: " + this.getNome() +  
+               "Email: " + this.getEmail() + 
+               "NIF: " + this.getNIF() + 
+               "Raio Geografico(m): " + this.getRaiogeografico() +
+               "Velocidade média (m/s): " + this.velocidade +
+               "Rating: " + this.rating + 
+               "Nr de Classificações: " + this.nmrClassificacoes + 
+               "Multitasking(Sim:1/Não:0): " + this.multitasking + 
+               "Disponível(Sim:1/Não:0): " + this.indicador + 
+               "Pedidos disponíveis ao mesmo tempo: " + this.capacidade +
+               "Encomendas entregues: " + this.re.toString() +
+               "Localizacao: "+ this.getLocalizacao() + "\n") ;
  
         return s;
     }
@@ -181,6 +199,11 @@ public class Empresa extends Utilizador
         return new Empresa(this);
     }
     
-    
+    //metodos para atualizar listas de encomendas entregues
+    public void atualizaLE(RealizadaEmpresa r){
+        ArrayList<RealizadaEmpresa> list = new ArrayList<RealizadaEmpresa>(this.getRe());
+        list.add(r);
+        this.setRe(list);
+    }
    
 }

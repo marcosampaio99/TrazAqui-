@@ -13,13 +13,13 @@ public class Loja extends Utilizador {
         this.tempoEspera=0;
     }
 
-    public Loja(String nomeAux,String emailAux, String passwordAux, Localizacao localizacaoAux, double tempoEsperaAux){
-        super(nomeAux,emailAux,passwordAux,localizacaoAux);
+    public Loja(String emailAux,String nomeAux, String passwordAux, Localizacao localizacaoAux, double tempoEsperaAux){
+        super(emailAux,nomeAux,passwordAux,localizacaoAux);
         this.tempoEspera=tempoEsperaAux;
     }
 
     public Loja(Loja c){
-        this(c.getNome(),c.getEmail(),c.getPassword(),c.getLocalizacao(),c.getTempoEspera());
+        this(c.getEmail(),c.getNome(),c.getPassword(),c.getLocalizacao(),c.getTempoEspera());
     }
 
     //getters
