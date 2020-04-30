@@ -10,51 +10,39 @@ import java.util.ArrayList;
 public class Pronta extends Encomenda
 {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
-    private boolean respostaCliente; // se alguma empresa mandou pedido ou nao
-    private boolean flagLojaPronta; // 0 se a encomenda ainda nao está pronta, 1 se a loja ja tiver a encomenda pronta
+    private Empresa empresa;
     private double preco;
     
     public Pronta(){
         super();
-        this.respostaCliente=false;
-        this.flagLojaPronta=false;
+        this.empresa= new Empresa();
         this.preco=-1;
     }
     
-    public Pronta(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,Date dataAux, ArrayList<LinhaEncomenda> l, boolean respostaClienteAux, boolean flagLojaProntaAux,double precoAux){
-        super(idAux, clienteAux, lojaAux, pesoAux, stateAux, dataAux,l);
-        this.respostaCliente=respostaClienteAux;
-        this.flagLojaPronta=flagLojaProntaAux;
+    public Pronta(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,Date dataAux, boolean respostaClienteAux, boolean flagLojaProntaAux,ArrayList<LinhaEncomenda> l,Empresa empresaAux, double precoAux){
+        super(idAux, clienteAux, lojaAux, pesoAux, stateAux, dataAux,respostaClienteAux,flagLojaProntaAux,l);
+        this.empresa= empresaAux;
         this.preco=precoAux;
     }
     
     public Pronta(Pronta p){
         super(p);
-        this.respostaCliente=p.getRespostaCliente();
-        this.flagLojaPronta=p.getFlagLojaPronta();
+        this.empresa= p.getEmpresa();
         this.preco=p.getPreco();
     }
     
     //getters
     
-    public boolean getRespostaCliente(){
-        return this.respostaCliente;
-    }
-    
-    public boolean getFlagLojaPronta(){
-        return this.flagLojaPronta;
+    public Empresa getEmpresa(){
+       return this.empresa;
     }
     
     public double getPreco(){
         return this.preco;
     }
     
-    public void setRespostaCliente(boolean r){
-        this.respostaCliente=r;
-    }
-    
-    public void setFlagLojaPronta(boolean r){
-        this.flagLojaPronta=r;
+  public void setEmpresa(Empresa e){
+       this.empresa=e;
     }
     
     public void setPreco(double preco){
@@ -65,18 +53,17 @@ public class Pronta extends Encomenda
         
         if((o==null) || (this.getClass()!=o.getClass())) return false;
         Pronta p=(Pronta) o;
-        return (super.equals(p) && this.respostaCliente==p.getRespostaCliente() 
-        && this.flagLojaPronta==p.getFlagLojaPronta() && this.preco==p.getPreco());
+        return (super.equals(p) && this.getEmpresa().equals(p.getEmpresa()) && this.preco==p.getPreco());
     }
     
     public String toString(){
        return "Encomenda com id: " + this.getId() +
-              "Cliente: " + this.getCliente() +
-              "Loja: " + this.getLoja() +
+              "Cliente: " + this.getCliente().getNome() +
+              "Loja: " + this.getLoja().getNome() +
               "Peso: " + this.getPeso() +
-              "Preco: " + this.preco +
-              "Loja ja tem a encomenda pronta? (0-Nao 1-Sim) " + this.flagLojaPronta +
-              "Ja foi enviado pedido de aceite ao cliente? (0-Nao 1-Sim) " + this.respostaCliente + "\n";
+              "Empresa que prentende transportar: "+ this.empresa.getEmail() + 
+              "Com preco: " + this.preco + "\n";
+              
             }
             
             

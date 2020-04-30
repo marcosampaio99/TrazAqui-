@@ -82,12 +82,12 @@ public class GestaoEncomenda
     }
     
     // metodo para cliente classificar o serviço da encomenda entregue por uma empresa com o id fornecido  
-    public void classificacaoClienteEmpresa(int id, int p) {
+    public void classificacaoClienteEmpresa(String id, double p) {
         ((RealizadaEmpresa) (this.encomendas.get(id))).clienteClassifica(p);
     }
     
     // metodo para cliente classificar o serviço da encomenda entregue por um voluntario com o id fornecido
-    public void classificacaoClienteVoluntario(int id, int p) {
+    public void classificacaoClienteVoluntario(String id, double p) {
         ((RealizadaVoluntario) (this.encomendas.get(id))).clienteClassifica(p);
     }
     

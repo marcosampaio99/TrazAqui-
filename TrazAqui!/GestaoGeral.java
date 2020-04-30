@@ -157,7 +157,7 @@ public class GestaoGeral implements Serializable{
         ArrayList<RealizadaVoluntario> list = new ArrayList<RealizadaVoluntario>(this.encomendas.getRealizadaVoluntario());
         return list;
     }
-    
+ 
    public List<Pronta> listagemPedidos(){
 
         ArrayList<Encomenda> list = new ArrayList<Encomenda>(this.getEncomendas().values());
@@ -171,16 +171,70 @@ public class GestaoGeral implements Serializable{
     }
     
     //metodo para o cliente ver os pedidos que tem para responder
-    public List<Pronta> listagemEncomendasProntas(Cliente c) {   
+    public List<Encomenda> listagemEncomendasProntas(Cliente c) {   
         List<Encomenda> list = new ArrayList<>(this.getEncomendas().values());
-        List<Pronta> r = new ArrayList<>();
+        List<Encomenda> r = new ArrayList<>();
 
         for (Encomenda a : list)
-            if((a instanceof Pronta) && ((Pronta)a).getFlagLojaPronta()==true && ((Pronta)a).getRespostaCliente()==true && a.getCliente().getEmail().equals(c.getEmail()) ) r.add((Pronta)a);
+            if(a.getFlagLojaPronta()==true && a.getRespostaCliente()==true && a.getCliente().getEmail().equals(c.getEmail()) ) r.add(a);
     return r;
-   }
-   
-   
 }
+
+//metodos para dar a listagem de encomendas que clientes podem classificar
+    public List<RealizadaEmpresa> listaClassificarEmpresa(Cliente c){
+        return this.encomendas.realizadosClassificarClienteEmpresa(c);
+    }
+    
+    public List<RealizadaVoluntario> listaClassificarVoluntario(Cliente c){
+        return this.encomendas.realizadosClassificarClienteVoluntario(c);
+    }
+
+//metodos para classificar empresa e voluntarios
+public void registaClassEmpresa(String idE,double classificacao,Cliente c) throws GestaoGeralException{
+        RealizadaEmpresa aux= (RealizadaEmpresa) this.getEncomendas().get(idE);
+        if (this.getEncomendas().get(idE) == null) throw new GestaoGeralException(String.valueOf(idE));
+        if (this.getEncomendas().get(idE).getCliente().getEmail().equals(c.getEmail()) == false) throw new GestaoGeralException(String.valueOf(idE));
+        if (((RealizadaEmpresa)(this.getEncomendas().get(idE))).getClassificado()==true )throw new GestaoGeralException(String.valueOf(idE));
+        else {
+            this.encomendas.classificacaoClienteEmpresa(idE,classificacao);
+            this.empresas.atualizaClassificacaoEmpresa(classificacao,aux.getEmpresa());
+        }
+    }
+    
+public void registaClassVoluntario(String idE,double classificacao,Cliente c) throws GestaoGeralException{
+        RealizadaVoluntario aux= (RealizadaVoluntario) this.getEncomendas().get(idE);
+        if (this.getEncomendas().get(idE) == null) throw new GestaoGeralException(String.valueOf(idE));
+        if (this.getEncomendas().get(idE).getCliente().getEmail().equals(c.getEmail()) == false) throw new GestaoGeralException(String.valueOf(idE));
+        if (((RealizadaVoluntario)(this.getEncomendas().get(idE))).getClassificado()==true )throw new GestaoGeralException(String.valueOf(idE));
+        else {
+            this.encomendas.classificacaoClienteVoluntario(idE,classificacao);
+            this.voluntarios.atualizaClassificacaoVoluntario(classificacao,aux.getVoluntario());
+        }
+    }
+    /*
+    public void AceitaPedido(int idP,Cliente c) throws GestaoGeralException {
+        if ((this.getEncomendas().get(idP)) instanceof RealizadaEmpresa) throw new GestaoGeralException(String.valueOf(idP));
+        Pronta pd = (Pronta) this.getEncomendas().get(idP);
+        if (pd == null) throw new GestaoGeralException(String.valueOf(idP));
+        if (pd.getRespostaCliente() != false || pd.getFlagLojaPronta() != false) throw new GestaoGeralException(String.valueOf(idP));
+        if (pd.getCliente().getEmail().equals(c.getEmail())==false) throw new GestaoGeralException(String.valueOf(idP));
+        else {
+            double distanciaViagem=
+            double preco =
+            Date data = new Date();
+            RealizadaEmpresa r = new RealizadaEmpresa();
+            this.encomendas.remove(); 
+            atualizar listas nos clientes
+            atualizar listas nas empresas
+            this.encomendas.addRealizadaEmrpesa(r);
+         
+            
+        }
+
+    }*/
+}
+   
+   
+    
         
 

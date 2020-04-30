@@ -178,18 +178,17 @@ public class Empresa extends Utilizador
         String s = new String();
  
         s = ("Empresa: " + 
-               "Nome: " + this.getNome() +  
-               "Email: " + this.getEmail() + 
-               "NIF: " + this.getNIF() + 
-               "Raio Geografico(m): " + this.getRaiogeografico() +
-               "Velocidade média (m/s): " + this.velocidade +
-               "Rating: " + this.rating + 
-               "Nr de Classificações: " + this.nmrClassificacoes + 
-               "Multitasking(Sim:1/Não:0): " + this.multitasking + 
-               "Disponível(Sim:1/Não:0): " + this.indicador + 
-               "Pedidos disponíveis ao mesmo tempo: " + this.capacidade +
-               "Encomendas entregues: " + this.re.toString() +
-               "Localizacao: "+ this.getLocalizacao() + "\n") ;
+               " Nome: " + this.getNome() +  
+               " Email: " + this.getEmail() + 
+               " NIF: " + this.getNIF() + 
+               " Raio Geografico(m): " + this.getRaiogeografico() +
+               " Velocidade média (m/s): " + this.velocidade +
+               " Rating: " + this.rating + 
+               " Nr de Classificações: " + this.nmrClassificacoes + 
+               " Multitasking(Sim:1/Não:0): " + this.multitasking + 
+               " Disponível(Sim:1/Não:0): " + this.indicador + 
+               " Pedidos disponíveis ao mesmo tempo: " + this.capacidade +
+               " Localizacao: "+ this.getLocalizacao() + "\n") ;
  
         return s;
     }

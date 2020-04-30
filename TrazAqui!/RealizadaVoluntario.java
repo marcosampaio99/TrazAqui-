@@ -21,8 +21,8 @@ public class RealizadaVoluntario extends Encomenda
       this.classificacao=-1;
     }
     
-    public RealizadaVoluntario(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,Date dataAux, ArrayList<LinhaEncomenda> l,Voluntario voluntarioAux, Date dataRAux,boolean classificadoAux, double classificacaoAux){
-        super(idAux, clienteAux, lojaAux, pesoAux, stateAux, dataAux,l);
+    public RealizadaVoluntario(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,Date dataAux,boolean respostaClienteAux, boolean flagLojaProntaAux, ArrayList<LinhaEncomenda> l,Voluntario voluntarioAux, Date dataRAux,boolean classificadoAux, double classificacaoAux){
+        super(idAux, clienteAux, lojaAux, pesoAux, stateAux, dataAux,respostaClienteAux,flagLojaProntaAux,l);
         this.voluntario=voluntarioAux;
         this.classificado=classificadoAux;
         this.classificacao=classificacaoAux;

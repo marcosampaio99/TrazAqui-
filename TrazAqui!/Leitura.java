@@ -58,7 +58,7 @@ public class Leitura {
                   //   System.out.println(en.toString());
                     break;
                case "Aceite":
-                    Pronta enc=lerAceite(linhaPartida[1]);
+                    RealizadaEmpresa enc=lerAceite(linhaPartida[1]);
                     ges.addEncomenda(enc);
                default:
                       System.out.println("Linha inválida.");
@@ -127,7 +127,7 @@ public class Leitura {
       li.add(len);
 
     }
-       return new Encomenda(id,c,l,peso,false,data,li);
+       return new Encomenda(id,c,l,peso,false,data,false,false,li);
     }
     
   public LinhaEncomenda leproduto(String input){
@@ -153,10 +153,14 @@ public class Leitura {
       return new Empresa(email,nome,"passdefault",l1,nif,raio,0,0.0,0,taxa,0,0,0,re);
     }
     
-  public Pronta lerAceite(String input){
+  public RealizadaEmpresa lerAceite(String input){
       String id=input;
       Encomenda temp= new Encomenda (this.ges.buscaEncomenda(id));
-      return new Pronta(temp.getId(),temp.getCliente(),temp.getLoja(),temp.getPeso(),temp.getState(),temp.getData(),temp.getLinhas(),false,true,-1);
+      temp.setRespostaCliente(true);
+      temp.setFlagLojaPronta(true);
+      Empresa aux=new Empresa();
+      Date data= new Date();
+      return new RealizadaEmpresa(temp.getId(),temp.getCliente(),temp.getLoja(),temp.getPeso(),temp.getState(),temp.getData(),temp.getRespostaCliente(),temp.getFlagLojaPronta(),temp.getLinhas(),aux,-1,data,-1,false,-1);
       
     }
     

@@ -19,8 +19,8 @@ public class RealizadaEmpresa extends Encomenda
       this.classificacao=-1;
     }
     
-  public RealizadaEmpresa(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,Date dataAux, ArrayList<LinhaEncomenda> l, Empresa empresaAux, double precoAux, Date dataRAux,double distanciaViagemAux, boolean classificadoAux, double classificacaoAux){
-      super(idAux, clienteAux, lojaAux, pesoAux, stateAux, dataAux,l);
+  public RealizadaEmpresa(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,Date dataAux,boolean respostaClienteAux, boolean flagLojaProntaAux, ArrayList<LinhaEncomenda> l, Empresa empresaAux, double precoAux, Date dataRAux,double distanciaViagemAux, boolean classificadoAux, double classificacaoAux){
+      super(idAux, clienteAux, lojaAux, pesoAux, stateAux, dataAux,respostaClienteAux,flagLojaProntaAux,l);
       this.empresa= empresaAux;
       this.preco= precoAux;
       this.distanciaViagem= distanciaViagemAux;
@@ -105,15 +105,15 @@ public class RealizadaEmpresa extends Encomenda
             
    public String toString(){
        return "Encomenda com id: " + this.getId() +
-              "Cliente: " + this.getCliente() +
-              "Loja: " + this.getLoja() +
-              "Peso: " + this.getPeso() +
-              "Entregue por Empresa: " + this.empresa.getEmail() +
-              "Distancia da viagem de entrega: " + this.distanciaViagem +
-              "Preco: " + this.preco + 
-              "Data de entrega: " + this.dataR +
-              "Classficada? "+ this.classificado +
-              "Classificacao atribuida: " + this.classificacao +"\n";
+              " Cliente: " + this.getCliente().getNome()+
+              " Loja: " + this.getLoja().getNome() +
+              " Peso: " + this.getPeso() +
+              " Entregue por Empresa: " + this.empresa.getNome() +
+              " Distancia da viagem de entrega: " + this.distanciaViagem +
+              " Preco: " + this.preco + 
+              " Data de entrega: " + this.dataR +
+              " Classficada? "+ this.classificado +
+              " Classificacao atribuida: " + this.classificacao +"\n";
             }
           
             
