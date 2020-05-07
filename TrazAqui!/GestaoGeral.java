@@ -190,25 +190,25 @@ public class GestaoGeral implements Serializable{
     }
 
 //metodos para classificar empresa e voluntarios
-public void registaClassEmpresa(String idE,double classificacao,Cliente c) throws GestaoGeralException{
-        RealizadaEmpresa aux= (RealizadaEmpresa) this.getEncomendas().get(idE);
+public void registaClassEmpresa(String idE,double classificacao,Cliente c,Empresa aux) throws GestaoGeralException{
+  
         if (this.getEncomendas().get(idE) == null) throw new GestaoGeralException(String.valueOf(idE));
         if (this.getEncomendas().get(idE).getCliente().getEmail().equals(c.getEmail()) == false) throw new GestaoGeralException(String.valueOf(idE));
         if (((RealizadaEmpresa)(this.getEncomendas().get(idE))).getClassificado()==true )throw new GestaoGeralException(String.valueOf(idE));
         else {
             this.encomendas.classificacaoClienteEmpresa(idE,classificacao);
-            this.empresas.atualizaClassificacaoEmpresa(classificacao,aux.getEmpresa());
+            this.empresas.atualizaClassificacaoEmpresa(classificacao,aux);
         }
     }
     
-public void registaClassVoluntario(String idE,double classificacao,Cliente c) throws GestaoGeralException{
-        RealizadaVoluntario aux= (RealizadaVoluntario) this.getEncomendas().get(idE);
+public void registaClassVoluntario(String idE,double classificacao,Cliente c,Voluntario v) throws GestaoGeralException{
+
         if (this.getEncomendas().get(idE) == null) throw new GestaoGeralException(String.valueOf(idE));
         if (this.getEncomendas().get(idE).getCliente().getEmail().equals(c.getEmail()) == false) throw new GestaoGeralException(String.valueOf(idE));
         if (((RealizadaVoluntario)(this.getEncomendas().get(idE))).getClassificado()==true )throw new GestaoGeralException(String.valueOf(idE));
         else {
             this.encomendas.classificacaoClienteVoluntario(idE,classificacao);
-            this.voluntarios.atualizaClassificacaoVoluntario(classificacao,aux.getVoluntario());
+            this.voluntarios.atualizaClassificacaoVoluntario(classificacao,v);
         }
     }
     /*

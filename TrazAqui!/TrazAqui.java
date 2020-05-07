@@ -90,11 +90,13 @@ public class TrazAqui implements Serializable
                                                             for (RealizadaVoluntario r : l)
                                                         System.out.println(r.toString());
                                                           String id = Scanners.leituraString("Escolha da lista acima o id do aluguer que quer classificar(apenas numero)");
-                                                          int c= Scanners.leituraInt("Qual a classificação que quer atribuir a entrega (0-10)");
-                                                          if (c > 1) c = 10;
-                                                          
+                                                          double c= Scanners.leituraDouble("Qual a classificação que quer atribuir a entrega (0.0-10.0)");
+                                                          if (c > 10.0) c = 10.0;
+                                                          if(c==0.0) break;
                                                          try{
-                                                              g.registaClassVoluntario(id,c,cliente);
+                                                             RealizadaVoluntario aux = (RealizadaVoluntario) g.getEncomendas().get(id);
+                                                              Voluntario a=aux.getVoluntario();
+                                                              g.registaClassVoluntario(id,c,cliente,a); 
                                                               System.out.println("Classificação realizada com sucesso");
                                                             }
                                                             catch (GestaoGeralException e){
@@ -108,11 +110,13 @@ public class TrazAqui implements Serializable
                                                             for (RealizadaEmpresa r : l)
                                                         System.out.println(r.toString());
                                                           String id = Scanners.leituraString("Escolha da lista acima o id do aluguer que quer classificar");
-                                                          int c= Scanners.leituraInt("Qual a classificação que quer atribuir a entrega (0-10)");
-                                                          if (c > 10) c = 10;
-                                                          
+                                                          double c= Scanners.leituraDouble("Qual a classificação que quer atribuir a entrega (0.0-10.0)");
+                                                          if (c > 10.0) c = 10.0;
+                                                          if(c==0.0) break;
                                                           try{
-                                                              g.registaClassEmpresa(id,c,cliente);
+                                                              RealizadaEmpresa aux = (RealizadaEmpresa) g.getEncomendas().get(id);
+                                                              Empresa a=aux.getEmpresa();  
+                                                              g.registaClassEmpresa(id,c,cliente,a);
                                                               System.out.println("Classificação realizada com sucesso");
                                                             }
                                                             catch (GestaoGeralException e){
