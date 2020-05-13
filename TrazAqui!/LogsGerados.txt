@@ -9,7 +9,7 @@ Utilizador:u7,Rodrigo Tiago Oliveira Ferreira,-14.681885,72.73595
 Utilizador:u80,Guilherme João Cerqueira da Mota Miranda,-18.299461,-35.02321
 Utilizador:u33,Salazar Valente,98.079666,-36.973225
 Utilizador:u78,Pedro da Silva Vila,64.87256,43.373962
-Utilizador:u40, Ana Barbosa de Araújo,99.15073,-45.263195
+Utilizador:u40,Ana Barbosa de Araújo,99.15073,-45.263195
 Utilizador:u68,Pedro Gonçalo dos Santos Pires Pinheiro,-71.837296,-29.223396
 Utilizador:u81,Rui Pedro Neto Reis,-67.93489,99.649734
 Voluntario:v20,João Pedro Gomes Coelho,-88.56778,-1.4521866,1.0
@@ -19,7 +19,7 @@ Voluntario:v59,João Carlos Delgado Monteiro,87.60193,-67.35995,56.0
 Voluntario:v33,Simão Pedro Santa Cruz Oliveira,11.959328,95.35214,81.0
 Transportadora:t26,TERCARGO - TRANSIT,68.8905,-38.96917,539968772,119.0,0.5
 Transportadora:t24,TORRESTIR TRANSITÃRIOS LDA,74.59796,12.1732025,881936632,114.0,1.5
-Transportadora:t51, ATITUDE - CONSTRUÇÕES,-39.519154,8.964966,455159118,167.0,3.5
+Transportadora:t51,ATITUDE - CONSTRUÇÕES,-39.519154,8.964966,455159118,167.0,3.5
 Transportadora:t31,ZENITHINDEX,31.47522,76.58536,599618020,192.0,1.5
 Transportadora:t9,TORRESTIR TRANSITÃRIOS LDA,-9.798416,29.869064,923953011,128.0,1.5
 Loja:l29,TV e Telecomunicações,39.627502,33.60112

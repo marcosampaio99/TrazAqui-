@@ -170,6 +170,32 @@ public class GestaoGeral implements Serializable{
         return list2;
     }
     
+    //metodo que devolve a lista de encomendas de uma loja que ainda nao estão prontas a ser entregues
+    public List<Encomenda> listagemEncomendasNaoRespondidas(Loja l){
+       ArrayList<Encomenda> list = new ArrayList<Encomenda>(this.getEncomendas().values());
+        List<Encomenda> r = new ArrayList<>();
+        
+        for (Encomenda a : list)
+            if(a.getFlagLojaPronta()==false && a.getRespostaCliente()==true && a.getLoja().getEmail().equals(l.getEmail()) ) r.add(a);
+    return r;
+    }
+    
+    //metodo para uma loja indicar que uma encomenda esta pronta
+    public void registaEncomendaLoja(String idE, Loja l)throws GestaoGeralException{
+        
+        if (this.getEncomendas().get(idE) == null) throw new GestaoGeralException(String.valueOf(idE));
+        if (this.getEncomendas().get(idE).getLoja().getEmail().equals(l.getEmail()) == false) throw new GestaoGeralException(String.valueOf(idE));
+        if (this.getEncomendas().get(idE).getFlagLojaPronta()==true)throw new GestaoGeralException(String.valueOf(idE));
+        else {
+            this.getEncomendas().get(idE).setFlagLojaPronta(true);
+        }
+    }
+    
+    public void registarFilaDeEspera(double qntd, Loja l){
+        this.getLojas().get(l).setTempoEspera(qntd);
+    }
+    
+    
     //metodo para o cliente ver os pedidos que tem para responder
     public List<Encomenda> listagemEncomendasProntas(Cliente c) {   
         List<Encomenda> list = new ArrayList<>(this.getEncomendas().values());

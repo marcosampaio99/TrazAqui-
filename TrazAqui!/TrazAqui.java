@@ -151,11 +151,23 @@ public class TrazAqui implements Serializable
                                         optLoginLoja= Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginLoja){
                                             case 1:{
-                                                //Sinalizar que existe uma encomenda de um Cliente para ser entregue
+                                                List<Encomenda> l = new ArrayList<>(g.listagemEncomendasNaoRespondidas(loja));
+                                                            for (Encomenda enc : l)
+                                                            System.out.println(enc.toString());
+                                                String id = Scanners.leituraString("Escolha da lista acima o id da encomenda que está pronta para entregar");
+                                                
+                                                try{
+                                                     g.registaEncomendaLoja(id,loja);
+                                                     System.out.println("Encomenda pronta a ser entregue");
+                                                     }
+                                                     catch (GestaoGeralException e){
+                                                      System.out.println("Não pode tornar pronta a seguinte encomenda" + e.getMessage());
+                                                  }
                                             break;
                                         }
                                             case 2 : {
-                                                //Indicar quantidade de pessoas que existem na fila
+                                               double qntdPessoas= Scanners.leituraDouble("Indique quantas pessoas estão em fial de espera");
+                                                g.registarFilaDeEspera(qntdPessoas, loja );
                                             break;
                                         }
                                             default :{
@@ -179,7 +191,8 @@ public class TrazAqui implements Serializable
                                         optLoginEmpresa= Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginEmpresa){
                                             case 1:{
-                                                //Sinalizar disposiÃ§Ã£o para entregar encomendas
+                                                //Sinalizar disposição para entregar encomendas (fazer funcao na gestao geral que verifica as encomendas
+                                                // que podem ser entregues e passar a ser do tipo Pronta com um preço )
                                             break;
                                         }
                                             case 2 : {
@@ -207,7 +220,8 @@ public class TrazAqui implements Serializable
                                         optLoginVoluntario= Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginVoluntario){
                                             case 1:{
-                                                //Entregar encomenda
+                                                //Entregar encomenda(fazer funcao na gestao geral que verifique se as encomendas prontas para ser
+                                                // entregues e passar essa cena para realizadaVoluntario)
                                             break;
                                         }
                                             case 2 : {
