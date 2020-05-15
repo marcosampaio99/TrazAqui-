@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
 
 
 /**
@@ -8,7 +10,7 @@ import java.util.ArrayList;
  * @author (seu nome) 
  * @version (número de versão ou data)
  */
-public class Cliente extends Utilizador
+public class Cliente extends Utilizador implements Serializable
 {
     private List<RealizadaEmpresa> re;
     private List<RealizadaVoluntario> rv;

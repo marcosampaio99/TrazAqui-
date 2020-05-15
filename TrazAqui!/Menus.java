@@ -9,6 +9,7 @@ public class Menus implements Serializable {
         System.out.println("2-Registar Utilizador");
         System.out.println("3-Gravar/Carregar");
         System.out.println("4-Administrador App");
+        System.out.println("5-Rankings");
         System.out.println("0-Sair");
     }
 
@@ -36,8 +37,8 @@ public class Menus implements Serializable {
      public static void submenu_cliente(){
         System.out.println("--------------------MENU CLIENTE--------------------");
         System.out.println("1-Criar encomenda a uma loja");
-        System.out.println("2-Responder a serviÃ§os de entrega propostos");
-        System.out.println("3-HistÃ³rico de encomendas");
+        System.out.println("2-Responder a serviços de entrega propostos");
+        System.out.println("3-Histórico de encomendas");
         System.out.println("4-Classificar serviços");
         System.out.println("0-Sair");
     }
@@ -51,14 +52,15 @@ public class Menus implements Serializable {
     
     public static void submenu_Empresa(){
         System.out.println("--------------------MENU EMPRESA--------------------");
-        System.out.println("1-Sinalizar disposiÃ§Ã£o para entregar encomendas");
-        System.out.println("2-HistÃ³rico de encomendas entregues");
+        System.out.println("1-Sinalizar disposição para entregar encomendas");
+        System.out.println("2-Histórico de encomendas entregues");
+        System.out.println("3-Consultar faturado por um intervalo de tempo");
         System.out.println("0-Sair");
     }
 
     public static void submenu_Loja(){
         System.out.println("--------------------MENU LOJA--------------------");
-        System.out.println("1-Sinalizar que existe uma encomenda de um Cliente para ser entregue");
+        System.out.println("1-Sinalizar que existe uma encomenda de um Cliente pronta para ser entregue");
         System.out.println("2-Indicar quantidade de pessoas que existem na fila");
         System.out.println("0-Sair");
     }
@@ -81,16 +83,23 @@ public class Menus implements Serializable {
 
     public static void submenu_HistoricoEncomendas(){
         System.out.println("--------------------MENU HISTORICO DE ENCOMENDAS--------------------");
-        System.out.println("1-Consultar encomendas entregues por voluntario");
-        System.out.println("2-Consultar encomenda entregues por empresa");
-        System.out.println("3-Consultar encomendas por um perÃ­odo");
+        System.out.println("1-Consultar encomendas entregues por voluntario por um período");
+        System.out.println("2-Consultar encomenda entregues por empresa por um período");
         System.out.println("0-Sair");
     }
 
     public static void submenu_gravar(){
         System.out.println("--------------------MENU GRAVAR/CARREGAR--------------------");
-        System.out.println("1-Gravar");
-        System.out.println("2-Carregar");
+        System.out.println("1-Gravar estado");
+        System.out.println("2-Carregar estado");
+        System.out.println("3-Carregar Logs");
+        System.out.println("0-Sair");
+    }
+    
+    public static void submenu_rankings(){
+        System.out.println("--------------------MENU RANKINGS--------------------");
+        System.out.println("1-Top10 clientes por número de encomendas");
+        System.out.println("2-Top10 empresas por km");
         System.out.println("0-Sair");
     }
 }

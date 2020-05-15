@@ -1,3 +1,5 @@
+import java.util.*;
+import java.io.*;
 
 /**
  * Escreva a descrição da classe LinhaEncomenda aqui.
@@ -5,7 +7,7 @@
  * @author (seu nome) 
  * @version (número de versão ou data)
  */
-public class LinhaEncomenda {
+public class LinhaEncomenda implements Serializable {
     private String referencia;
     private String descricao;
     private double preco;

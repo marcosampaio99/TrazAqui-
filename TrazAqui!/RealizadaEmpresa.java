@@ -1,7 +1,10 @@
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
 
-public class RealizadaEmpresa extends Encomenda 
+
+public class RealizadaEmpresa extends Encomenda implements Serializable
 {
   private Empresa empresa;
   private double preco;
@@ -47,7 +50,7 @@ public class RealizadaEmpresa extends Encomenda
        return this.preco;
     }
     
-   public Date getDataR(){
+   public Date getData(){
        return this.dataR;
     }
     

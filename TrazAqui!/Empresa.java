@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
 
 /**
  * Escreva a descrição da classe Empresa aqui.
@@ -7,7 +9,7 @@ import java.util.ArrayList;
  * @author (seu nome) 
  * @version (número de versão ou data)
  */
-public class Empresa extends Utilizador
+public class Empresa extends Utilizador implements Serializable
 {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private int NIF;

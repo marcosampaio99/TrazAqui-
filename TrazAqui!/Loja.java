@@ -1,7 +1,9 @@
+import java.util.*;
+import java.io.*;
 
 
 
-public class Loja extends Utilizador {
+public class Loja extends Utilizador implements Serializable {
     //variaveis de instancia
     private double tempoEspera;
     // private qqlmerda filaEspera;

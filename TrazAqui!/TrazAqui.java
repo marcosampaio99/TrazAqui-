@@ -62,15 +62,35 @@ public class TrazAqui implements Serializable
                                                optHistorico=Scanners.leituraInt("Escolha uma opção");
                                                switch(optHistorico){
                                                 case 1:{
-                                                    //é so imprimir a lista de realizadaVoluntarios que esta nas variaveis de instancia 
+                                                    int dia1 = Scanners.leituraInt("Dia Inicial:");
+                                                    int mes1 = Scanners.leituraInt("Mês Inicial");
+                                                    int ano1 = Scanners.leituraInt("Ano Inicial:");
+                                                    int dia2 = Scanners.leituraInt("Dia Final:");
+                                                    int mes2 = Scanners.leituraInt("Mês Final");
+                                                    int ano2 = Scanners.leituraInt("Ano Final:");
+                                                    LocalDate d1 = LocalDate.of(ano1,mes1,dia1);
+                                                    LocalDate d2 = LocalDate.of(ano2,mes2,dia2);
+                                                    Date auxD1 = java.sql.Date.valueOf(d1);
+                                                    Date auxD2 = java.sql.Date.valueOf(d2);
+                                                    List<RealizadaEmpresa> l = new ArrayList<>(g.getEncEmpPorPeriodo(cliente,auxD1,auxD2));
+                                                    for (RealizadaEmpresa r : l)
+                                                        System.out.println(r.toString());
                                                 break;
                                                 }
                                                 case 2:{
-                                                    //é so imprimir a lista de realizadaEmpresas que esta nas variaveis de instancia 
-                                                break;
-                                                }
-                                                case 3:{
-                                                    //imprimir so numa lista as entregues entre uma data
+                                                    int dia1 = Scanners.leituraInt("Dia Inicial:");
+                                                    int mes1 = Scanners.leituraInt("Mês Inicial");
+                                                    int ano1 = Scanners.leituraInt("Ano Inicial:");
+                                                    int dia2 = Scanners.leituraInt("Dia Final:");
+                                                    int mes2 = Scanners.leituraInt("Mês Final");
+                                                    int ano2 = Scanners.leituraInt("Ano Final:");
+                                                    LocalDate d1 = LocalDate.of(ano1,mes1,dia1);
+                                                    LocalDate d2 = LocalDate.of(ano2,mes2,dia2);
+                                                    Date auxD1 = java.sql.Date.valueOf(d1);
+                                                    Date auxD2 = java.sql.Date.valueOf(d2);
+                                                    List<RealizadaVoluntario> aux = new ArrayList<>(g.getEncVolPorPeriodo(cliente,auxD1,auxD2));
+                                                    for (RealizadaVoluntario r : aux)
+                                                        System.out.println(r.toString());
                                                 break;
                                                 }
                                                 default:{
@@ -196,7 +216,19 @@ public class TrazAqui implements Serializable
                                             break;
                                         }
                                             case 2 : {
-                                                //é so imprimir a lista de realizadaEmpresas que esta nas suas variaveis de instancia 
+                                                 int dia1 = Scanners.leituraInt("Dia Inicial:");
+                                                    int mes1 = Scanners.leituraInt("Mês Inicial");
+                                                    int ano1 = Scanners.leituraInt("Ano Inicial:");
+                                                    int dia2 = Scanners.leituraInt("Dia Final:");
+                                                    int mes2 = Scanners.leituraInt("Mês Final");
+                                                    int ano2 = Scanners.leituraInt("Ano Final:");
+                                                    LocalDate d1 = LocalDate.of(ano1,mes1,dia1);
+                                                    LocalDate d2 = LocalDate.of(ano2,mes2,dia2);
+                                                    Date auxD1 = java.sql.Date.valueOf(d1);
+                                                    Date auxD2 = java.sql.Date.valueOf(d2);
+                                                    List<RealizadaEmpresa> l = new ArrayList<>(g.getEncEPorPeriodo(empresa,auxD1,auxD2));
+                                                    for (RealizadaEmpresa r : l)
+                                                        System.out.println(r.toString());
                                             break;
                                         }
                                             default :{
@@ -225,7 +257,19 @@ public class TrazAqui implements Serializable
                                             break;
                                         }
                                             case 2 : {
-                                                //é so imprimir a lista de realizadaVoluntarios que esta nas suas variaveis de instancia 
+                                                int dia1 = Scanners.leituraInt("Dia Inicial:");
+                                                    int mes1 = Scanners.leituraInt("Mês Inicial");
+                                                    int ano1 = Scanners.leituraInt("Ano Inicial:");
+                                                    int dia2 = Scanners.leituraInt("Dia Final:");
+                                                    int mes2 = Scanners.leituraInt("Mês Final");
+                                                    int ano2 = Scanners.leituraInt("Ano Final:");
+                                                    LocalDate d1 = LocalDate.of(ano1,mes1,dia1);
+                                                    LocalDate d2 = LocalDate.of(ano2,mes2,dia2);
+                                                    Date auxD1 = java.sql.Date.valueOf(d1);
+                                                    Date auxD2 = java.sql.Date.valueOf(d2);
+                                                    List<RealizadaVoluntario> aux = new ArrayList<>(g.getEncVPorPeriodo(voluntario,auxD1,auxD2));
+                                                    for (RealizadaVoluntario r : aux)
+                                                        System.out.println(r.toString());
                                             break;
                                         }
                                             default :{
@@ -337,9 +381,31 @@ public class TrazAqui implements Serializable
                         optGravarCarregar=Scanners.leituraInt("Escolha uma opção");
                         switch(optGravarCarregar){
                             case 1:{
-                                
+                                try {
+                                    g.guardaEstado();
+                                    System.out.println("Gravação realizada com sucesso");
+                                }
+                                catch(IOException i){
+                                    System.out.println(i);
+
+                                }
+                                break;
                             }
                             case 2:{
+                                try {
+                                    g.carregaEstado();
+                                    System.out.println("Carregamento realizado com sucesso");
+                                }
+                                catch(IOException i){
+                                    System.out.println(i);
+
+                                }
+                                catch (ClassNotFoundException c){
+                                    System.out.println(c);
+                                }
+                              break; 
+                            }
+                            case 3:{
                                 
                                 Leitura l = new Leitura();
                                 l.ler();
@@ -418,6 +484,24 @@ public class TrazAqui implements Serializable
                         }
                     }while(optAdmin!=0);
                     
+                }
+                case 5:{
+                    int optRank;
+                    do{
+                        Menus.submenu_rankings();
+                        optRank=Scanners.leituraInt("Escolha uma opção");
+                        switch(optRank){
+                            case 1:{
+                                //top10 users
+                            }
+                            case 2:{
+                                //top10 empresas
+                            }
+                            default: {
+                            break;
+                            }
+                        }
+                    }while(optRank!=0);
                 }
                 default: {
                     break;

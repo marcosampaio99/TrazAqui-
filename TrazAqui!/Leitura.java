@@ -14,9 +14,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.*;
+import java.io.*;
 
 
-public class Leitura {
+public class Leitura implements Serializable {
     
     GestaoCliente gc =new GestaoCliente();
     GestaoVoluntario gv = new GestaoVoluntario();

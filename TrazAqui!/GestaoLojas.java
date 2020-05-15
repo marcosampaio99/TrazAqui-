@@ -1,6 +1,8 @@
 import java.util.*;
+import java.io.*;
 
-public class GestaoLojas
+
+public class GestaoLojas implements Serializable
 {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private HashMap<String,Loja> lojas;

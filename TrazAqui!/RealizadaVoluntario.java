@@ -1,12 +1,15 @@
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
+
 /**
  * Escreva a descrição da classe RealizadaVoluntario aqui.
  * 
  * @author (seu nome) 
  * @version (número de versão ou data)
  */
-public class RealizadaVoluntario extends Encomenda
+public class RealizadaVoluntario extends Encomenda implements Serializable
 {
     private Voluntario voluntario;
     private Date dataR;
@@ -49,6 +52,9 @@ public class RealizadaVoluntario extends Encomenda
         return this.classificacao;
     }
     
+    public Date getData(){
+       return this.dataR;
+    }
    //setters
    
    public void setVoluntario(Voluntario v){

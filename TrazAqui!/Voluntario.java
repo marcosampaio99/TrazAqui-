@@ -1,7 +1,10 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
 
-public class Voluntario extends Utilizador
+
+public class Voluntario extends Utilizador implements Serializable
 {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private double raiogeografico;

@@ -1,12 +1,14 @@
 import java.util.*;
 import java.util.HashMap;
+import java.io.*;
+
 /**
  * Escreva a descrição da classe GestaoCliente aqui.
  * 
  * @author (seu nome) 
  * @version (número de versão ou data)
  */
-public class GestaoCliente
+public class GestaoCliente implements Serializable
 {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private HashMap<String,Cliente> clientes;
@@ -91,7 +93,22 @@ public class GestaoCliente
      
      public void atualizaCLV(RealizadaVoluntario r, String mail) {((this.clientes.get(mail))).atualizaLV(r);}
      
-    
-     
+    //metodos para devovolverem encomendas entregues a um cliente num periodo de tempo
+     public List<RealizadaEmpresa> EncEmpPorPeriodo(Cliente c, Date inicio, Date fim){
+        List<RealizadaEmpresa> re= new ArrayList<RealizadaEmpresa>(buscaCliente(c.getEmail()).getRe());
+        List<RealizadaEmpresa> aux = new ArrayList<RealizadaEmpresa>();
+        for (RealizadaEmpresa a : re){
+             if (a.getData().after(inicio) && a.getData().before(fim)) aux.add(a);
+        }
+           return aux; 
+        }
    
+        public List<RealizadaVoluntario> EncVolPorPeriodo(Cliente c, Date inicio, Date fim){
+        List<RealizadaVoluntario> re= new ArrayList<RealizadaVoluntario>(buscaCliente(c.getEmail()).getRv());
+        List<RealizadaVoluntario> aux = new ArrayList<RealizadaVoluntario>();
+        for (RealizadaVoluntario a : re){
+             if (a.getData().after(inicio) && a.getData().before(fim)) aux.add(a);
+        }
+           return aux; 
+        }
 }

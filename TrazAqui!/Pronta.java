@@ -1,5 +1,7 @@
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
 
 /**
  * Escreva a descrição da classe Pronta aqui.
@@ -7,7 +9,7 @@ import java.util.ArrayList;
  * @author (seu nome) 
  * @version (número de versão ou data)
  */
-public class Pronta extends Encomenda
+public class Pronta extends Encomenda implements Serializable
 {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private Empresa empresa;

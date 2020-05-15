@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.*;
+import java.io.*;
 
-public class Encomenda
+
+public class Encomenda implements Serializable
 {
     String id;
     private Cliente cliente;

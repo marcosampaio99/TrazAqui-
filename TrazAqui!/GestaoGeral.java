@@ -191,6 +191,7 @@ public class GestaoGeral implements Serializable{
         }
     }
     
+    //metodo para loja indicar quantas pessoas estao em fila de espera
     public void registarFilaDeEspera(double qntd, Loja l){
         this.getLojas().get(l).setTempoEspera(qntd);
     }
@@ -258,6 +259,71 @@ public void registaClassVoluntario(String idE,double classificacao,Cliente c,Vol
         }
 
     }*/
+    
+    
+    
+    //metodos que devolvem encomendas entregues a um cliente por um determinado periodo
+    public List<RealizadaEmpresa> getEncEmpPorPeriodo(Cliente c, Date inicio, Date fim) {
+        return this.clientes.EncEmpPorPeriodo(c,inicio,fim);
+    }
+    
+    public List<RealizadaVoluntario> getEncVolPorPeriodo(Cliente c, Date inicio, Date fim) {
+        return this.clientes.EncVolPorPeriodo(c,inicio,fim);
+    }
+    
+    //metodos que devolvem encomendas entregues por uma empresa por um determinado periodo
+    public List<RealizadaEmpresa> getEncEPorPeriodo(Empresa e, Date inicio, Date fim){
+        return this.empresas.EncEmpresaPorPeriodo(e,inicio,fim);
+    }
+    
+    //metodos que devolvem encomendas entregues por um voluntario por um determinado periodo
+    public List<RealizadaVoluntario> getEncVPorPeriodo(Voluntario v, Date inicio, Date fim){
+        return this.voluntarios.EncVoluntarioPorPeriodo(v,inicio,fim);
+    }
+    
+    
+     //metodo para gravar estado
+    public void guardaEstado() throws FileNotFoundException,IOException {
+
+        FileOutputStream fos1 = new FileOutputStream("GClientes");
+        FileOutputStream fos2 = new FileOutputStream("GEmpresas");
+        FileOutputStream fos3 = new FileOutputStream("GVoluntarios");
+        FileOutputStream fos4 = new FileOutputStream("GLojas");
+        FileOutputStream fos5 = new FileOutputStream("GEncomendas");
+        ObjectOutputStream oos1 = new ObjectOutputStream(fos1);
+        ObjectOutputStream oos2 = new ObjectOutputStream(fos2);
+        ObjectOutputStream oos3 = new ObjectOutputStream(fos3);
+        ObjectOutputStream oos4 = new ObjectOutputStream(fos4);
+        ObjectOutputStream oos5 = new ObjectOutputStream(fos5);
+        oos1.writeObject(this.clientes);
+        oos2.writeObject(this.empresas);
+        oos3.writeObject(this.voluntarios);
+        oos4.writeObject(this.lojas);
+        oos5.writeObject(this.encomendas);
+        oos1.flush(); oos2.flush(); oos3.flush(); oos4.flush(); oos5.flush();
+        oos1.close(); oos2.close(); oos3.close(); oos4.close(); oos5.close();
+
+    }
+
+    //metodo para carregar estado
+    public void carregaEstado() throws FileNotFoundException,IOException, ClassNotFoundException{
+        FileInputStream fis1 = new FileInputStream("GClientes");
+        FileInputStream fis2 = new FileInputStream("GEmpresas");
+        FileInputStream fis3 = new FileInputStream("GVoluntarios");
+        FileInputStream fis4 = new FileInputStream("GLojas");
+        FileInputStream fis5 = new FileInputStream("GEncomendas");
+        ObjectInputStream ois1 = new ObjectInputStream(fis1);
+        ObjectInputStream ois2 = new ObjectInputStream(fis2);
+        ObjectInputStream ois3 = new ObjectInputStream(fis3);
+        ObjectInputStream ois4 = new ObjectInputStream(fis4);
+        ObjectInputStream ois5 = new ObjectInputStream(fis5);
+        clientes = (GestaoCliente) ois1.readObject();
+        empresas = (GestaoEmpresa) ois2.readObject();
+        voluntarios = (GestaoVoluntario) ois3.readObject();
+        lojas = (GestaoLojas) ois4.readObject();
+        encomendas = (GestaoEncomenda) ois5.readObject();
+        ois1.close(); ois2.close(); ois3.close(); ois4.close(); ois5.close();
+    }
 }
    
    

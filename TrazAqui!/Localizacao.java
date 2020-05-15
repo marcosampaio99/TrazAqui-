@@ -1,10 +1,12 @@
 import static java.lang.Math.abs;
 import java.lang.Math; 
+import java.util.*;
+import java.io.*;
 
 
-public class Localizacao {
+public class Localizacao implements Serializable {
 
-    //VARI√ÅVEIS DE INSTANCIA
+    //VARI√?VEIS DE INSTANCIA
     private double latitude, longitude;
 
     //CONSTRUTORES USUAIS

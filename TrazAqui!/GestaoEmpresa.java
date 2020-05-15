@@ -1,6 +1,7 @@
 import java.util.*;
+import java.io.*;
 
-public class GestaoEmpresa
+public class GestaoEmpresa implements Serializable
 {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private HashMap<String,Empresa> empresas;
@@ -52,6 +53,9 @@ public class GestaoEmpresa
         return "As empresas são: \n" + this.getEmpresa();
     }
     
+    public Empresa buscaEmpresa(String mail){
+        return this.empresas.get(mail).clone();
+    }
     
     //adiciona empresa
     
@@ -88,4 +92,14 @@ public class GestaoEmpresa
             this.empresas.get(cl.getEmail()).setnmrClassificacoes(this.empresas.get(cl.getEmail()).getnmrClassificacoes() + 1);
         }
     }
+    
+    //metodo que devolve lista de encomendas entregues por uma empresa num determinado periodo
+    public List<RealizadaEmpresa> EncEmpresaPorPeriodo(Empresa e, Date inicio, Date fim){
+        List<RealizadaEmpresa> re= new ArrayList<RealizadaEmpresa>(buscaEmpresa(e.getEmail()).getRe());
+        List<RealizadaEmpresa> aux = new ArrayList<RealizadaEmpresa>();
+        for (RealizadaEmpresa a : re){
+             if (a.getData().after(inicio) && a.getData().before(fim)) aux.add(a);
+        }
+           return aux; 
+        }
 }

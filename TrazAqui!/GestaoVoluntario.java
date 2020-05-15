@@ -1,6 +1,7 @@
 import java.util.*;
+import java.io.*;
 
-public class GestaoVoluntario
+public class GestaoVoluntario implements Serializable
 {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private HashMap<String,Voluntario> voluntarios;
@@ -52,6 +53,10 @@ public class GestaoVoluntario
         return "Os voluntários são: \n" + this.getVoluntario();
     }
     
+    public Voluntario buscaVoluntario(String mail){
+        return this.voluntarios.get(mail).clone();
+    }
+    
     
     //adiciona voluntario
     
@@ -88,4 +93,15 @@ public class GestaoVoluntario
             this.voluntarios.get(cl.getEmail()).setnmrClassificacoes(this.voluntarios.get(cl.getEmail()).getnmrClassificacoes() + 1);
         }
     }
+    
+      //metodo que devolve lista de encomendas entregues por um voluntario num determinado periodo
+    public List<RealizadaVoluntario> EncVoluntarioPorPeriodo(Voluntario v, Date inicio, Date fim){
+        List<RealizadaVoluntario> re= new ArrayList<RealizadaVoluntario>(buscaVoluntario(v.getEmail()).getRv());
+        List<RealizadaVoluntario> aux = new ArrayList<RealizadaVoluntario>();
+        for (RealizadaVoluntario a : re){
+             if (a.getData().after(inicio) && a.getData().before(fim)) aux.add(a);
+        }
+           return aux; 
+        }
+    
 }
