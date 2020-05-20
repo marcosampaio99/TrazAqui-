@@ -39,7 +39,7 @@ public class TrazAqui implements Serializable
                                         optLoginCliente = Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginCliente){
                                         case 1:{
-                                            //criar encomenda
+                                            g.criaEncomenda(cliente);
                                         break;
                                         }
                                         case 2:{

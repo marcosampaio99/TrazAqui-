@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.ArrayList;
 import java.io.*;
 /**
  * Escreva a descriÃ§Ã£o da classe GestaoGeral aqui.
@@ -280,6 +281,48 @@ public void registaClassVoluntario(String idE,double classificacao,Cliente c,Vol
     public List<RealizadaVoluntario> getEncVPorPeriodo(Voluntario v, Date inicio, Date fim){
         return this.voluntarios.EncVoluntarioPorPeriodo(v,inicio,fim);
     }
+    
+    
+    // metodo p criar encomenda 
+    
+    public void criaEncomenda(Cliente c){
+        Encomenda e = new Encomenda();
+        e.setCliente(c);
+        String id=String.valueOf(this.listagemClientes().size())+10;
+        e.setId(id);
+        int medical= Scanners.leituraInt("A encomenda é médica?");
+        if(medical==0){
+        e.setState(false);
+    } else if(medical==1){
+        e.setState(true);
+    }
+       System.out.println("Introduza os produtos");
+       ArrayList <LinhaEncomenda> l=new ArrayList<>();
+
+      int completo=1;
+      while(completo==1){
+           String ref=Scanners.leituraString("Insira a referencia do produto");
+           String descricao=Scanners.leituraString("Insira a descricao do produto");
+           Double preco=Scanners.leituraDouble("Insira o preco do produto");
+           Double quantidade=Scanners.leituraDouble("Insira a quantidade");
+           LinhaEncomenda li= new LinhaEncomenda(ref,descricao,preco,quantidade);
+           l.add(li);
+           completo=Scanners.leituraInt("Deseja adicionar mais algum produto(Sim:1;Não:0");
+        }
+        
+        e.setLinhas(l);
+        String idLoja=Scanners.leituraString("Insira o email da loja");
+        Loja loja=this.lojas.buscaLoja(idLoja);
+        e.setLoja(loja);
+        e.setPeso(e.calculapeso());
+        
+        System.out.println("Encomenda feita com sucesso");
+        this.encomendas.addEncomenda(e);
+    }
+        
+    
+       
+        
     
     
      //metodo para gravar estado

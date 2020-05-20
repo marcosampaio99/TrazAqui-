@@ -174,5 +174,14 @@ public ArrayList <LinhaEncomenda> getLinhas(){
      public Encomenda clone(){
         return new Encomenda(this);
     }
+    
+    public double  calculapeso(){
+        double peso=0;
+        linhas=this.getLinhas();
+        for(LinhaEncomenda s:linhas){
+        peso+=s.getQuantidade();
+    }
+    return peso;
+    }
 }
 
