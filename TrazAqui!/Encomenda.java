@@ -89,7 +89,7 @@ public class Encomenda implements Serializable
 public ArrayList <LinhaEncomenda> getLinhas(){
         ArrayList <LinhaEncomenda> li =new ArrayList <>(this.linhas.size());
         for(LinhaEncomenda s :this.linhas){
-            li.add(s);
+            li.add(s.clone());
         }
         return li;
     }

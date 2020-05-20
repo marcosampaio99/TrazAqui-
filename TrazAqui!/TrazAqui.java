@@ -39,20 +39,54 @@ public class TrazAqui implements Serializable
                                         optLoginCliente = Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginCliente){
                                         case 1:{
-                                            g.criaEncomenda(cliente);
-                                        break;
+                                             Encomenda e = new Encomenda();
+                                             e.setCliente(cliente);
+                                             String id=String.valueOf(g.listagemClientes().size())+10;
+                                             e.setId(id);
+                                             int medical= Scanners.leituraInt("A encomenda é médica?");
+                                             if(medical==0){
+                                                 e.setState(false);
+                                                } else if(medical==1){
+                                                    e.setState(true);
+                                                }
+                                                System.out.println("Introduza os produtos");
+                                                ArrayList <LinhaEncomenda> l=new ArrayList<>();
+
+                                                int completo=1;
+                                                while(completo==1){
+                                                    String ref=Scanners.leituraString("Insira a referencia do produto");
+                                                    String descricao=Scanners.leituraString("Insira a descricao do produto");
+                                                    Double preco=Scanners.leituraDouble("Insira o preco do produto");
+                                                    Double quantidade=Scanners.leituraDouble("Insira a quantidade");
+                                                    LinhaEncomenda li= new LinhaEncomenda(ref,descricao,preco,quantidade);
+                                                    l.add(li);
+                                                    completo=Scanners.leituraInt("Deseja adicionar mais algum produto(Sim:1;Não:0");
+                                                }
+        
+                                                e.setLinhas(l);
+                                                String idLoja=Scanners.leituraString("Insira o email da loja");
+                                                try{
+                                                    Loja loja=g.getLojas().get(idLoja);
+                                                    e.setLoja(loja);
+                                                    e.setPeso(e.calculapeso());
+                                                    g.criaEncomenda(cliente,e,idLoja);
+                                                    System.out.println("Encomenda feita com sucesso");
+                                                } catch(LojaNaoExisteException a){
+                                                    System.out.println("Loja" + a.getMessage()+ "nao existe");
+                                                }
+                                                break;
                                         }
                                         case 2:{
                                              ArrayList<Pronta> list = (ArrayList) g.listagemEncomendasProntas(cliente);
                                                 for (Pronta p : list)
                                                     System.out.println(p.toString());
-                                             int id = Scanners.leituraInt("Escolha id do aluguer que pretende aceitar:");
-                                             /* try {
-                                                    //g.AceitaPedido(id, cliente); falta fazer funcao de aceitar pedido
+                                             String id = Scanners.leituraString("Escolha id do aluguer que pretende aceitar:");
+                                              try {
+                                                    g.AceitaPedido(id, cliente); 
                                                     System.out.println("Pedido aceite");
                                                 } catch (GestaoGeralException e) {
                                                     System.out.println("Não podes aceitar o seguinte pedido" + e.getMessage());
-                                                }*/
+                                                }
                                                 break;
                                         }
                                         case 3:{

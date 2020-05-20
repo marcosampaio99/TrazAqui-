@@ -239,29 +239,52 @@ public void registaClassVoluntario(String idE,double classificacao,Cliente c,Vol
             this.voluntarios.atualizaClassificacaoVoluntario(classificacao,v);
         }
     }
-    /*
-    public void AceitaPedido(int idP,Cliente c) throws GestaoGeralException {
+    
+    public void AceitaPedido(String idP,Cliente c) throws GestaoGeralException {
         if ((this.getEncomendas().get(idP)) instanceof RealizadaEmpresa) throw new GestaoGeralException(String.valueOf(idP));
         Pronta pd = (Pronta) this.getEncomendas().get(idP);
         if (pd == null) throw new GestaoGeralException(String.valueOf(idP));
         if (pd.getRespostaCliente() != false || pd.getFlagLojaPronta() != false) throw new GestaoGeralException(String.valueOf(idP));
         if (pd.getCliente().getEmail().equals(c.getEmail())==false) throw new GestaoGeralException(String.valueOf(idP));
         else {
-            double distanciaViagem=
-            double preco =
+            double lat1=pd.getCliente().getLocalizacao().getX();
+            double lat2=pd.getLoja().getLocalizacao().getX();
+            double lon1=pd.getCliente().getLocalizacao().getY();
+            double lon2=pd.getLoja().getLocalizacao().getY();
+            double lat3=pd.getEmpresa().getLocalizacao().getX();
+            double lon3=pd.getEmpresa().getLocalizacao().getY();
+            double distanciaViagem=distance(lat2,lat3,lon2,lon3)+ distance(lat1,lat2,lon1,lon2);
+            double preco = pd.getPreco();
             Date data = new Date();
-            RealizadaEmpresa r = new RealizadaEmpresa();
-            this.encomendas.remove(); 
-            atualizar listas nos clientes
-            atualizar listas nas empresas
-            this.encomendas.addRealizadaEmrpesa(r);
+            RealizadaEmpresa r = new RealizadaEmpresa(idP,c,pd.getLoja(),pd.getPeso(),pd.getState(),pd.getData(),true,true,pd.getLinhas(),pd.getEmpresa(),preco,data,distanciaViagem,false,-1);;
+            //this.encomendas.remove(); 
+            getClientes().get(c).atualizaLE(r);
+            getEmpresas().get(pd.getEmpresa()).atualizaLE(r);
+            this.encomendas.addRealizadaEmpresa(r);
          
             
         }
 
-    }*/
+    }
     
-    
+    //CALCULA A DISTANCIA EM METROS ENTRE DUAS COORDENAS GEOGRAFICAS
+    public static double distance(double lat1, double lat2, double lon1,double lon2) {
+
+    final int R = 6371; // Radius of the earth
+
+    double latDistance = Math.toRadians(lat2 - lat1);
+    double lonDistance = Math.toRadians(lon2 - lon1);
+    double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+            + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+            * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    double distance = R * c * 1000; // convert to meters
+
+
+    distance = Math.pow(distance, 2) + Math.pow(0, 2);
+
+    return Math.sqrt(distance);
+}
     
     //metodos que devolvem encomendas entregues a um cliente por um determinado periodo
     public List<RealizadaEmpresa> getEncEmpPorPeriodo(Cliente c, Date inicio, Date fim) {
@@ -285,38 +308,8 @@ public void registaClassVoluntario(String idE,double classificacao,Cliente c,Vol
     
     // metodo p criar encomenda 
     
-    public void criaEncomenda(Cliente c){
-        Encomenda e = new Encomenda();
-        e.setCliente(c);
-        String id=String.valueOf(this.listagemClientes().size())+10;
-        e.setId(id);
-        int medical= Scanners.leituraInt("A encomenda é médica?");
-        if(medical==0){
-        e.setState(false);
-    } else if(medical==1){
-        e.setState(true);
-    }
-       System.out.println("Introduza os produtos");
-       ArrayList <LinhaEncomenda> l=new ArrayList<>();
-
-      int completo=1;
-      while(completo==1){
-           String ref=Scanners.leituraString("Insira a referencia do produto");
-           String descricao=Scanners.leituraString("Insira a descricao do produto");
-           Double preco=Scanners.leituraDouble("Insira o preco do produto");
-           Double quantidade=Scanners.leituraDouble("Insira a quantidade");
-           LinhaEncomenda li= new LinhaEncomenda(ref,descricao,preco,quantidade);
-           l.add(li);
-           completo=Scanners.leituraInt("Deseja adicionar mais algum produto(Sim:1;Não:0");
-        }
-        
-        e.setLinhas(l);
-        String idLoja=Scanners.leituraString("Insira o email da loja");
-        Loja loja=this.lojas.buscaLoja(idLoja);
-        e.setLoja(loja);
-        e.setPeso(e.calculapeso());
-        
-        System.out.println("Encomenda feita com sucesso");
+    public void criaEncomenda(Cliente c,Encomenda e,String idLoja) throws LojaNaoExisteException{
+        if (this.getLojas().get(idLoja) == null) throw new LojaNaoExisteException(String.valueOf(idLoja));
         this.encomendas.addEncomenda(e);
     }
         

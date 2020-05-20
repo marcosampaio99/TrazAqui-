@@ -162,8 +162,9 @@ public class Leitura implements Serializable {
       temp.setFlagLojaPronta(true);
       Empresa aux=ge.getEmpresa().get("t31@mail.com");
       Date data= new Date();
-      return new RealizadaEmpresa(temp.getId(),temp.getCliente(),temp.getLoja(),temp.getPeso(),temp.getState(),temp.getData(),temp.getRespostaCliente(),temp.getFlagLojaPronta(),temp.getLinhas(),aux,-1,data,-1,false,-1);
-      
+      RealizadaEmpresa re= new RealizadaEmpresa(temp.getId(),temp.getCliente(),temp.getLoja(),temp.getPeso(),temp.getState(),temp.getData(),temp.getRespostaCliente(),temp.getFlagLojaPronta(),temp.getLinhas(),aux,-1,data,-1,false,-1);
+      aux.atualizaLE(re);
+      return re;
     }
     
   public List<String> lerFicheiro(String nomeFich) {
