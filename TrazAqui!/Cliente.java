@@ -37,14 +37,14 @@ public class Cliente extends Utilizador implements Serializable
     public List<RealizadaEmpresa> getRe(){
         List<RealizadaEmpresa> l = new ArrayList();
         for(RealizadaEmpresa r : this.re)
-            l.add(r);
+            l.add(r.clone());
         return l;
     }
     
     public List<RealizadaVoluntario> getRv(){
         List<RealizadaVoluntario> l = new ArrayList();
         for(RealizadaVoluntario r : this.rv)
-            l.add(r);
+            l.add(r.clone());
         return l;
     }
     
@@ -73,12 +73,11 @@ public boolean equals (Object o){
     public String toString() {
         String s = new String();
  
-        s = ( "\nCliente: \n" +
-                "Email: " + this.getEmail() + "\n"+
-                "Nome: " + this.getNome() + "\n" + 
-                "Encomendas entregues por Empresas: " + this.re.toString() +
-                "Encomendas entregues por Voluntarios: " + this.rv.toString() +
-                "Localizacao: "+ this.getLocalizacao() + "\n" );
+        s = ( "\nCliente->" +
+                " Email: " + this.getEmail() + 
+                " Nome: " + this.getNome() +
+                " Localizacao: "+ this.getLocalizacao()+ 
+                "encomendas entregues" + this.getRv());
  
         return s;
     }

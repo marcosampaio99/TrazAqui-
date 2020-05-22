@@ -127,16 +127,14 @@ public class Voluntario extends Utilizador implements Serializable
     public String toString() {
         String s = new String();
  
-        s = ("VoluntÃ¡rio: \n" + 
-               "Nome: " + this.getNome() +  
-               "Email: " + this.getEmail() + 
-               "Raio Geografico: " + this.getRaiogeografico() + 
-               "Velocidade mÃ©dia (m/s): " + this.velocidade +
-               "Rating: " + this.rating + 
-               "Nr de ClassificaÃ§Ãµes: " + this.nmrClassificacoes +  
-               "Verificador: " + this.verificador + 
-               "Encomendas entregues: " + this.rv.toString() +
-               "Localizacao: "+ this.getLocalizacao() + "\n");
+        s = ("\n Voluntario->" + 
+               "Nome:" + this.getNome() +  
+               " Email:" + this.getEmail() + 
+               " Raio Geografico:" + this.getRaiogeografico() + 
+               " Velocidade média (m/s):" + this.velocidade +
+               " Rating: " + this.rating + 
+               " Nr de Classificações:" + this.nmrClassificacoes +  
+               " Localizacao:"+ this.getLocalizacao());
              
  
         return s;

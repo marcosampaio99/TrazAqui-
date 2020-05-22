@@ -158,15 +158,15 @@ public ArrayList <LinhaEncomenda> getLinhas(){
 
     @Override
     public String toString() {
-        return "Encomenda: " +
-                "id: " + this.id + "\n" +
-                "Cliente: " + this.cliente.getNome() + "\n" +
-                "Loja: " + this.loja.getNome() + "\n" +
-                "Peso: " + this.peso + "\n" +
-                "Data:" + this.data + "\n" +
-                "Produtos " + this.linhas.toString() +
-                "Loja ja tem a encomenda pronta? (0-Nao 1-Sim) " + this.flagLojaPronta +
-                "Ja foi enviado pedido de aceite ao cliente? (0-Nao 1-Sim) " + this.respostaCliente + "\n";
+        return "Encomenda-> " +
+                "id:" + this.id + "\n" +
+                " Cliente: " + this.cliente.getNome() + "\n" +
+                " Loja:" + this.loja.getNome() + "\n" +
+                " Peso:" + this.peso + "\n" +
+                " Data:" + this.data + "\n" +
+                " Produtos" + this.linhas.toString() +
+                " Loja ja tem a encomenda pronta? (0-Nao 1-Sim)" + this.flagLojaPronta +
+                " Ja foi enviado pedido de aceite ao cliente? (0-Nao 1-Sim)" + this.respostaCliente ;
 
     }
     

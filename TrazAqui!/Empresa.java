@@ -179,18 +179,15 @@ public class Empresa extends Utilizador implements Serializable
     public String toString() {
         String s = new String();
  
-        s = ("Empresa: " + 
-               " Nome: " + this.getNome() +  
-               " Email: " + this.getEmail() + 
-               " NIF: " + this.getNIF() + 
-               " Raio Geografico(m): " + this.getRaiogeografico() +
-               " Velocidade mÃ©dia (m/s): " + this.velocidade +
-               " Rating: " + this.rating + 
-               " Nr de ClassificaÃ§Ãµes: " + this.nmrClassificacoes + 
-               " Multitasking(Sim:1/NÃ£o:0): " + this.multitasking + 
-               " DisponÃ­vel(Sim:1/NÃ£o:0): " + this.indicador + 
-               " Pedidos disponÃ­veis ao mesmo tempo: " + this.capacidade +
-               " Localizacao: "+ this.getLocalizacao() + "\n") ;
+        s = ("\n Empresa->" + 
+               " Nome:" + this.getNome() +  
+               " Email:" + this.getEmail() + 
+               " Raio Geografico(m):" + this.getRaiogeografico() +
+               " Velocidade média (m/s):" + this.velocidade +
+               " Rating:" + this.rating + 
+               " Nr de Classificações:" + this.nmrClassificacoes + 
+               " Multitasking(Sim:1/Não:0):" + this.multitasking + 
+               " Localizacao:"+ this.getLocalizacao() + "\n") ;
  
         return s;
     }

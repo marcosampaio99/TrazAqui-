@@ -22,6 +22,7 @@ public class Menus implements Serializable {
         System.out.println("5-Consultar Clientes");
         System.out.println("6-Consultar Empresas");
         System.out.println("7-Consultar Pedidos");
+        System.out.println("8-Consultar Voluntarios");
         System.out.println("0-Sair");
     }
 

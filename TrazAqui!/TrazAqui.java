@@ -244,10 +244,19 @@ public class TrazAqui implements Serializable
                                     do{
                                         optLoginEmpresa= Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginEmpresa){
-                                            case 1:{
-                                                //Sinalizar disposição para entregar encomendas (fazer funcao na gestao geral que verifica as encomendas
-                                                // que podem ser entregues e passar a ser do tipo Pronta com um preço )
+                                            case 1:{ 
+                                                List<Encomenda> l = new ArrayList<>(g.listagemEncomendasNaoRespondidas1());
+                                                            for (Encomenda enc : l)
+                                                            System.out.println(enc.toString());
+                                                String id = Scanners.leituraString("Escolha da lista acima o id da encomenda que pretende entregar");
+                                                try{
+                                                    g.empresaPede(id,empresa);
+                                                    System.out.println("Encomenda entregue");
+                                                } catch(GestaoGeralException e){
+                                                    System.out.println("Distancia para entregar fora do raio ou erros na encomenda com id" + e.getMessage());
+                                                }
                                             break;
+                                            
                                         }
                                             case 2 : {
                                                  int dia1 = Scanners.leituraInt("Dia Inicial:");
@@ -286,8 +295,16 @@ public class TrazAqui implements Serializable
                                         optLoginVoluntario= Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginVoluntario){
                                             case 1:{
-                                                //Entregar encomenda(fazer funcao na gestao geral que verifique se as encomendas prontas para ser
-                                                // entregues e passar essa cena para realizadaVoluntario)
+                                                List<Encomenda> l = new ArrayList<>(g.listagemEncomendasNaoRespondidas1());
+                                                            for (Encomenda enc : l)
+                                                            System.out.println(enc.toString());
+                                                String id = Scanners.leituraString("Escolha da lista acima o id da encomenda que pretende entregar");
+                                                try{
+                                                    g.voluntarioEntrega(id,voluntario);
+                                                    System.out.println("Encomenda entregue");
+                                                } catch(GestaoGeralException e){
+                                                    System.out.println("Distancia para entregar fora do raio ou erros na encomenda com id" + e.getMessage());
+                                                }
                                             break;
                                         }
                                             case 2 : {
@@ -512,6 +529,13 @@ public class TrazAqui implements Serializable
                                         System.out.println(c.toString());
                                     break;
                             }
+                            case 8:{
+                             ArrayList<Voluntario> result = new ArrayList<Voluntario>();
+                                    result = (ArrayList) g.listagemVoluntarios();
+                                    for (Voluntario c : result)
+                                        System.out.println(c.toString());
+                                    break;
+                            }
                             default:{
                                 break;
                             }
@@ -526,10 +550,22 @@ public class TrazAqui implements Serializable
                         optRank=Scanners.leituraInt("Escolha uma opção");
                         switch(optRank){
                             case 1:{
-                                //top10 users
+                                TreeSet<Cliente> t = new TreeSet<Cliente>(g.rank10Vezes());
+                                int x = 1;
+                                while (x <= 10 && t != null) {
+                                    System.out.println(x + " " + t.pollFirst().toString() + "\n");
+                                    x++;
+                                }
+                                break;
                             }
                             case 2:{
-                                //top10 empresas
+                                TreeSet<Empresa> t = new TreeSet<Empresa>(g.rank10km());
+                                int x = 1;
+                                while (x <= 10 && t != null) {
+                                    System.out.println(x + " " + t.pollFirst().toString() + "\n");
+                                    x++;
+                                }
+                                break;
                             }
                             default: {
                             break;

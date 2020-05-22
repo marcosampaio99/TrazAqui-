@@ -181,6 +181,60 @@ public class GestaoGeral implements Serializable{
     return r;
     }
     
+    //metodo que apresenta a lista de todas as encomendas de qualquer loja ja prontas a ser entregues
+    public List<Encomenda> listagemEncomendasNaoRespondidas1(){
+       ArrayList<Encomenda> list = new ArrayList<Encomenda>(this.getEncomendas().values());
+        List<Encomenda> r = new ArrayList<>();
+        
+        for (Encomenda a : list)
+            if(a.getFlagLojaPronta()==true ) r.add(a);
+    return r;
+    }
+    
+    //metodo para voluntario sinalizar e entregar encomenda
+    public void voluntarioEntrega(String idE, Voluntario v) throws GestaoGeralException{
+        if (this.getEncomendas().get(idE) == null) throw new GestaoGeralException(String.valueOf(idE));
+        if (this.getEncomendas().get(idE).getFlagLojaPronta()==false)throw new GestaoGeralException(String.valueOf(idE));
+        Encomenda pd=this.getEncomendas().get(idE);
+       
+        double lat1=pd.getCliente().getLocalizacao().getX();
+        double lat2=pd.getLoja().getLocalizacao().getX();
+        double lon1=pd.getCliente().getLocalizacao().getY();
+        double lon2=pd.getLoja().getLocalizacao().getY();
+        double lat3=v.getLocalizacao().getX();
+        double lon3=v.getLocalizacao().getY();
+        double distanciaViagem=distance(lat2,lat3,lon2,lon3)+ distance(lat1,lat2,lon1,lon2);
+        if(distanciaViagem>getVoluntarios().get(v.getEmail()).getRaiogeografico()) throw new GestaoGeralException(String.valueOf(idE));
+        else{
+            Date data = new Date();
+            RealizadaVoluntario novo=new RealizadaVoluntario(idE,pd.getCliente(),pd.getLoja(),pd.getPeso(),pd.getState(),pd.getData(),true,true,pd.getLinhas(),v,data,false,-1);
+            getClientes().get(pd.getCliente().getEmail()).atualizaLV(novo);
+            getVoluntarios().get(v.getEmail()).atualizaLV(novo);
+            this.encomendas.addRealizadaVoluntario(novo);
+        }
+    }
+    
+    //metodo para empresa mandar pedido a cliente se aceita transportar
+    public void empresaPede(String idE, Empresa e) throws GestaoGeralException{
+        if (this.getEncomendas().get(idE) == null) throw new GestaoGeralException(String.valueOf(idE));
+        if (this.getEncomendas().get(idE).getFlagLojaPronta()==false  || this.getEncomendas().get(idE).getRespostaCliente()==true)throw new GestaoGeralException(String.valueOf(idE));
+        Encomenda pd=this.getEncomendas().get(idE);
+        double lat1=pd.getCliente().getLocalizacao().getX();
+        double lat2=pd.getLoja().getLocalizacao().getX();
+        double lon1=pd.getCliente().getLocalizacao().getY();
+        double lon2=pd.getLoja().getLocalizacao().getY();
+        double lat3=e.getLocalizacao().getX();
+        double lon3=e.getLocalizacao().getY();
+        double distanciaViagem=distance(lat2,lat3,lon2,lon3)+ distance(lat1,lat2,lon1,lon2);
+        if(distanciaViagem>e.getRaiogeografico()) throw new GestaoGeralException(String.valueOf(idE));
+        else{
+        Date data = new Date();
+        double preco=e.getTaxa()*(distanciaViagem/1000);
+        Pronta nova= new Pronta(idE,pd.getCliente(),pd.getLoja(),pd.getPeso(),pd.getState(),pd.getData(),true,true,pd.getLinhas(),e,preco);
+        }
+    }
+    
+    
     //metodo para uma loja indicar que uma encomenda esta pronta
     public void registaEncomendaLoja(String idE, Loja l)throws GestaoGeralException{
         
@@ -257,9 +311,8 @@ public void registaClassVoluntario(String idE,double classificacao,Cliente c,Vol
             double preco = pd.getPreco();
             Date data = new Date();
             RealizadaEmpresa r = new RealizadaEmpresa(idP,c,pd.getLoja(),pd.getPeso(),pd.getState(),pd.getData(),true,true,pd.getLinhas(),pd.getEmpresa(),preco,data,distanciaViagem,false,-1);;
-            //this.encomendas.remove(); 
-            getClientes().get(c).atualizaLE(r);
-            getEmpresas().get(pd.getEmpresa()).atualizaLE(r);
+            getClientes().get(c.getEmail()).atualizaLE(r);
+            getEmpresas().get(pd.getEmpresa().getEmail()).atualizaLE(r);
             this.encomendas.addRealizadaEmpresa(r);
          
             
@@ -314,7 +367,23 @@ public void registaClassVoluntario(String idE,double classificacao,Cliente c,Vol
     }
         
     
-       
+    //metodo para ranking dos 10 clientes que t?m mais encomendas entregues
+     public TreeSet<Cliente> rank10Vezes() {
+        TreeSet<Cliente> t = new TreeSet<>(new ComparadorNrVezes());
+        ArrayList<Cliente> clientes1 = new ArrayList<Cliente> (this.getClientes().values());
+        for (Cliente c : clientes1)
+             t.add(c.clone());
+        return t;
+    }
+    
+    //metodo para ranking das 10 empresas com mais kms percorridos
+     public TreeSet<Empresa> rank10km() {
+        TreeSet<Empresa> t = new TreeSet<>(new ComparadorKmPercorridos());
+        ArrayList<Empresa> empresas1 = new ArrayList<Empresa>(this.getEmpresas().values());
+        for (Empresa e : empresas1)
+            t.add(e.clone());
+        return t;
+    }
         
     
     

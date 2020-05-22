@@ -82,13 +82,13 @@ public class RealizadaVoluntario extends Encomenda implements Serializable
             
    public String toString(){
        return "Encomenda com id: " + this.getId() +
-              "Cliente: " + this.getCliente() +
-              "Loja: " + this.getLoja() +
-              "Peso: " + this.getPeso() +
-              "Entregue por Voluntario: " + this.voluntario.getEmail() +
-              "Data de entrega: " + this.dataR +
-              "Classficada? "+ this.classificado +
-              "Classificacao atribuida: " + this.classificacao +"\n";
+               this.getCliente() +
+               this.getLoja() + "\n" +
+              "Peso:" + this.getPeso() +
+              " Entregue por Voluntario:" + this.voluntario.getEmail() +
+              " Data de entrega:" + this.dataR +
+              " Classficada? "+ this.classificado +
+              " Classificacao atribuida:" + this.classificacao +"\n";
             }
             
     public RealizadaVoluntario clone(){

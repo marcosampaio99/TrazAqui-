@@ -53,11 +53,9 @@ public class Loja extends Utilizador implements Serializable {
 
     //toString
     public String toString(){
-        return  "Loja: " + "\n" +
-                "Nome: " + this.getNome() + "\n" +
-                "Email: " + this.getEmail() + "\n" +
-                "Password: " + this.getPassword() + "\n" +
-                "LocalizaÃ§Ã£o: " + this.getLocalizacao() + "\n" +
-                "Tempo mÃ©dio de espera: " + this.getTempoEspera() + "\n" ;
+        return  "\nLoja->" +
+                " Nome:" + this.getNome() + 
+                " Email:" + this.getEmail() + 
+                " Localização:" + this.getLocalizacao();
     }
 }
