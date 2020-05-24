@@ -1,4 +1,5 @@
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.*;
 import java.io.*;
@@ -12,7 +13,7 @@ import java.io.*;
 public class RealizadaVoluntario extends Encomenda implements Serializable
 {
     private Voluntario voluntario;
-    private Date dataR;
+    private LocalDate dataR;
     private boolean classificado; // se ja foi classificado ou nao
     private double classificacao; // guarda-se a classificacao atribuida
     
@@ -24,7 +25,7 @@ public class RealizadaVoluntario extends Encomenda implements Serializable
       this.classificacao=-1;
     }
     
-    public RealizadaVoluntario(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,Date dataAux,boolean respostaClienteAux, boolean flagLojaProntaAux, ArrayList<LinhaEncomenda> l,Voluntario voluntarioAux, Date dataRAux,boolean classificadoAux, double classificacaoAux){
+    public RealizadaVoluntario(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,LocalDate dataAux,boolean respostaClienteAux, boolean flagLojaProntaAux, ArrayList<LinhaEncomenda> l,Voluntario voluntarioAux, LocalDate dataRAux,boolean classificadoAux, double classificacaoAux){
         super(idAux, clienteAux, lojaAux, pesoAux, stateAux, dataAux,respostaClienteAux,flagLojaProntaAux,l);
         this.voluntario=voluntarioAux;
         this.classificado=classificadoAux;
@@ -52,7 +53,7 @@ public class RealizadaVoluntario extends Encomenda implements Serializable
         return this.classificacao;
     }
     
-    public Date getData(){
+    public LocalDate getData(){
        return this.dataR;
     }
    //setters

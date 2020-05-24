@@ -1,6 +1,8 @@
 import java.util.*;
 import java.util.HashMap;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Escreva a descrição da classe GestaoCliente aqui.
@@ -94,20 +96,20 @@ public class GestaoCliente implements Serializable
      public void atualizaCLV(RealizadaVoluntario r, String mail) {((this.clientes.get(mail))).atualizaLV(r);}
      
     //metodos para devovolverem encomendas entregues a um cliente num periodo de tempo
-     public List<RealizadaEmpresa> EncEmpPorPeriodo(Cliente c, Date inicio, Date fim){
+     public List<RealizadaEmpresa> EncEmpPorPeriodo(Cliente c, LocalDate inicio, LocalDate fim){
         List<RealizadaEmpresa> re= new ArrayList<RealizadaEmpresa>(buscaCliente(c.getEmail()).getRe());
         List<RealizadaEmpresa> aux = new ArrayList<RealizadaEmpresa>();
         for (RealizadaEmpresa a : re){
-             if (a.getData().after(inicio) && a.getData().before(fim)) aux.add(a);
+             if (a.getData().isAfter(inicio) && a.getData().isBefore(fim)) aux.add(a);
         }
            return aux; 
         }
    
-        public List<RealizadaVoluntario> EncVolPorPeriodo(Cliente c, Date inicio, Date fim){
+        public List<RealizadaVoluntario> EncVolPorPeriodo(Cliente c, LocalDate inicio, LocalDate fim){
         List<RealizadaVoluntario> re= new ArrayList<RealizadaVoluntario>(buscaCliente(c.getEmail()).getRv());
         List<RealizadaVoluntario> aux = new ArrayList<RealizadaVoluntario>();
         for (RealizadaVoluntario a : re){
-             if (a.getData().after(inicio) && a.getData().before(fim)) aux.add(a);
+             if (a.getData().isAfter(inicio) && a.getData().isBefore(fim)) aux.add(a);
         }
            return aux; 
         }

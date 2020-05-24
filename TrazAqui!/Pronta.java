@@ -1,4 +1,5 @@
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.*;
 import java.io.*;
@@ -21,7 +22,7 @@ public class Pronta extends Encomenda implements Serializable
         this.preco=-1;
     }
     
-    public Pronta(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,Date dataAux, boolean respostaClienteAux, boolean flagLojaProntaAux,ArrayList<LinhaEncomenda> l,Empresa empresaAux, double precoAux){
+    public Pronta(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,LocalDate dataAux, boolean respostaClienteAux, boolean flagLojaProntaAux,ArrayList<LinhaEncomenda> l,Empresa empresaAux, double precoAux){
         super(idAux, clienteAux, lojaAux, pesoAux, stateAux, dataAux,respostaClienteAux,flagLojaProntaAux,l);
         this.empresa= empresaAux;
         this.preco=precoAux;
@@ -60,11 +61,11 @@ public class Pronta extends Encomenda implements Serializable
     
     public String toString(){
        return "Encomenda com id: " + this.getId() +
-              "Cliente: " + this.getCliente().getNome() +
-              "Loja: " + this.getLoja().getNome() +
-              "Peso: " + this.getPeso() +
-              "Empresa que prentende transportar: "+ this.empresa.getEmail() + 
-              "Com preco: " + this.preco + "\n";
+               this.getCliente() +
+               this.getLoja() + "\n" +
+              "Peso:" + this.getPeso() +
+              " Empresa que prentende transportar:"+ this.empresa.getEmail() + 
+              " Com preco:" + this.preco + "\n";
               
             }
             

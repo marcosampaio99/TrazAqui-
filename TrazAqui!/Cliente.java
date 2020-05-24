@@ -76,8 +76,9 @@ public boolean equals (Object o){
         s = ( "\nCliente->" +
                 " Email: " + this.getEmail() + 
                 " Nome: " + this.getNome() +
-                " Localizacao: "+ this.getLocalizacao()+ 
-                "encomendas entregues" + this.getRv());
+                " Localizacao: "+ this.getLocalizacao());
+                
+                
  
         return s;
     }

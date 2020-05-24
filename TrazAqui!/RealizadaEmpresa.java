@@ -1,4 +1,5 @@
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.*;
 import java.io.*;
@@ -8,7 +9,7 @@ public class RealizadaEmpresa extends Encomenda implements Serializable
 {
   private Empresa empresa;
   private double preco;
-  private Date dataR;
+  private LocalDate dataR;
   private double distanciaViagem;
   private boolean classificado; // se ja foi classificado ou nao
   private double classificacao; // guarda-se a classificacao atribuida
@@ -22,7 +23,7 @@ public class RealizadaEmpresa extends Encomenda implements Serializable
       this.classificacao=-1;
     }
     
-  public RealizadaEmpresa(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,Date dataAux,boolean respostaClienteAux, boolean flagLojaProntaAux, ArrayList<LinhaEncomenda> l, Empresa empresaAux, double precoAux, Date dataRAux,double distanciaViagemAux, boolean classificadoAux, double classificacaoAux){
+  public RealizadaEmpresa(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,LocalDate dataAux,boolean respostaClienteAux, boolean flagLojaProntaAux, ArrayList<LinhaEncomenda> l, Empresa empresaAux, double precoAux, LocalDate dataRAux,double distanciaViagemAux, boolean classificadoAux, double classificacaoAux){
       super(idAux, clienteAux, lojaAux, pesoAux, stateAux, dataAux,respostaClienteAux,flagLojaProntaAux,l);
       this.empresa= empresaAux;
       this.preco= precoAux;
@@ -50,7 +51,7 @@ public class RealizadaEmpresa extends Encomenda implements Serializable
        return this.preco;
     }
     
-   public Date getData(){
+   public LocalDate getData(){
        return this.dataR;
     }
     
@@ -77,7 +78,7 @@ public class RealizadaEmpresa extends Encomenda implements Serializable
        this.preco=p;
     }
     
-   public void setData(Date d) {
+   public void setData(LocalDate d) {
         this.dataR = d;
     } 
      

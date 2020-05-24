@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.*;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 public class TrazAqui implements Serializable
@@ -41,7 +43,7 @@ public class TrazAqui implements Serializable
                                         case 1:{
                                              Encomenda e = new Encomenda();
                                              e.setCliente(cliente);
-                                             String id=String.valueOf(g.listagemClientes().size())+10;
+                                             String id="e" +String.valueOf(g.listagemClientes().size())+10;
                                              e.setId(id);
                                              int medical= Scanners.leituraInt("A encomenda é médica?");
                                              if(medical==0){
@@ -60,7 +62,7 @@ public class TrazAqui implements Serializable
                                                     Double quantidade=Scanners.leituraDouble("Insira a quantidade");
                                                     LinhaEncomenda li= new LinhaEncomenda(ref,descricao,preco,quantidade);
                                                     l.add(li);
-                                                    completo=Scanners.leituraInt("Deseja adicionar mais algum produto(Sim:1;Não:0");
+                                                    completo=Scanners.leituraInt("Deseja adicionar mais algum produto(Sim:1;Não:0)");
                                                 }
         
                                                 e.setLinhas(l);
@@ -68,6 +70,8 @@ public class TrazAqui implements Serializable
                                                 try{
                                                     Loja loja=g.getLojas().get(idLoja);
                                                     e.setLoja(loja);
+                                                    LocalDate data= LocalDate.now();
+                                                    e.setData(data);
                                                     e.setPeso(e.calculapeso());
                                                     g.criaEncomenda(cliente,e,idLoja);
                                                     System.out.println("Encomenda feita com sucesso");
@@ -104,9 +108,9 @@ public class TrazAqui implements Serializable
                                                     int ano2 = Scanners.leituraInt("Ano Final:");
                                                     LocalDate d1 = LocalDate.of(ano1,mes1,dia1);
                                                     LocalDate d2 = LocalDate.of(ano2,mes2,dia2);
-                                                    Date auxD1 = java.sql.Date.valueOf(d1);
-                                                    Date auxD2 = java.sql.Date.valueOf(d2);
-                                                    List<RealizadaEmpresa> l = new ArrayList<>(g.getEncEmpPorPeriodo(cliente,auxD1,auxD2));
+                                                    
+                                                  
+                                                    List<RealizadaEmpresa> l = new ArrayList<>(g.getEncEmpPorPeriodo(cliente,d1,d2));
                                                     for (RealizadaEmpresa r : l)
                                                         System.out.println(r.toString());
                                                 break;
@@ -120,9 +124,8 @@ public class TrazAqui implements Serializable
                                                     int ano2 = Scanners.leituraInt("Ano Final:");
                                                     LocalDate d1 = LocalDate.of(ano1,mes1,dia1);
                                                     LocalDate d2 = LocalDate.of(ano2,mes2,dia2);
-                                                    Date auxD1 = java.sql.Date.valueOf(d1);
-                                                    Date auxD2 = java.sql.Date.valueOf(d2);
-                                                    List<RealizadaVoluntario> aux = new ArrayList<>(g.getEncVolPorPeriodo(cliente,auxD1,auxD2));
+                                                    
+                                                    List<RealizadaVoluntario> aux = new ArrayList<>(g.getEncVolPorPeriodo(cliente,d1,d2));
                                                     for (RealizadaVoluntario r : aux)
                                                         System.out.println(r.toString());
                                                 break;
@@ -144,7 +147,7 @@ public class TrazAqui implements Serializable
                                                             for (RealizadaVoluntario r : l)
                                                         System.out.println(r.toString());
                                                           String id = Scanners.leituraString("Escolha da lista acima o id do aluguer que quer classificar(apenas numero)");
-                                                          double c= Scanners.leituraDouble("Qual a classificação que quer atribuir a entrega (0.0-10.0)");
+                                                          double c= Scanners.leituraDouble("Qual a classificação que quer atribuir a entrega (0,0-10,0)");
                                                           if (c > 10.0) c = 10.0;
                                                           if(c==0.0) break;
                                                          try{
@@ -164,7 +167,7 @@ public class TrazAqui implements Serializable
                                                             for (RealizadaEmpresa r : l)
                                                         System.out.println(r.toString());
                                                           String id = Scanners.leituraString("Escolha da lista acima o id do aluguer que quer classificar");
-                                                          double c= Scanners.leituraDouble("Qual a classificação que quer atribuir a entrega (0.0-10.0)");
+                                                          double c= Scanners.leituraDouble("Qual a classificação que quer atribuir a entrega (0,0-10,0)");
                                                           if (c > 10.0) c = 10.0;
                                                           if(c==0.0) break;
                                                           try{
@@ -202,6 +205,7 @@ public class TrazAqui implements Serializable
                                     Loja loja =  g.getLojas().get(email);
                                     int optLoginLoja;
                                     do{
+                                        Menus.submenu_Loja();
                                         optLoginLoja= Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginLoja){
                                             case 1:{
@@ -242,6 +246,7 @@ public class TrazAqui implements Serializable
                                     Empresa empresa=g.getEmpresas().get(email);
                                     int optLoginEmpresa;
                                     do{
+                                        Menus.submenu_Empresa();
                                         optLoginEmpresa= Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginEmpresa){
                                             case 1:{ 
@@ -267,9 +272,8 @@ public class TrazAqui implements Serializable
                                                     int ano2 = Scanners.leituraInt("Ano Final:");
                                                     LocalDate d1 = LocalDate.of(ano1,mes1,dia1);
                                                     LocalDate d2 = LocalDate.of(ano2,mes2,dia2);
-                                                    Date auxD1 = java.sql.Date.valueOf(d1);
-                                                    Date auxD2 = java.sql.Date.valueOf(d2);
-                                                    List<RealizadaEmpresa> l = new ArrayList<>(g.getEncEPorPeriodo(empresa,auxD1,auxD2));
+                                                    
+                                                    List<RealizadaEmpresa> l = new ArrayList<>(g.getEncEPorPeriodo(empresa,d1,d2));
                                                     for (RealizadaEmpresa r : l)
                                                         System.out.println(r.toString());
                                             break;
@@ -292,6 +296,7 @@ public class TrazAqui implements Serializable
                                     Voluntario voluntario=g.getVoluntarios().get(email);
                                     int optLoginVoluntario;
                                     do{
+                                        Menus.submenu_Voluntario();
                                         optLoginVoluntario= Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginVoluntario){
                                             case 1:{
@@ -316,9 +321,8 @@ public class TrazAqui implements Serializable
                                                     int ano2 = Scanners.leituraInt("Ano Final:");
                                                     LocalDate d1 = LocalDate.of(ano1,mes1,dia1);
                                                     LocalDate d2 = LocalDate.of(ano2,mes2,dia2);
-                                                    Date auxD1 = java.sql.Date.valueOf(d1);
-                                                    Date auxD2 = java.sql.Date.valueOf(d2);
-                                                    List<RealizadaVoluntario> aux = new ArrayList<>(g.getEncVPorPeriodo(voluntario,auxD1,auxD2));
+                                                  
+                                                    List<RealizadaVoluntario> aux = new ArrayList<>(g.getEncVPorPeriodo(voluntario,d1,d2));
                                                     for (RealizadaVoluntario r : aux)
                                                         System.out.println(r.toString());
                                             break;

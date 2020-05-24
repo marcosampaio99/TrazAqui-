@@ -13,7 +13,7 @@ import java.lang.Object;
 import java.util.HashMap;
 import java.util.Map;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.io.*;
 
@@ -116,7 +116,8 @@ public class Leitura implements Serializable {
       String emailL = campos[2]+"@mail.com";
       Loja l = gl.buscaLoja(emailL);
       double peso = Double.parseDouble(campos[3]);
-      Date data = new Date();
+      LocalDate data = LocalDate.now();
+      System.out.println(data);
       //fazer ciclo for para ler uma linha de encomenda de cada vez
       String[] novos=input.split(",",5);
       String[] finalissima=novos[4].split(",");
@@ -162,15 +163,15 @@ public class Leitura implements Serializable {
       temp.setRespostaCliente(true);
       temp.setFlagLojaPronta(true);
       Voluntario aux=volMaisPerto(id);
-      Date data= new Date();
+      LocalDate data = LocalDate.now();
       RealizadaVoluntario rv= new RealizadaVoluntario(temp.getId(),temp.getCliente(),temp.getLoja(),temp.getPeso(),temp.getState(),temp.getData(),temp.getRespostaCliente(),temp.getFlagLojaPronta(),temp.getLinhas(),aux,data,false,-1);
       
       Voluntario novo= gv.getVoluntario().get(aux.getEmail());
       novo.atualizaLV(rv);
-      gv.getVoluntario().put(novo.getEmail(),novo);
+      gv.addVoluntario(novo);
       Cliente novo1=ges.buscaEncomenda(id).getCliente();
       novo1.atualizaLV(rv);
-      gc.getCliente().put(novo1.getEmail(),novo1);
+      gc.addCliente(novo1);
       return rv;
     }
     

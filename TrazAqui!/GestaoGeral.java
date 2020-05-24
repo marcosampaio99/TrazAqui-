@@ -1,6 +1,8 @@
 import java.util.*;
 import java.util.ArrayList;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 /**
  * Escreva a descrição da classe GestaoGeral aqui.
  * 
@@ -177,7 +179,7 @@ public class GestaoGeral implements Serializable{
         List<Encomenda> r = new ArrayList<>();
         
         for (Encomenda a : list)
-            if(a.getFlagLojaPronta()==false && a.getRespostaCliente()==true && a.getLoja().getEmail().equals(l.getEmail()) ) r.add(a);
+            if(a.getFlagLojaPronta()==false && a.getLoja().getEmail().equals(l.getEmail()) ) r.add(a);
     return r;
     }
     
@@ -187,7 +189,7 @@ public class GestaoGeral implements Serializable{
         List<Encomenda> r = new ArrayList<>();
         
         for (Encomenda a : list)
-            if(a.getFlagLojaPronta()==true ) r.add(a);
+            if(a.getFlagLojaPronta()==true && ( a instanceof RealizadaEmpresa==false) && (a instanceof RealizadaVoluntario==false) && (a instanceof Pronta==false)) r.add(a);
     return r;
     }
     
@@ -206,7 +208,7 @@ public class GestaoGeral implements Serializable{
         double distanciaViagem=distance(lat2,lat3,lon2,lon3)+ distance(lat1,lat2,lon1,lon2);
         if(distanciaViagem>getVoluntarios().get(v.getEmail()).getRaiogeografico()) throw new GestaoGeralException(String.valueOf(idE));
         else{
-            Date data = new Date();
+            LocalDate data = LocalDate.now();
             RealizadaVoluntario novo=new RealizadaVoluntario(idE,pd.getCliente(),pd.getLoja(),pd.getPeso(),pd.getState(),pd.getData(),true,true,pd.getLinhas(),v,data,false,-1);
             getClientes().get(pd.getCliente().getEmail()).atualizaLV(novo);
             getVoluntarios().get(v.getEmail()).atualizaLV(novo);
@@ -231,6 +233,7 @@ public class GestaoGeral implements Serializable{
         Date data = new Date();
         double preco=e.getTaxa()*(distanciaViagem/1000);
         Pronta nova= new Pronta(idE,pd.getCliente(),pd.getLoja(),pd.getPeso(),pd.getState(),pd.getData(),true,true,pd.getLinhas(),e,preco);
+        this.encomendas.addPronta(nova);
         }
     }
     
@@ -242,7 +245,9 @@ public class GestaoGeral implements Serializable{
         if (this.getEncomendas().get(idE).getLoja().getEmail().equals(l.getEmail()) == false) throw new GestaoGeralException(String.valueOf(idE));
         if (this.getEncomendas().get(idE).getFlagLojaPronta()==true)throw new GestaoGeralException(String.valueOf(idE));
         else {
-            this.getEncomendas().get(idE).setFlagLojaPronta(true);
+            Encomenda p= this.getEncomendas().get(idE);
+            p.setFlagLojaPronta(true);
+            this.encomendas.addEncomenda(p);
         }
     }
     
@@ -309,7 +314,7 @@ public void registaClassVoluntario(String idE,double classificacao,Cliente c,Vol
             double lon3=pd.getEmpresa().getLocalizacao().getY();
             double distanciaViagem=distance(lat2,lat3,lon2,lon3)+ distance(lat1,lat2,lon1,lon2);
             double preco = pd.getPreco();
-            Date data = new Date();
+            LocalDate data = LocalDate.now();
             RealizadaEmpresa r = new RealizadaEmpresa(idP,c,pd.getLoja(),pd.getPeso(),pd.getState(),pd.getData(),true,true,pd.getLinhas(),pd.getEmpresa(),preco,data,distanciaViagem,false,-1);;
             getClientes().get(c.getEmail()).atualizaLE(r);
             getEmpresas().get(pd.getEmpresa().getEmail()).atualizaLE(r);
@@ -340,21 +345,21 @@ public void registaClassVoluntario(String idE,double classificacao,Cliente c,Vol
 }
     
     //metodos que devolvem encomendas entregues a um cliente por um determinado periodo
-    public List<RealizadaEmpresa> getEncEmpPorPeriodo(Cliente c, Date inicio, Date fim) {
+    public List<RealizadaEmpresa> getEncEmpPorPeriodo(Cliente c, LocalDate inicio, LocalDate fim) {
         return this.clientes.EncEmpPorPeriodo(c,inicio,fim);
     }
     
-    public List<RealizadaVoluntario> getEncVolPorPeriodo(Cliente c, Date inicio, Date fim) {
+    public List<RealizadaVoluntario> getEncVolPorPeriodo(Cliente c, LocalDate inicio, LocalDate fim) {
         return this.clientes.EncVolPorPeriodo(c,inicio,fim);
     }
     
     //metodos que devolvem encomendas entregues por uma empresa por um determinado periodo
-    public List<RealizadaEmpresa> getEncEPorPeriodo(Empresa e, Date inicio, Date fim){
+    public List<RealizadaEmpresa> getEncEPorPeriodo(Empresa e, LocalDate inicio, LocalDate fim){
         return this.empresas.EncEmpresaPorPeriodo(e,inicio,fim);
     }
     
     //metodos que devolvem encomendas entregues por um voluntario por um determinado periodo
-    public List<RealizadaVoluntario> getEncVPorPeriodo(Voluntario v, Date inicio, Date fim){
+    public List<RealizadaVoluntario> getEncVPorPeriodo(Voluntario v, LocalDate inicio, LocalDate fim){
         return this.voluntarios.EncVoluntarioPorPeriodo(v,inicio,fim);
     }
     

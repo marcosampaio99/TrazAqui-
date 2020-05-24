@@ -1,7 +1,8 @@
-import java.util.*;
 import java.util.HashMap;
 import java.util.*;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 public class GestaoEncomenda implements Serializable
@@ -146,12 +147,12 @@ public class GestaoEncomenda implements Serializable
         return result2;
     }
     
-     public double faturacao(String email,Date inicio,Date fim){
+     public double faturacao(String email,LocalDate inicio,LocalDate fim){
         double result = 0;
         List<Encomenda> list = new ArrayList<Encomenda>(this.getRealizadaEmpresa());
 
         for (Encomenda e: list){
-            if ((((RealizadaEmpresa)e).getEmpresa().getEmail()).equals(email) && ((RealizadaEmpresa)e).getData().after(inicio) && ((RealizadaEmpresa)e).getData().before(fim)) result = result + (((RealizadaEmpresa)e).getPreco());
+            if ((((RealizadaEmpresa)e).getEmpresa().getEmail()).equals(email) && ((RealizadaEmpresa)e).getData().isAfter(inicio) && ((RealizadaEmpresa)e).getData().isBefore(fim)) result = result + (((RealizadaEmpresa)e).getPreco());
     }
     return  result;
     }

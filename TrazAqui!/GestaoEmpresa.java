@@ -1,5 +1,7 @@
 import java.util.*;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class GestaoEmpresa implements Serializable
 {
@@ -94,11 +96,11 @@ public class GestaoEmpresa implements Serializable
     }
     
     //metodo que devolve lista de encomendas entregues por uma empresa num determinado periodo
-    public List<RealizadaEmpresa> EncEmpresaPorPeriodo(Empresa e, Date inicio, Date fim){
+    public List<RealizadaEmpresa> EncEmpresaPorPeriodo(Empresa e, LocalDate inicio, LocalDate fim){
         List<RealizadaEmpresa> re= new ArrayList<RealizadaEmpresa>(buscaEmpresa(e.getEmail()).getRe());
         List<RealizadaEmpresa> aux = new ArrayList<RealizadaEmpresa>();
         for (RealizadaEmpresa a : re){
-             if (a.getData().after(inicio) && a.getData().before(fim)) aux.add(a);
+             if (a.getData().isAfter(inicio) && a.getData().isBefore(fim)) aux.add(a);
         }
            return aux; 
         }

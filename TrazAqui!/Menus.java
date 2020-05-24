@@ -61,7 +61,7 @@ public class Menus implements Serializable {
 
     public static void submenu_Loja(){
         System.out.println("--------------------MENU LOJA--------------------");
-        System.out.println("1-Sinalizar que existe uma encomenda de um Cliente pronta para ser entregue");
+        System.out.println("1-Sinalizar que existe uma encomenda de um cliente pronta para ser entregue");
         System.out.println("2-Indicar quantidade de pessoas que existem na fila");
         System.out.println("0-Sair");
     }
@@ -69,7 +69,7 @@ public class Menus implements Serializable {
      public static void submenu_Voluntario(){
         System.out.println("--------------------MENU VOLUNTARIO--------------------");
         System.out.println("1-Entregar encomenda");
-        System.out.println("2-Consultar historico de encomendas entregues");
+        System.out.println("2-Consultar historico de encomendas entregues por período");
         System.out.println("0-Sair");
     }
     

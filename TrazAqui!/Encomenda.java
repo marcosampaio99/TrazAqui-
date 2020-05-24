@@ -1,5 +1,7 @@
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.io.*;
 
@@ -11,7 +13,7 @@ public class Encomenda implements Serializable
     private Loja loja;
     public double peso;
     private boolean state; // 0 se n for medico 1 se for
-    private Date data;
+    private LocalDate data;
     private boolean respostaCliente; // se alguma empresa mandou pedido ou nao
     private boolean flagLojaPronta; // 0 se a encomenda ainda nao está pronta, 1 se a loja ja tiver a encomenda pronta
     private ArrayList <LinhaEncomenda> linhas;
@@ -27,7 +29,7 @@ public class Encomenda implements Serializable
         this. linhas =new ArrayList<>();
     }
 
-    public Encomenda(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,Date dataAux,boolean respostaClienteAux, boolean flagLojaProntaAux, ArrayList<LinhaEncomenda> l){
+    public Encomenda(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,LocalDate dataAux,boolean respostaClienteAux, boolean flagLojaProntaAux, ArrayList<LinhaEncomenda> l){
         this.id=idAux;
         this.cliente=new Cliente(clienteAux);
         this.loja=new Loja(lojaAux);
@@ -74,7 +76,7 @@ public class Encomenda implements Serializable
         return this.state;
     }
     
-    public Date getData() {
+    public LocalDate getData() {
         return this.data;
     }
     
@@ -117,7 +119,7 @@ public ArrayList <LinhaEncomenda> getLinhas(){
         this.state = state;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
@@ -158,15 +160,15 @@ public ArrayList <LinhaEncomenda> getLinhas(){
 
     @Override
     public String toString() {
-        return "Encomenda-> " +
-                "id:" + this.id + "\n" +
-                " Cliente: " + this.cliente.getNome() + "\n" +
-                " Loja:" + this.loja.getNome() + "\n" +
-                " Peso:" + this.peso + "\n" +
+        
+        return "Encomenda com id " + this.id +
+                this.cliente +
+                this.loja + "\n" +
+                "Peso:" + this.peso +
                 " Data:" + this.data + "\n" +
-                " Produtos" + this.linhas.toString() +
-                " Loja ja tem a encomenda pronta? (0-Nao 1-Sim)" + this.flagLojaPronta +
-                " Ja foi enviado pedido de aceite ao cliente? (0-Nao 1-Sim)" + this.respostaCliente ;
+                "Produtos:" + this.linhas.toString() + "\n" +
+                "Loja ja tem a encomenda pronta? " + this.flagLojaPronta + "\n" +
+                "Ja foi enviado pedido de aceite ao cliente? " + this.respostaCliente + "\n" ;
 
     }
     

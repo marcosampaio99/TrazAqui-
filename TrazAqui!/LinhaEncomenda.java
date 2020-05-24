@@ -87,10 +87,10 @@ public class LinhaEncomenda implements Serializable {
           
     
         public String toString() {
-        return  "Referencia: " + this.referencia + "\n" +
-                "Descricao: " + this.descricao + "\n" +
-                "PreÃ§o: " + this.preco +  "\n" +
-                "Quantidade: " + this.quantidade + "\n" +"\n";
+        return  "Referencia:" + this.referencia+
+                " Descricao:" + this.descricao + 
+                " Preço:" + this.preco + 
+                " Quantidade: " + this.quantidade;
 
     }
 }
