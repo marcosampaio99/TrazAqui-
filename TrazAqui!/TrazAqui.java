@@ -72,6 +72,7 @@ public class TrazAqui implements Serializable
                                                     e.setLoja(loja);
                                                     LocalDate data= LocalDate.now();
                                                     e.setData(data);
+                                                    System.out.println(e.getData());
                                                     e.setPeso(e.calculapeso());
                                                     g.criaEncomenda(cliente,e,idLoja);
                                                     System.out.println("Encomenda feita com sucesso");
@@ -130,11 +131,15 @@ public class TrazAqui implements Serializable
                                                         System.out.println(r.toString());
                                                 break;
                                                 }
+                                                case 0: {
+                                                break;
+                                                }
                                                 default:{
                                                 break;
                                                 }
                                                }
                                             }while(optHistorico!=0);
+                                            break;
                                         }
                                         case 4:{
                                             int optClassi;
@@ -181,17 +186,25 @@ public class TrazAqui implements Serializable
                                                             }
                                                             break;
                                                     }
+                                                     case 0: {
+                                                         break;
+                                                    }
                                                     default :{
                                                     break;
                                                     }
                                                 }
                                         }while(optClassi!=0);
+                                        break;
+                                        }
+                                        case 0: {
+                                            break;
                                         }
                                         default:{
                                         break;
                                         }
                                        }
                                     }while(optLoginCliente!=0);
+                                    break;
                                 } catch (GestaoGeralException e) {
                                     System.out.println("Dados incorretos para esta conta: " + e.getMessage());
                                 }
@@ -228,11 +241,15 @@ public class TrazAqui implements Serializable
                                                 g.registarFilaDeEspera(qntdPessoas, loja );
                                             break;
                                         }
+                                            case 0: {
+                                            break;
+                                        }
                                             default :{
                                             break;
                                         }
                                       }
                                     }while(optLoginLoja!=0);
+                                    break;
                                 } catch (GestaoGeralException e) {
                                     System.out.println("Dados incorretos para esta conta: " + e.getMessage());
                                 }
@@ -278,11 +295,29 @@ public class TrazAqui implements Serializable
                                                         System.out.println(r.toString());
                                             break;
                                         }
+                                        case 3:{
+                                            int dia1 = Scanners.leituraInt("Dia Inicial:");
+                                                    int mes1 = Scanners.leituraInt("Mês Inicial");
+                                                    int ano1 = Scanners.leituraInt("Ano Inicial:");
+                                                    int dia2 = Scanners.leituraInt("Dia Final:");
+                                                    int mes2 = Scanners.leituraInt("Mês Final");
+                                                    int ano2 = Scanners.leituraInt("Ano Final:");
+                                                    LocalDate d1 = LocalDate.of(ano1,mes1,dia1);
+                                                    LocalDate d2 = LocalDate.of(ano2,mes2,dia2);
+                                                    
+                                                    double fat=g.faturacaoPeriodo(empresa,d1,d2);
+                                                    System.out.println("Total faturado durante o periodo é de " + fat);
+                                        break;
+                                        }
+                                        case 0: {
+                                        break;
+                                        }
                                             default :{
                                             break;
                                         }
                                       }
                                     }while(optLoginEmpresa!=0);
+                                    break;
                                 } catch (GestaoGeralException e) {
                                     System.out.println("Dados incorretos para esta conta: " + e.getMessage());
                                 }
@@ -327,21 +362,29 @@ public class TrazAqui implements Serializable
                                                         System.out.println(r.toString());
                                             break;
                                         }
+                                        case 0: {
+                                            break;
+                                        }
                                             default :{
                                             break;
                                         }
                                       }
                                     }while(optLoginVoluntario!=0);
+                                    break;
                                 } catch (GestaoGeralException e) {
                                     System.out.println("Dados incorretos para esta conta: " + e.getMessage());
                                 }
                                 break; 
+                            }
+                            case 0: {
+                                break;
                             }
                             default :{
                                 break;
                             }
                           }
                         }while (optLogin!=0);
+                        break;
                     }
                 case 2:{
                     int optRegUtilizador;
@@ -423,11 +466,15 @@ public class TrazAqui implements Serializable
                                 }
                                 break;
                             }
+                            case 0: {
+                                break;
+                            }
                             default:{
                                 break;
                             }
                         }
                     }while (optRegUtilizador!=0);
+                    break;
                 }
                 case 3:{
                     int optGravarCarregar;
@@ -469,14 +516,19 @@ public class TrazAqui implements Serializable
                                 g.addListaLojas(l.listagemLojas());
                                 g.addListaVoluntarios(l.listagemVoluntarios());
                                 g.addListaEncomendas(l.listagemEncomendas());
+                                
                                 System.out.println("Carregamento realizado com sucesso");
                                 
+                            }
+                            case 0: {
+                                break;
                             }
                             default:{
                                 break;
                             }
                         }
                     }while(optGravarCarregar!=0);
+                    break;
                 }
                 case 4:{
                     int optAdmin;
@@ -540,11 +592,15 @@ public class TrazAqui implements Serializable
                                         System.out.println(c.toString());
                                     break;
                             }
+                            case 0: {
+                                break;
+                            }
                             default:{
                                 break;
                             }
                         }
                     }while(optAdmin!=0);
+                    break;
                     
                 }
                 case 5:{
@@ -571,12 +627,19 @@ public class TrazAqui implements Serializable
                                 }
                                 break;
                             }
+                            case 0: {
+                                break;
+                            }
                             default: {
                             break;
                             }
                         }
                     }while(optRank!=0);
+                    break;
                 }
+                case 0: {
+                   break;
+              }
                 default: {
                     break;
                 }    

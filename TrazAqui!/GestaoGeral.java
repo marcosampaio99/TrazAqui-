@@ -125,6 +125,20 @@ public class GestaoGeral implements Serializable{
         this.encomendas.addEncomenda(temp);
      }
    }
+   
+    public void addListaRV(List<RealizadaVoluntario> v){
+        for (RealizadaVoluntario temp : v) {
+        this.encomendas.addRealizadaVoluntario(temp);
+     }
+   }
+   
+   
+    public void addListaRE(List<RealizadaEmpresa> v){
+        for (RealizadaEmpresa temp : v) {
+        this.encomendas.addRealizadaEmpresa(temp);
+     }
+   }
+   
    //metodos de listagens de entidades presentes no sistema para o admin ver
    public List<Cliente> listagemClientes(){
        ArrayList<Cliente> list = new ArrayList<Cliente>(this.getClientes().values());
@@ -209,7 +223,8 @@ public class GestaoGeral implements Serializable{
         if(distanciaViagem>getVoluntarios().get(v.getEmail()).getRaiogeografico()) throw new GestaoGeralException(String.valueOf(idE));
         else{
             LocalDate data = LocalDate.now();
-            RealizadaVoluntario novo=new RealizadaVoluntario(idE,pd.getCliente(),pd.getLoja(),pd.getPeso(),pd.getState(),pd.getData(),true,true,pd.getLinhas(),v,data,false,-1);
+            RealizadaVoluntario novo=new RealizadaVoluntario(idE,pd.getCliente(),pd.getLoja(),pd.getPeso(),pd.getState(),pd.getData(),true,true,pd.getLinhas(),v,false,-1);
+            novo.setData(data);
             getClientes().get(pd.getCliente().getEmail()).atualizaLV(novo);
             getVoluntarios().get(v.getEmail()).atualizaLV(novo);
             this.encomendas.addRealizadaVoluntario(novo);
@@ -315,7 +330,8 @@ public void registaClassVoluntario(String idE,double classificacao,Cliente c,Vol
             double distanciaViagem=distance(lat2,lat3,lon2,lon3)+ distance(lat1,lat2,lon1,lon2);
             double preco = pd.getPreco();
             LocalDate data = LocalDate.now();
-            RealizadaEmpresa r = new RealizadaEmpresa(idP,c,pd.getLoja(),pd.getPeso(),pd.getState(),pd.getData(),true,true,pd.getLinhas(),pd.getEmpresa(),preco,data,distanciaViagem,false,-1);;
+            RealizadaEmpresa r = new RealizadaEmpresa(idP,c,pd.getLoja(),pd.getPeso(),pd.getState(),pd.getData(),true,true,pd.getLinhas(),pd.getEmpresa(),preco,distanciaViagem,false,-1);;
+            r.setData(data);
             getClientes().get(c.getEmail()).atualizaLE(r);
             getEmpresas().get(pd.getEmpresa().getEmail()).atualizaLE(r);
             this.encomendas.addRealizadaEmpresa(r);
@@ -371,6 +387,11 @@ public void registaClassVoluntario(String idE,double classificacao,Cliente c,Vol
         this.encomendas.addEncomenda(e);
     }
         
+    
+    //metodo faturacao por periodo
+    public double faturacaoPeriodo(Empresa e, LocalDate inicio, LocalDate fim){
+        return this.encomendas.faturacao(e.getEmail(),inicio,fim);
+    }
     
     //metodo para ranking dos 10 clientes que t?m mais encomendas entregues
      public TreeSet<Cliente> rank10Vezes() {

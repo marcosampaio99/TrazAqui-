@@ -13,7 +13,6 @@ import java.io.*;
 public class RealizadaVoluntario extends Encomenda implements Serializable
 {
     private Voluntario voluntario;
-    private LocalDate dataR;
     private boolean classificado; // se ja foi classificado ou nao
     private double classificacao; // guarda-se a classificacao atribuida
     
@@ -25,7 +24,7 @@ public class RealizadaVoluntario extends Encomenda implements Serializable
       this.classificacao=-1;
     }
     
-    public RealizadaVoluntario(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,LocalDate dataAux,boolean respostaClienteAux, boolean flagLojaProntaAux, ArrayList<LinhaEncomenda> l,Voluntario voluntarioAux, LocalDate dataRAux,boolean classificadoAux, double classificacaoAux){
+    public RealizadaVoluntario(String idAux, Cliente clienteAux, Loja lojaAux, double pesoAux, boolean stateAux,LocalDate dataAux,boolean respostaClienteAux, boolean flagLojaProntaAux, ArrayList<LinhaEncomenda> l,Voluntario voluntarioAux,boolean classificadoAux, double classificacaoAux){
         super(idAux, clienteAux, lojaAux, pesoAux, stateAux, dataAux,respostaClienteAux,flagLojaProntaAux,l);
         this.voluntario=voluntarioAux;
         this.classificado=classificadoAux;
@@ -53,9 +52,7 @@ public class RealizadaVoluntario extends Encomenda implements Serializable
         return this.classificacao;
     }
     
-    public LocalDate getData(){
-       return this.dataR;
-    }
+    
    //setters
    
    public void setVoluntario(Voluntario v){
@@ -69,6 +66,9 @@ public class RealizadaVoluntario extends Encomenda implements Serializable
    public void setClassificacao(double c){
        this.classificacao=c;
     }
+    
+    
+    
     
    public boolean equals (Object o){
         if(this==o) return true;
@@ -87,13 +87,15 @@ public class RealizadaVoluntario extends Encomenda implements Serializable
                this.getLoja() + "\n" +
               "Peso:" + this.getPeso() +
               " Entregue por Voluntario:" + this.voluntario.getEmail() +
-              " Data de entrega:" + this.dataR +
+              " Data de entrega:" + this.getData() +
               " Classficada? "+ this.classificado +
               " Classificacao atribuida:" + this.classificacao +"\n";
             }
             
     public RealizadaVoluntario clone(){
-        return new RealizadaVoluntario(this);
+        RealizadaVoluntario aux= new RealizadaVoluntario(this);
+       aux.setData(this.getData());
+        return aux;
     }
     
     //metodos

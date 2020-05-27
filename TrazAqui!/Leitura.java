@@ -34,9 +34,9 @@ public class Leitura implements Serializable {
                 linhaPartida = linha.split(":", 2);
                 switch(linhaPartida[0]){
                case "Utilizador": 
-                       Cliente  c = lerCliente(linhaPartida[1]); // criar um Utilizador
+                       Cliente  c = lerCliente(linhaPartida[1]); 
                         gc.addCliente(c); 
-                     //  System.out.println(c.toString()); //enviar para o ecrÃ¡n apenas para teste
+                     //  System.out.println(c.toString()); 
                         break;
                case "Loja": 
                      Loja l = lerLoja(linhaPartida[1]);
@@ -56,15 +56,17 @@ public class Leitura implements Serializable {
                         break;
                case "Encomenda":
                     Encomenda en=lerEncomenda(linhaPartida[1]);
+                    //System.out.println(en.getData());
                       ges.addEncomenda(en);
-                  //   System.out.println(en.toString());
+                     //System.out.println(en.toString());
                     break;
                case "Aceite":
                     RealizadaVoluntario enc=lerAceite(linhaPartida[1]);
+                   // System.out.println(enc.getData());// chega aqui
+                    ges.addRealizadaVoluntario(enc);
                     
-                    ges.addEncomenda(enc);
                default:
-                      System.out.println("Linha inválida.");
+                      
                        break;
 }
   
@@ -117,7 +119,7 @@ public class Leitura implements Serializable {
       Loja l = gl.buscaLoja(emailL);
       double peso = Double.parseDouble(campos[3]);
       LocalDate data = LocalDate.now();
-      System.out.println(data);
+      //System.out.println(data);
       //fazer ciclo for para ler uma linha de encomenda de cada vez
       String[] novos=input.split(",",5);
       String[] finalissima=novos[4].split(",");
@@ -134,14 +136,7 @@ public class Leitura implements Serializable {
        return new Encomenda(id,c,l,peso,false,data,false,false,li);
     }
     
-  public LinhaEncomenda leproduto(String input){
-      String[] campos = input.split(",");
-      String referencia=campos[0];
-      String descricao=campos[1];
-      double preco=Double.parseDouble(campos[2]);
-      double quantidade =Double.parseDouble(campos[3]);
-      return new LinhaEncomenda(referencia,descricao,preco,quantidade);
-    }
+  
     
   public Empresa lerEmpresa(String input){
       String[] campos = input.split(",");
@@ -164,8 +159,8 @@ public class Leitura implements Serializable {
       temp.setFlagLojaPronta(true);
       Voluntario aux=volMaisPerto(id);
       LocalDate data = LocalDate.now();
-      RealizadaVoluntario rv= new RealizadaVoluntario(temp.getId(),temp.getCliente(),temp.getLoja(),temp.getPeso(),temp.getState(),temp.getData(),temp.getRespostaCliente(),temp.getFlagLojaPronta(),temp.getLinhas(),aux,data,false,-1);
-      
+      RealizadaVoluntario rv= new RealizadaVoluntario(temp.getId(),temp.getCliente(),temp.getLoja(),temp.getPeso(),temp.getState(),temp.getData(),temp.getRespostaCliente(),temp.getFlagLojaPronta(),temp.getLinhas(),aux,false,-1);
+      rv.setData(data);
       Voluntario novo= gv.getVoluntario().get(aux.getEmail());
       novo.atualizaLV(rv);
       gv.addVoluntario(novo);
@@ -251,10 +246,10 @@ public List<Voluntario> listagemVoluntarios(){
     }
 
 public List<Encomenda> listagemEncomendas(){
-       ArrayList<Encomenda> list = new ArrayList<Encomenda>(this.ges.getEncomenda().values());
+   
+       List<Encomenda> list = new ArrayList<Encomenda>(this.ges.getEncomenda().values());
+       
        return list;
     }    
-    
-
-    
+ 
 }

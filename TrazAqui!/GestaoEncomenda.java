@@ -54,13 +54,14 @@ public class GestaoEncomenda implements Serializable
     }
 
     public String toString(){
-        return "As encomendas sÃ£o: \n" + this.getEncomenda();
+        return "As encomendas sao: \n" + this.getEncomenda();
     }
     
     
     //adiciona encomenda
     
     public void addEncomenda(Encomenda a){
+        
         this.encomendas.put(a.getId(),a.clone());
     }
     
@@ -72,17 +73,17 @@ public class GestaoEncomenda implements Serializable
     
     //adiciona uma encomenda da instancia pronta
      public void addPronta(Pronta p) {
-        this.encomendas.put(p.getId(), p.clone());
+        this.encomendas.put(p.getId(), p.clone());// ver o clone por causa das datas
     }
     
     //adiciona uma encomenda da instancia realizadaVoluntario
     public void addRealizadaVoluntario(RealizadaVoluntario r) {
-        this.encomendas.put(r.getId(), r.clone());
+        this.encomendas.put(r.getId(), r.clone()); // ver o clone por causa das datas
     }
     
     //adiciona uma encomenda da instancia realizadaEmpresa
     public void addRealizadaEmpresa(RealizadaEmpresa r) {
-        this.encomendas.put(r.getId(), r.clone());
+        this.encomendas.put(r.getId(), r.clone());// ver o clone por causa das datas
     }
     
     // metodo para cliente classificar o serviço da encomenda entregue por uma empresa com o id fornecido  
@@ -101,7 +102,9 @@ public class GestaoEncomenda implements Serializable
         List<RealizadaEmpresa> r = new ArrayList<>();
 
         for (Encomenda e : list)
-            if (e instanceof RealizadaEmpresa) r.add((RealizadaEmpresa) e);
+            if (e instanceof RealizadaEmpresa) 
+                r.add((RealizadaEmpresa) e);
+              
     return r;
    }
     
@@ -111,7 +114,10 @@ public class GestaoEncomenda implements Serializable
         List<RealizadaVoluntario> r = new ArrayList<>();
 
         for (Encomenda e : list)
-            if (e instanceof RealizadaVoluntario) r.add((RealizadaVoluntario) e);
+            if (e instanceof RealizadaVoluntario) {
+                r.add((RealizadaVoluntario) e);
+                  //System.out.println(e.getData());
+            }
     return r;
    }
     

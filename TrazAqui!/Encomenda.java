@@ -35,7 +35,7 @@ public class Encomenda implements Serializable
         this.loja=new Loja(lojaAux);
         this.peso=pesoAux;
         this.state=stateAux;
-        this.data=dataAux;
+        this.data=LocalDate.now();
         this.respostaCliente=respostaClienteAux;
         this.flagLojaPronta=flagLojaProntaAux;
          setLinhas (l);
@@ -120,7 +120,7 @@ public ArrayList <LinhaEncomenda> getLinhas(){
     }
 
     public void setData(LocalDate data) {
-        this.data = data;
+        this.data = LocalDate.now();
     }
 
      public void setRespostaCliente(boolean r){
@@ -174,7 +174,9 @@ public ArrayList <LinhaEncomenda> getLinhas(){
     
     
      public Encomenda clone(){
-        return new Encomenda(this);
+       Encomenda aux= new Encomenda(this);
+       aux.setData(this.data);
+         return aux;
     }
     
     public double  calculapeso(){
