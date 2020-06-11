@@ -103,15 +103,14 @@ public class RealizadaEmpresa extends Encomenda implements Serializable
             
    public String toString(){
        return "Encomenda com id: " + this.getId() +
-              " Cliente: " + this.getCliente().getNome()+
-              " Loja: " + this.getLoja().getNome() +
-              " Peso: " + this.getPeso() +
-              " Entregue por Empresa: " + this.empresa.getNome() +
-              " Distancia da viagem de entrega: " + this.distanciaViagem +
-              " Preco: " + this.preco + 
-              " Data de entrega: " + this.getData() +
-              " Classficada? "+ this.classificado +
-              " Classificacao atribuida: " + this.classificacao +"\n";
+               this.getCliente() +
+               this.getLoja() +  "\n" +
+              "Peso: " + this.getPeso() + " | " +
+              " Entregue por Empresa: " + this.empresa.getNome() + "\n"+
+              "Distancia da viagem: " + this.distanciaViagem + " | " +
+              " Preco: " + this.preco + " | " +
+              " Data de entrega: " + this.getData() +" | " +
+              " Classificacao atribuida: " + this.classificacao +"\n\n";
             }
           
             

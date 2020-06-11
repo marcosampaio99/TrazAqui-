@@ -97,7 +97,7 @@ public class Leitura implements Serializable {
         double raio = Double.parseDouble(campos[4]);
         List<RealizadaVoluntario> rv = new ArrayList<RealizadaVoluntario>();
         
-        return new Voluntario(email,nome,"passdefault",l1,raio*1000,0,0.0,0,0,rv);
+        return new Voluntario(email,nome,"passdefault",l1,raio,0,0.0,0,0,rv);
     }
     
     public Loja lerLoja(String input){
@@ -149,7 +149,7 @@ public class Leitura implements Serializable {
       double raio = Double.parseDouble(campos[5]);
       double taxa = Double.parseDouble(campos[6]);
       List<RealizadaEmpresa> re = new ArrayList<RealizadaEmpresa>();
-      return new Empresa(email,nome,"passdefault",l1,nif,raio*1000,0,0.0,0,taxa,0,0,0,re);
+      return new Empresa(email,nome,"passdefault",l1,nif,raio,0,0.0,0,taxa,0,0,0,re);
     }
     
   public RealizadaVoluntario lerAceite(String input){
@@ -164,7 +164,7 @@ public class Leitura implements Serializable {
       Voluntario novo= gv.getVoluntario().get(aux.getEmail());
       novo.atualizaLV(rv);
       gv.addVoluntario(novo);
-      Cliente novo1=ges.buscaEncomenda(id).getCliente();
+      Cliente novo1=gc.getCliente().get(temp.getCliente().getEmail());
       novo1.atualizaLV(rv);
       gc.addCliente(novo1);
       return rv;
@@ -172,38 +172,23 @@ public class Leitura implements Serializable {
     
     
    public Voluntario volMaisPerto(String id){
-       double distMin=9999999;
+       double distMin=100;
        Voluntario aux=new Voluntario();
        Localizacao l=this.ges.getEncomenda().get(id).getLoja().getLocalizacao();
        double lat1=l.getX();
        double lon1=l.getY();
        for(Voluntario v: this.gv.getVoluntario().values()){
-           double d=distance(lat1,v.getLocalizacao().getX(),lon1,v.getLocalizacao().getY());
-           if (d<distMin ) distMin=d;
-           aux=v;
+           double d=GestaoGeral.distance(lat1,v.getLocalizacao().getX(),lon1,v.getLocalizacao().getY());
+           if (d<distMin ){ 
+            distMin=d;
+            aux=v;
+          }
         }
         return aux;
     }
    
+   
     
-     //CALCULA A DISTANCIA EM METROS ENTRE DUAS COORDENAS GEOGRAFICAS
-    public static double distance(double lat1, double lat2, double lon1,double lon2) {
-
-    final int R = 6371; // Radius of the earth
-
-    double latDistance = Math.toRadians(lat2 - lat1);
-    double lonDistance = Math.toRadians(lon2 - lon1);
-    double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-            + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-            * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    double distance = R * c * 1000; // convert to meters
-
-
-    distance = Math.pow(distance, 2) + Math.pow(0, 2);
-
-    return Math.sqrt(distance);
-}
 
   public List<String> lerFicheiro(String nomeFich) {
         List<String> lines = new ArrayList<>();

@@ -13,7 +13,7 @@ public class ComparadorKmPercorridos implements Comparator<Empresa>, Serializabl
         for(RealizadaEmpresa rv: e2.getRe())
             km2 =+ rv.getDistanciaViagem();
 
-        if (km1<km2) return  -1;
+        if (km1>km2) return  -1;
         else return 1;
     }
 }

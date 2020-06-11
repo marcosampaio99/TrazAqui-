@@ -19,6 +19,8 @@ public class TrazAqui implements Serializable
         int opt;
         
         do {
+            System.out.print('\u000C');
+            Menus.logo();
             Menus.menu();
             opt=Scanners.leituraInt("Escolha uma opção:");
             
@@ -37,6 +39,7 @@ public class TrazAqui implements Serializable
                                     Cliente cliente =  g.getClientes().get(email);
                                     int optLoginCliente;
                                     do{
+                                        System.out.print('\u000C');
                                         Menus.submenu_cliente();
                                         optLoginCliente = Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginCliente){
@@ -45,7 +48,7 @@ public class TrazAqui implements Serializable
                                              e.setCliente(cliente);
                                              String id="e" +String.valueOf(g.listagemClientes().size())+10;
                                              e.setId(id);
-                                             int medical= Scanners.leituraInt("A encomenda é médica?");
+                                             int medical= Scanners.leituraInt("A encomenda é médica? (Sim:1;Não:0)");
                                              if(medical==0){
                                                  e.setState(false);
                                                 } else if(medical==1){
@@ -82,7 +85,7 @@ public class TrazAqui implements Serializable
                                                 break;
                                         }
                                         case 2:{
-                                             ArrayList<Pronta> list = (ArrayList) g.listagemEncomendasProntas(cliente);
+                                             ArrayList<Pronta> list = new ArrayList<>(g.listagemEncomendasProntas(cliente));
                                                 for (Pronta p : list)
                                                     System.out.println(p.toString());
                                              String id = Scanners.leituraString("Escolha id do aluguer que pretende aceitar:");
@@ -151,7 +154,7 @@ public class TrazAqui implements Serializable
                                                           List<RealizadaVoluntario> l = new ArrayList<>(g.listaClassificarVoluntario(cliente));
                                                             for (RealizadaVoluntario r : l)
                                                         System.out.println(r.toString());
-                                                          String id = Scanners.leituraString("Escolha da lista acima o id do aluguer que quer classificar(apenas numero)");
+                                                          String id = Scanners.leituraString("Escolha da lista acima o id do aluguer que quer classificar)");
                                                           double c= Scanners.leituraDouble("Qual a classificação que quer atribuir a entrega (0,0-10,0)");
                                                           if (c > 10.0) c = 10.0;
                                                           if(c==0.0) break;
@@ -218,6 +221,7 @@ public class TrazAqui implements Serializable
                                     Loja loja =  g.getLojas().get(email);
                                     int optLoginLoja;
                                     do{
+                                        System.out.print('\u000C');
                                         Menus.submenu_Loja();
                                         optLoginLoja= Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginLoja){
@@ -236,11 +240,7 @@ public class TrazAqui implements Serializable
                                                   }
                                             break;
                                         }
-                                            case 2 : {
-                                               double qntdPessoas= Scanners.leituraDouble("Indique quantas pessoas estão em fial de espera");
-                                                g.registarFilaDeEspera(qntdPessoas, loja );
-                                            break;
-                                        }
+                                            
                                             case 0: {
                                             break;
                                         }
@@ -263,6 +263,7 @@ public class TrazAqui implements Serializable
                                     Empresa empresa=g.getEmpresas().get(email);
                                     int optLoginEmpresa;
                                     do{
+                                        System.out.print('\u000C');
                                         Menus.submenu_Empresa();
                                         optLoginEmpresa= Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginEmpresa){
@@ -273,7 +274,7 @@ public class TrazAqui implements Serializable
                                                 String id = Scanners.leituraString("Escolha da lista acima o id da encomenda que pretende entregar");
                                                 try{
                                                     g.empresaPede(id,empresa);
-                                                    System.out.println("Encomenda entregue");
+                                                    System.out.println("Pedido Enviado ao Cliente");
                                                 } catch(GestaoGeralException e){
                                                     System.out.println("Distancia para entregar fora do raio ou erros na encomenda com id" + e.getMessage());
                                                 }
@@ -331,6 +332,7 @@ public class TrazAqui implements Serializable
                                     Voluntario voluntario=g.getVoluntarios().get(email);
                                     int optLoginVoluntario;
                                     do{
+                                        System.out.print('\u000C');
                                         Menus.submenu_Voluntario();
                                         optLoginVoluntario= Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginVoluntario){
@@ -612,18 +614,22 @@ public class TrazAqui implements Serializable
                             case 1:{
                                 TreeSet<Cliente> t = new TreeSet<Cliente>(g.rank10Vezes());
                                 int x = 1;
-                                while (x <= 10 && t != null) {
-                                    System.out.println(x + " " + t.pollFirst().toString() + "\n");
+                                for(Cliente e: t){ 
+                                    if(x<=10){
+                                    System.out.println(x + " "+  e.toString());
                                     x++;
+                                   }
                                 }
                                 break;
                             }
                             case 2:{
                                 TreeSet<Empresa> t = new TreeSet<Empresa>(g.rank10km());
                                 int x = 1;
-                                while (x <= 10 && t != null) {
-                                    System.out.println(x + " " + t.pollFirst().toString() + "\n");
+                                for(Empresa e: t){ 
+                                    if(x<=10){
+                                    System.out.println(x + " "+  e.toString());
                                     x++;
+                                   }
                                 }
                                 break;
                             }

@@ -63,9 +63,9 @@ public class Pronta extends Encomenda implements Serializable
        return "Encomenda com id: " + this.getId() +
                this.getCliente() +
                this.getLoja() + "\n" +
-              "Peso:" + this.getPeso() +
-              " Empresa que prentende transportar:"+ this.empresa.getEmail() + 
-              " Com preco:" + this.preco + "\n";
+              "Peso:" + this.getPeso() + "\n" +
+              "Empresa que prentende transportar:"+ this.empresa.getEmail() + "\n" + 
+              "Com preco:" + this.preco + "\n\n";
               
             }
             

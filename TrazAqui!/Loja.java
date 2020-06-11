@@ -6,7 +6,7 @@ import java.io.*;
 public class Loja extends Utilizador implements Serializable {
     //variaveis de instancia
     private double tempoEspera;
-    // private qqlmerda filaEspera;
+    
 
     //construtores
 
@@ -54,8 +54,8 @@ public class Loja extends Utilizador implements Serializable {
     //toString
     public String toString(){
         return  "\nLoja->" +
-                " Nome:" + this.getNome() + 
-                " Email:" + this.getEmail() + 
+                " Email: " + this.getEmail() + " | " +
+                " Nome: " + this.getNome() +  " | " +
                 " Localização:" + this.getLocalizacao();
     }
 }

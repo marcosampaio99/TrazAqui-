@@ -74,8 +74,8 @@ public boolean equals (Object o){
         String s = new String();
  
         s = ( "\nCliente->" +
-                " Email: " + this.getEmail() + 
-                " Nome: " + this.getNome() +
+                " Email: " + this.getEmail() + " | " +
+                " Nome: " + this.getNome() + " | " +
                 " Localizacao: "+ this.getLocalizacao());
                 
                 

@@ -97,7 +97,7 @@ public class GestaoCliente implements Serializable
      
     //metodos para devovolverem encomendas entregues a um cliente num periodo de tempo
      public List<RealizadaEmpresa> EncEmpPorPeriodo(Cliente c, LocalDate inicio, LocalDate fim){
-        List<RealizadaEmpresa> re= new ArrayList<RealizadaEmpresa>(buscaCliente(c.getEmail()).getRe());
+        List<RealizadaEmpresa> re= new ArrayList<RealizadaEmpresa>(this.clientes.get(c.getEmail()).getRe());
         List<RealizadaEmpresa> aux = new ArrayList<RealizadaEmpresa>();
         for (RealizadaEmpresa a : re){
              if (a.getData().isAfter(inicio) && a.getData().isBefore(fim)) aux.add(a);
@@ -106,7 +106,7 @@ public class GestaoCliente implements Serializable
         }
    
         public List<RealizadaVoluntario> EncVolPorPeriodo(Cliente c, LocalDate inicio, LocalDate fim){
-        List<RealizadaVoluntario> re= new ArrayList<RealizadaVoluntario>(buscaCliente(c.getEmail()).getRv());
+        List<RealizadaVoluntario> re= new ArrayList<RealizadaVoluntario>(this.clientes.get(c.getEmail()).getRv());
         List<RealizadaVoluntario> aux = new ArrayList<RealizadaVoluntario>();
         for (RealizadaVoluntario a : re){
              if (a.getData().isAfter(inicio) && a.getData().isBefore(fim)) aux.add(a);

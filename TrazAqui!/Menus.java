@@ -3,7 +3,27 @@ import java.io.*;
 
 public class Menus implements Serializable {
 
+    
+    public static void logo(){
+        System.out.println(" %%%%%%%                     %%%%%                      % ");
+        System.out.println("    %                       %     %                     % ");
+        System.out.println("    %    %%%  %%%    %%%%%  %     %                 %   % ");
+        System.out.println("    %   %        %      %   %     %    %%%   %   %      % ");
+        System.out.println("    %   %     %%%%     %    %%%%%%%   %   %  %   %  %   % ");
+        System.out.println("    %   %    %   %    %     %     %   %   %  %   %  %     ");
+        System.out.println("    %   %     %%% %  %%%%%  %     %    %%%%   %%%   %   % ");
+        System.out.println("                                          %               ");
+        System.out.println("                                          %               ");
+    }
+    
+    
+    
+    
+    
+    
+    
     public static void menu(){
+        
         System.out.println("--------------------MENU PRINCIPAL--------------------");
         System.out.println("1-Login");
         System.out.println("2-Registar Utilizador");
@@ -62,7 +82,6 @@ public class Menus implements Serializable {
     public static void submenu_Loja(){
         System.out.println("--------------------MENU LOJA--------------------");
         System.out.println("1-Sinalizar que existe uma encomenda de um cliente pronta para ser entregue");
-        System.out.println("2-Indicar quantidade de pessoas que existem na fila");
         System.out.println("0-Sair");
     }
 
@@ -84,8 +103,8 @@ public class Menus implements Serializable {
 
     public static void submenu_HistoricoEncomendas(){
         System.out.println("--------------------MENU HISTORICO DE ENCOMENDAS--------------------");
-        System.out.println("1-Consultar encomendas entregues por voluntario por um período");
-        System.out.println("2-Consultar encomenda entregues por empresa por um período");
+        System.out.println("1-Consultar encomendas entregues por empresa por um período");
+        System.out.println("2-Consultar encomenda entregues por voluntario por um período");
         System.out.println("0-Sair");
     }
 

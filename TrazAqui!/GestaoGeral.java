@@ -243,10 +243,11 @@ public class GestaoGeral implements Serializable{
         double lat3=e.getLocalizacao().getX();
         double lon3=e.getLocalizacao().getY();
         double distanciaViagem=distance(lat2,lat3,lon2,lon3)+ distance(lat1,lat2,lon1,lon2);
+        System.out.println("dist total= " + distanciaViagem);
         if(distanciaViagem>e.getRaiogeografico()) throw new GestaoGeralException(String.valueOf(idE));
         else{
         Date data = new Date();
-        double preco=e.getTaxa()*(distanciaViagem/1000);
+        double preco=e.getTaxa()*(distanciaViagem);
         Pronta nova= new Pronta(idE,pd.getCliente(),pd.getLoja(),pd.getPeso(),pd.getState(),pd.getData(),true,true,pd.getLinhas(),e,preco);
         this.encomendas.addPronta(nova);
         }
@@ -266,19 +267,16 @@ public class GestaoGeral implements Serializable{
         }
     }
     
-    //metodo para loja indicar quantas pessoas estao em fila de espera
-    public void registarFilaDeEspera(double qntd, Loja l){
-        this.getLojas().get(l).setTempoEspera(qntd);
-    }
+    
     
     
     //metodo para o cliente ver os pedidos que tem para responder
-    public List<Encomenda> listagemEncomendasProntas(Cliente c) {   
+    public List<Pronta> listagemEncomendasProntas(Cliente c) {   
         List<Encomenda> list = new ArrayList<>(this.getEncomendas().values());
-        List<Encomenda> r = new ArrayList<>();
+        List<Pronta> r = new ArrayList<>();
 
         for (Encomenda a : list)
-            if(a.getFlagLojaPronta()==true && a.getRespostaCliente()==true && a.getCliente().getEmail().equals(c.getEmail()) ) r.add(a);
+            if(a instanceof Pronta && a.getCliente().getEmail().equals(c.getEmail()) ) r.add((Pronta)a);
     return r;
 }
 
@@ -318,7 +316,7 @@ public void registaClassVoluntario(String idE,double classificacao,Cliente c,Vol
         if ((this.getEncomendas().get(idP)) instanceof RealizadaEmpresa) throw new GestaoGeralException(String.valueOf(idP));
         Pronta pd = (Pronta) this.getEncomendas().get(idP);
         if (pd == null) throw new GestaoGeralException(String.valueOf(idP));
-        if (pd.getRespostaCliente() != false || pd.getFlagLojaPronta() != false) throw new GestaoGeralException(String.valueOf(idP));
+        if (pd.getRespostaCliente()== false || pd.getFlagLojaPronta() == false) throw new GestaoGeralException(String.valueOf(idP));
         if (pd.getCliente().getEmail().equals(c.getEmail())==false) throw new GestaoGeralException(String.valueOf(idP));
         else {
             double lat1=pd.getCliente().getLocalizacao().getX();
@@ -332,8 +330,12 @@ public void registaClassVoluntario(String idE,double classificacao,Cliente c,Vol
             LocalDate data = LocalDate.now();
             RealizadaEmpresa r = new RealizadaEmpresa(idP,c,pd.getLoja(),pd.getPeso(),pd.getState(),pd.getData(),true,true,pd.getLinhas(),pd.getEmpresa(),preco,distanciaViagem,false,-1);;
             r.setData(data);
-            getClientes().get(c.getEmail()).atualizaLE(r);
-            getEmpresas().get(pd.getEmpresa().getEmail()).atualizaLE(r);
+            Cliente c1= getClientes().get(c.getEmail());
+            c1.atualizaLE(r);
+            clientes.addCliente(c1); 
+            Empresa e1 = getEmpresas().get(pd.getEmpresa().getEmail());
+            e1.atualizaLE(r);
+            empresas.addEmpresa(e1);
             this.encomendas.addRealizadaEmpresa(r);
          
             
@@ -343,21 +345,7 @@ public void registaClassVoluntario(String idE,double classificacao,Cliente c,Vol
     
     //CALCULA A DISTANCIA EM METROS ENTRE DUAS COORDENAS GEOGRAFICAS
     public static double distance(double lat1, double lat2, double lon1,double lon2) {
-
-    final int R = 6371; // Radius of the earth
-
-    double latDistance = Math.toRadians(lat2 - lat1);
-    double lonDistance = Math.toRadians(lon2 - lon1);
-    double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-            + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-            * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    double distance = R * c * 1000; // convert to meters
-
-
-    distance = Math.pow(distance, 2) + Math.pow(0, 2);
-
-    return Math.sqrt(distance);
+    return Math.sqrt((Math.pow(lat1+lat2,2))+(Math.pow(lon1+lon2,2)));
 }
     
     //metodos que devolvem encomendas entregues a um cliente por um determinado periodo

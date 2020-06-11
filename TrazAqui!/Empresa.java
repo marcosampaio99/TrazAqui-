@@ -180,14 +180,14 @@ public class Empresa extends Utilizador implements Serializable
         String s = new String();
  
         s = ("\n Empresa->" + 
-               " Nome:" + this.getNome() +  
-               " Email:" + this.getEmail() + 
-               " Raio Geografico(m):" + this.getRaiogeografico() +
-               " Velocidade média (m/s):" + this.velocidade +
-               " Rating:" + this.rating + 
-               " Nr de Classificações:" + this.nmrClassificacoes + 
-               " Multitasking(Sim:1/Não:0):" + this.multitasking + 
-               " Localizacao:"+ this.getLocalizacao() + "\n") ;
+               " Email: " + this.getEmail() + " | " +
+               " Nome: " + this.getNome() +  " | " +
+               " Raio Geografico(m) :" + this.getRaiogeografico() +" | " +
+               " Velocidade média (m/s): " + this.velocidade +" | " +
+               " Rating: " + this.rating + " | " +
+               " Nr de Classificações: " + this.nmrClassificacoes + " | " +
+               " Multitasking(Sim:1/Não:0): " + this.multitasking + " | " +
+               " Localizacao: "+ this.getLocalizacao() +"\n") ;
  
         return s;
     }

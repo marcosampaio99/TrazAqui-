@@ -98,7 +98,7 @@ public class GestaoVoluntario implements Serializable
     
       //metodo que devolve lista de encomendas entregues por um voluntario num determinado periodo
     public List<RealizadaVoluntario> EncVoluntarioPorPeriodo(Voluntario v, LocalDate inicio, LocalDate fim){
-        List<RealizadaVoluntario> re= new ArrayList<RealizadaVoluntario>(buscaVoluntario(v.getEmail()).getRv());
+        List<RealizadaVoluntario> re= new ArrayList<RealizadaVoluntario>(this.voluntarios.get(v.getEmail()).getRv());
         List<RealizadaVoluntario> aux = new ArrayList<RealizadaVoluntario>();
         for (RealizadaVoluntario a : re){
              if (a.getData().isAfter(inicio) && a.getData().isBefore(fim)) aux.add(a);
