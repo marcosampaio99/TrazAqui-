@@ -39,14 +39,14 @@ public class TrazAqui implements Serializable
                                     Cliente cliente =  g.getClientes().get(email);
                                     int optLoginCliente;
                                     do{
-                                        System.out.print('\u000C');
+                                        
                                         Menus.submenu_cliente();
                                         optLoginCliente = Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginCliente){
                                         case 1:{
                                              Encomenda e = new Encomenda();
                                              e.setCliente(cliente);
-                                             String id="e" +String.valueOf(g.listagemClientes().size())+10;
+                                             String id="e" +String.valueOf(g.listagemEncomendas().size())+10;
                                              e.setId(id);
                                              int medical= Scanners.leituraInt("A encomenda é médica? (Sim:1;Não:0)");
                                              if(medical==0){
@@ -221,7 +221,7 @@ public class TrazAqui implements Serializable
                                     Loja loja =  g.getLojas().get(email);
                                     int optLoginLoja;
                                     do{
-                                        System.out.print('\u000C');
+                                        
                                         Menus.submenu_Loja();
                                         optLoginLoja= Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginLoja){
@@ -263,7 +263,7 @@ public class TrazAqui implements Serializable
                                     Empresa empresa=g.getEmpresas().get(email);
                                     int optLoginEmpresa;
                                     do{
-                                        System.out.print('\u000C');
+                                        
                                         Menus.submenu_Empresa();
                                         optLoginEmpresa= Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginEmpresa){
@@ -332,7 +332,7 @@ public class TrazAqui implements Serializable
                                     Voluntario voluntario=g.getVoluntarios().get(email);
                                     int optLoginVoluntario;
                                     do{
-                                        System.out.print('\u000C');
+                                        
                                         Menus.submenu_Voluntario();
                                         optLoginVoluntario= Scanners.leituraInt("Escolha uma opção");
                                         switch(optLoginVoluntario){

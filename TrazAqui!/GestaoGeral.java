@@ -225,8 +225,12 @@ public class GestaoGeral implements Serializable{
             LocalDate data = LocalDate.now();
             RealizadaVoluntario novo=new RealizadaVoluntario(idE,pd.getCliente(),pd.getLoja(),pd.getPeso(),pd.getState(),pd.getData(),true,true,pd.getLinhas(),v,false,-1);
             novo.setData(data);
-            getClientes().get(pd.getCliente().getEmail()).atualizaLV(novo);
-            getVoluntarios().get(v.getEmail()).atualizaLV(novo);
+            Cliente c1 = getClientes().get(pd.getCliente().getEmail());
+            c1.atualizaLV(novo);
+            clientes.addCliente(c1);
+            Voluntario v1= getVoluntarios().get(v.getEmail());
+            v1.atualizaLV(novo);
+            voluntarios.addVoluntario(v1);
             this.encomendas.addRealizadaVoluntario(novo);
         }
     }
@@ -243,7 +247,6 @@ public class GestaoGeral implements Serializable{
         double lat3=e.getLocalizacao().getX();
         double lon3=e.getLocalizacao().getY();
         double distanciaViagem=distance(lat2,lat3,lon2,lon3)+ distance(lat1,lat2,lon1,lon2);
-        System.out.println("dist total= " + distanciaViagem);
         if(distanciaViagem>e.getRaiogeografico()) throw new GestaoGeralException(String.valueOf(idE));
         else{
         Date data = new Date();
